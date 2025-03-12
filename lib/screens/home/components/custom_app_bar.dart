@@ -5,19 +5,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size preferredSize;
 
   CustomAppBar({Key? key})
-      : preferredSize =const Size.fromHeight(60.0),
+      : preferredSize = const Size.fromHeight(60.0),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title:const Text('Ana Sayfa'),
+      title: const Text('Ana Sayfa'),
       actions: [
         IconButton(
-          icon:const Icon(Icons.account_circle),
-          onPressed: () {
-            
-          },
+          icon: const Icon(Icons.account_circle),
+          onPressed: () {},
         ),
       ],
     );
