@@ -7,9 +7,6 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profil'),
-      ),
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
