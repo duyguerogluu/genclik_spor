@@ -17,6 +17,8 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/riverpod/riverpod_management.dart';
+import 'package:genclik_spor/screens/home/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     if (kDebugMode) {
       login.telNo.text = "05554443311";
-      login.passwprd.text = "10";
+      login.password.text = "10";
     }
   }
 
@@ -86,8 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         backgroundColor: _pageLogin
                             ? Color.fromARGB(255, 253, 210, 92)
                             : Colors.transparent,
-                        primary: Colors.transparent,
-                        onPrimary: Colors.transparent,
+                        foregroundColor: Colors.transparent,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 15),
                         shape: RoundedRectangleBorder(
@@ -118,8 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         backgroundColor: _pageLogin
                             ? Colors.transparent
                             : Color.fromARGB(255, 253, 210, 92),
-                        primary: Colors.transparent,
-                        onPrimary: Colors.transparent,
+                        foregroundColor: Colors.transparent,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 15),
                         shape: RoundedRectangleBorder(
@@ -187,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Container(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextField(
-                                      controller: login.passwprd,
+                                      controller: login.password,
                                       cursorColor: Colors.purpleAccent,
                                       obscureText: _ishidden ? true : false,
                                       style: const TextStyle(
@@ -222,7 +222,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => BaseScaffold()),
+                                          builder: (context) =>
+                                              const HomeScreen()),
                                     );
                                   } else {
                                     // ignore: use_build_context_synchronously
@@ -236,8 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   backgroundColor: _pageLogin
                                       ? Color.fromARGB(255, 253, 210, 92)
                                       : Colors.transparent,
-                                  primary: Colors.transparent,
-                                  onPrimary: Colors.transparent,
+                                  foregroundColor: Colors.transparent,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 15),
                                   shape: RoundedRectangleBorder(
@@ -274,7 +274,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                       )
-                    : LoginScreen()
+                    : LoginScreen()//!!!!!!!!!!!!!!!!!!!!!! singupp a yönlendiricem
               ],
             ),
           ),
