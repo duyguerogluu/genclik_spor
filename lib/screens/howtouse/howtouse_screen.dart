@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/screens/home/home_screen.dart';
+import 'package:genclik_spor/screens/login/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HowToUseScreen extends StatefulWidget {
@@ -75,7 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     await prefs.setBool('isFirstTime', false);
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
     );
   }
 
