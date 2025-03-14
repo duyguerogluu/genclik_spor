@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/home/home_screen.dart';
 import 'package:genclik_spor/screens/login/signup_screen.dart';
+import 'package:genclik_spor/utils/colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -58,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: SvgPicture.asset(
                     'assets/images/logo.svg',
                     semanticsLabel: 'Genclik Spor Bakanligi Photo',
+                    color: offred,
                   ),
                 ),
               ),
@@ -97,9 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       _togglePage(false);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _pageLogin
-                          ? Colors.transparent
-                          : const Color.fromARGB(255, 253, 210, 92),
+                      backgroundColor:
+                          _pageLogin ? Colors.transparent : offdarkblue,
                       foregroundColor: Colors.transparent,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 15),

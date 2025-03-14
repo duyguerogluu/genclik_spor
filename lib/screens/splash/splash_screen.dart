@@ -32,9 +32,10 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.24,
               child: SvgPicture.asset(
-                'assets/images/logo.svg',
-                color: officialred,
+                'assets/images/logo1.svg',
+                color: offred,
               ),
             ),
             const SizedBox(height: 20),
