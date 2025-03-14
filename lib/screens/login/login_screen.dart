@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
@@ -42,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("Login!!!!");
     double deviceHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
@@ -86,11 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-          
                   const SizedBox(
                     width: 10,
                   ),
-          
                   ElevatedButton(
                     onPressed: () {
                       _togglePage(false);
@@ -150,8 +148,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     controller: login.telNo,
                                     cursorColor: Colors.purpleAccent,
                                     style: const TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 253, 210, 92)),
+                                        color:
+                                            Color.fromARGB(255, 253, 210, 92)),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: "Phone number",
@@ -160,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                 ),
-          
+
                                 //password gircem
                                 Container(
                                   padding: const EdgeInsets.all(8.0),
@@ -169,8 +167,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     cursorColor: Colors.purpleAccent,
                                     obscureText: _ishidden ? true : false,
                                     style: const TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 253, 210, 92)),
+                                        color:
+                                            Color.fromARGB(255, 253, 210, 92)),
                                     decoration: InputDecoration(
                                       suffixIcon: IconButton(
                                         icon: Icon(_ishidden
@@ -189,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-          
+
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: ElevatedButton(
@@ -207,8 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   // ignore: use_build_context_synchronously
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content:
-                                              Text("Giriş yapılamadı!")));
+                                          content: Text("Giriş yapılamadı!")));
                                 }
                               },
                               style: ElevatedButton.styleFrom(
@@ -233,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-          
+
                           //Şifremi Unuttum
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
@@ -241,8 +238,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 'Şifremi Unuttum',
                                 style: TextStyle(
-                                  color:
-                                       Color.fromARGB(255, 253, 210, 92),
+                                  color: Color.fromARGB(255, 253, 210, 92),
                                   fontSize: 16,
                                 ),
                               ),
@@ -252,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     )
-                  : LoginScreen()//!!!!!!!!!!!!!!!!!!!!!! singupp a yönlendiricem
+                  : LoginScreen() //!!!!!!!!!!!!!!!!!!!!!! singupp a yönlendiricem
             ],
           ),
         ),

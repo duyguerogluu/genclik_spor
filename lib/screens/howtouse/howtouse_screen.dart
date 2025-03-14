@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:genclik_spor/screens/home/home_screen.dart';
 import 'package:genclik_spor/screens/login/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,49 +6,35 @@ class HowToUseScreen extends StatefulWidget {
   const HowToUseScreen({super.key});
 
   @override
-  _HowToUseScreenState createState() => _HowToUseScreenState();
+  State<HowToUseScreen> createState() => _HowToUseScreenState();
 }
 
 class _HowToUseScreenState extends State<HowToUseScreen> {
   @override
   void initState() {
     super.initState();
-    _checkFirstTime();
+    // _checkFirstTime();
   }
 
+/*
   Future<void> _checkFirstTime() async {
-    final prefs = await SharedPreferences.getInstance();
-    final isFirstTime = prefs.getBool('isFirstTime') ?? true;
+    // final prefs = await SharedPreferences.getInstance();
+    // final isFirstTime = prefs.getBool('isFirstTime') ?? true;
 
-    if (isFirstTime) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HowToUseScreen()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HowToUseScreen()),
-      );
-    }
+    // if (isFirstTime) {
+    //   Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => const HowToUseScreen()),
+    //   );
+    // } else {
+    //   Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => const HowToUseScreen()),
+    //   );
+    // }
   }
+  */
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
-    );
-  }
-}
-
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
-
-  @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
-}
-
-class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int currentIndex = 0;
 
