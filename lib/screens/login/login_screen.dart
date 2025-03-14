@@ -53,8 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(12.0),
                 child: SizedBox(
                   height: deviceHeight * 0.18,
-                  child: Image.asset(
-                    'assets/images/logo.png',
+                  child: Image.network(
+                    "https://logomaker.designfreelogoonline.com/media/productdesigner/logo/resized/1286_bird-01.png",
                   ),
                 ),
               ),
