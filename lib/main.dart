@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/screens/splash/splash_screen.dart';
+import 'package:genclik_spor/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: offlightblue),
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: offdarkblue,
+          brightness: Brightness.dark,
+        ),
         useMaterial3: true,
       ),
       home: const SplashScreen(),
