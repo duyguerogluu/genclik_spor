@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/home/home_screen.dart';
+import 'package:genclik_spor/screens/login/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -48,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
+            children: [
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: SizedBox(
@@ -158,8 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                 ),
-
-                                //password gircem
                                 Container(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextField(
@@ -248,7 +247,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     )
-                  : LoginScreen() //!!!!!!!!!!!!!!!!!!!!!! singupp a yönlendiricem
+                  : SignupScreen() //!!!!!!!!!!!!!!!!!!!!!! singupp a yönlendiricem
             ],
           ),
         ),

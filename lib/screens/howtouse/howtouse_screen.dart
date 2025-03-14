@@ -42,17 +42,17 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
     {
       "title": "Hoş Geldiniz!",
       "description": "Uygulamamızı keşfetmeye hazır olun!",
-      "image": ""
+      "image": "assets/images/images.png"
     },
     {
       "title": "Kolay Kullanım",
       "description": "Basit ve sezgisel bir deneyim sunuyoruz.",
-      "image": ""
+      "image": "assets/images/images.png"
     },
     {
       "title": "Hadi Başlayalım!",
       "description": "Uygulamayı şimdi keşfetmeye başlayın!",
-      "image": ""
+      "image": "assets/images/images.png"
     }
   ];
 
