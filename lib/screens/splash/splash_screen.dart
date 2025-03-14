@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:genclik_spor/screens/howtouse/howtouse_screen.dart';
+import 'package:genclik_spor/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -24,13 +26,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-                "https://logomaker.designfreelogoonline.com/media/productdesigner/logo/resized/1286_bird-01.png"),
+            SizedBox(
+              child: SvgPicture.asset(
+                'assets/images/logo.svg',
+                color: officialred,
+              ),
+            ),
             const SizedBox(height: 20),
             const CircularProgressIndicator(color: Colors.white),
           ],

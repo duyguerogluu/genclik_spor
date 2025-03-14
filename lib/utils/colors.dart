@@ -9,3 +9,5 @@ Color blue = const Color(0xFF385D80);
 Color darkblue = const Color(0xFF00375C);
 Color blue1 = const Color(0xFF0095D4);
 Color blue2 = const Color(0xFF176096);
+Color officialblue = const Color(0xFF00235A);
+Color officialred = const Color(0xFFC30000);

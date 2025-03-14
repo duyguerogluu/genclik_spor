@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/home/home_screen.dart';
 import 'package:genclik_spor/screens/login/signup_screen.dart';
@@ -53,9 +54,10 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: SizedBox(
-                  height: deviceHeight * 0.18,
-                  child: Image.network(
-                    "https://logomaker.designfreelogoonline.com/media/productdesigner/logo/resized/1286_bird-01.png",
+                  height: deviceHeight * 0.2,
+                  child: SvgPicture.asset(
+                    'assets/images/logo.svg',
+                    semanticsLabel: 'Genclik Spor Bakanligi Photo',
                   ),
                 ),
               ),
