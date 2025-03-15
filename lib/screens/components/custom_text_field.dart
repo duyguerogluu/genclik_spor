@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+
+Widget customTextField({
+  required TextEditingController controller,
+  required String hintText,
+  required bool obscureText,
+  required Function() onVisibilityToggle,
+  required bool isDark,
+}) {
+  return Container(
+    padding: const EdgeInsets.all(5),
+    decoration: BoxDecoration(
+      color: isDark ? Colors.grey[800] : Colors.grey[200],
+      borderRadius: BorderRadius.circular(10),
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromRGBO(143, 148, 251, .2),
+          blurRadius: 20.0,
+          offset: Offset(0, 10),
+        ),
+      ],
+    ),
+    child: TextFormField(
+      controller: controller,
+      cursorColor: Colors.purpleAccent,
+      obscureText: obscureText,
+      style: TextStyle(color: isDark ? Colors.white : Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: isDark ? Colors.grey[800] : Colors.grey[200],
+        border: InputBorder.none,
+        hintText: hintText,
+        hintStyle: TextStyle(color: isDark ? Colors.white70 : Colors.black45),
+        suffixIcon: obscureText
+            ? IconButton(
+                icon:
+                    Icon(obscureText ? Icons.visibility_off : Icons.visibility),
+                onPressed: onVisibilityToggle,
+              )
+            : null,
+      ),
+    ),
+  );
+}

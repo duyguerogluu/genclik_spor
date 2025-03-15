@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/screens/components/custom_button.dart';
 import 'package:genclik_spor/screens/login/login_screen.dart';
+import 'package:genclik_spor/utils/colors.dart';
+import 'package:genclik_spor/utils/extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HowToUseScreen extends StatefulWidget {
@@ -69,6 +71,7 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.isDark ? offdarkblue : white,
       body: Column(
         children: [
           Expanded(
