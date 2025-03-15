@@ -101,11 +101,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               color:
                                   context.isDark ? offdarkblue : Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(143, 148, 251, .2),
+                                  color: offlightblue,
                                   blurRadius: 20.0,
-                                  offset: Offset(0, 10),
+                                  offset: const Offset(0, 10),
                                 )
                               ],
                             ),

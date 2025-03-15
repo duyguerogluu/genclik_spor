@@ -11,11 +11,11 @@ Widget customTextField({
   return Container(
     padding: const EdgeInsets.all(5),
     decoration: BoxDecoration(
-      color: isDark ? offdarkblue : Colors.grey[200],
+      color: isDark ? offdarkblue : white,
       borderRadius: BorderRadius.circular(10),
       boxShadow: const [
         BoxShadow(
-          color: Color.fromRGBO(143, 148, 251, .2),
+          color: Colors.transparent,
           blurRadius: 20.0,
           offset: Offset(0, 10),
         ),
@@ -28,7 +28,7 @@ Widget customTextField({
       style: TextStyle(color: isDark ? Colors.white : Colors.black),
       decoration: InputDecoration(
         filled: true,
-        fillColor: isDark ? offdarkblue : Colors.grey[200],
+        fillColor: isDark ? offdarkblue : white,
         border: InputBorder.none,
         hintText: hintText,
         hintStyle: TextStyle(color: isDark ? Colors.white70 : Colors.black45),

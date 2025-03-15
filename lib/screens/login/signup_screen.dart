@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/components/custom_text_field.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -11,6 +12,7 @@ class SignupScreen extends ConsumerStatefulWidget {
 }
 
 class _SignupPageState extends ConsumerState<SignupScreen> {
+  TextEditingController telNo = TextEditingController();
   bool _ishidden = true;
   bool isProcessing = false;
   bool _pageLogin = true;
@@ -34,15 +36,15 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
       child: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
-          children: <Widget>[
+          children: [
             Container(
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: context.isDark ? offdarkblue : white,
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                    color: Color.fromRGBO(143, 148, 251, .2),
+                    color: offlightblue,
                     blurRadius: 20.0,
                     offset: Offset(0, 10),
                   )
@@ -61,120 +63,41 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        Container(
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey.shade200,
-                              ),
-                            ),
-                          ),
-                          child: TextFormField(
-                            cursorColor: Colors.purpleAccent,
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 253, 210, 92)),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Ad",
-                              hintStyle: TextStyle(color: Colors.grey[400]),
-                            ),
-                          ),
+                        customTextField(
+                          controller: telNo,
+                          hintText: "Ad",
+                          obscureText: false,
+                          onVisibilityToggle: () {},
+                          isDark: context.isDark,
                         ),
-
-                        Container(
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey.shade200,
-                              ),
-                            ),
-                          ),
-                          child: TextFormField(
-                            cursorColor: Colors.purpleAccent,
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 253, 210, 92)),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Soyad",
-                              hintStyle: TextStyle(color: Colors.grey[400]),
-                            ),
-                          ),
+                        customTextField(
+                          controller: telNo,
+                          hintText: "Soyad",
+                          obscureText: false,
+                          onVisibilityToggle: () {},
+                          isDark: context.isDark,
                         ),
-
-                        Container(
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey.shade200,
-                              ),
-                            ),
-                          ),
-                          child: TextFormField(
-                            keyboardType: TextInputType.phone,
-                            cursorColor: Colors.purpleAccent,
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 253, 210, 92)),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Telefon Numarası",
-                              hintStyle: TextStyle(color: Colors.grey[400]),
-                            ),
-                          ),
+                        customTextField(
+                          controller: telNo,
+                          hintText: "Telefon Numarası",
+                          obscureText: false,
+                          onVisibilityToggle: () {},
+                          isDark: context.isDark,
                         ),
-
-                        Container(
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey.shade200,
-                              ),
-                            ),
-                          ),
-                          child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            cursorColor: Colors.purpleAccent,
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 253, 210, 92)),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Email Adres",
-                              hintStyle: TextStyle(color: Colors.grey[400]),
-                            ),
-                          ),
+                        customTextField(
+                          controller: telNo,
+                          hintText: "Email",
+                          obscureText: false,
+                          onVisibilityToggle: () {},
+                          isDark: context.isDark,
                         ),
-
-                        Container(
-                            padding: const EdgeInsets.all(4.0),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Colors.grey.shade200,
-                                ),
-                              ),
-                            ),
-                            child: TextFormField(
-                              cursorColor: Colors.purpleAccent,
-                              obscureText: _ishidden ? true : false,
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 253, 210, 92)),
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: Icon(_ishidden
-                                      ? Icons.visibility_off
-                                      : Icons.visibility),
-                                  onPressed: _toggleVisibility,
-                                ),
-                                border: InputBorder.none,
-                                hintText: "Şifre",
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[400],
-                                ),
-                              ),
-                            )),
+                        customTextField(
+                          controller: telNo,
+                          hintText: "Şifre",
+                          obscureText: false,
+                          onVisibilityToggle: () {},
+                          isDark: context.isDark,
+                        ),
                         //ConfirmPassword(),
                       ],
                     ),
