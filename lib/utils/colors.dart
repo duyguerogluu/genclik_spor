@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 Color offdarkblue = const Color(0xFF00235A);
+Color offdarkblue1 = const Color.fromARGB(255, 0, 47, 123);
 Color offlightblue = const Color(0xFF3C6BC3);
+Color offlightblue1 = const Color(0xFF3C6BC3);
 Color offred = const Color(0xFFC30000);
 
 Color green = const Color(0xFF03A373);

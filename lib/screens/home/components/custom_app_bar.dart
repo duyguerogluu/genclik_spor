@@ -32,6 +32,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {},
         ),
       ],
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1),
+        child: Container(
+          color: Colors.grey.shade300,
+          height: 1,
+        ),
+      ),
     );
   }
 }
