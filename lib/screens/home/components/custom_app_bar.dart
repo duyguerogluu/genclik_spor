@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      backgroundColor: context.isDark ? offlightblue : white,
+      backgroundColor: context.isDark ? offdarkblue1 : white,
       actions: [
         IconButton(
           icon: const Icon(CupertinoIcons.bell),
@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
         child: Container(
-          color: Colors.grey.shade300,
+          color: context.isDark ? Colors.transparent : Colors.grey.shade300,
           height: 1,
         ),
       ),
