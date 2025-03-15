@@ -68,60 +68,24 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  ElevatedButton(
+                  customButton(
+                    context: context,
                     onPressed: () {
                       _togglePage(true);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _pageLogin
-                          ? context.isDark
-                              ? white
-                              : offdarkblue
-                          : Colors.transparent,
-                      foregroundColor: Colors.transparent,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text(
-                      'Giriş',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: _pageLogin
-                            ? Colors.white
-                            : context.isDark
-                                ? white
-                                : offdarkblue,
-                      ),
-                    ),
+                    text: 'Giriş',
+                    isTransparent: !_pageLogin,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  ElevatedButton(
+                  customButton(
+                    context: context,
                     onPressed: () {
                       _togglePage(false);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          _pageLogin ? Colors.transparent : offdarkblue,
-                      foregroundColor: Colors.transparent,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text(
-                      'Kayıt Ol',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: _pageLogin
-                              ? const Color.fromARGB(255, 217, 217, 217)
-                              : Colors.white),
-                    ),
+                    text: 'Kayıt Ol',
+                    isTransparent: _pageLogin,
                   ),
                 ],
               ),
@@ -223,10 +187,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: InkWell(
-                              child: const Text(
+                              child: Text(
                                 'Şifremi Unuttum',
                                 style: TextStyle(
-                                  color: Color.fromARGB(255, 253, 210, 92),
+                                  color: context.isDark ? white : offdarkblue,
                                   fontSize: 16,
                                 ),
                               ),
