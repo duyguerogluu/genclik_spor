@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/utils/colors.dart';
 
 Widget customTextField({
   required TextEditingController controller,
@@ -10,7 +11,7 @@ Widget customTextField({
   return Container(
     padding: const EdgeInsets.all(5),
     decoration: BoxDecoration(
-      color: isDark ? Colors.grey[800] : Colors.grey[200],
+      color: isDark ? offdarkblue : Colors.grey[200],
       borderRadius: BorderRadius.circular(10),
       boxShadow: const [
         BoxShadow(
@@ -27,7 +28,7 @@ Widget customTextField({
       style: TextStyle(color: isDark ? Colors.white : Colors.black),
       decoration: InputDecoration(
         filled: true,
-        fillColor: isDark ? Colors.grey[800] : Colors.grey[200],
+        fillColor: isDark ? offdarkblue : Colors.grey[200],
         border: InputBorder.none,
         hintText: hintText,
         hintStyle: TextStyle(color: isDark ? Colors.white70 : Colors.black45),

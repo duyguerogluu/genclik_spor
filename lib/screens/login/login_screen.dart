@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/components/custom_button.dart';
+import 'package:genclik_spor/screens/components/custom_text_field.dart';
 import 'package:genclik_spor/screens/home/home_screen.dart';
 import 'package:genclik_spor/screens/login/signup_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
@@ -97,7 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           Container(
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color:
+                                  context.isDark ? offdarkblue : Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
@@ -109,53 +111,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             child: Column(
                               children: <Widget>[
-                                Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        color: Colors.grey.shade200,
-                                      ),
-                                    ),
-                                  ),
-                                  child: TextField(
-                                    controller: login.telNo,
-                                    cursorColor: Colors.purpleAccent,
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 253, 210, 92)),
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Phone number",
-                                      hintStyle:
-                                          TextStyle(color: Colors.grey[400]),
-                                    ),
-                                  ),
+                                customTextField(
+                                  controller: login.telNo,
+                                  hintText: "Phone number",
+                                  obscureText: false,
+                                  onVisibilityToggle: () {},
+                                  isDark: context.isDark,
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextField(
-                                    controller: login.password,
-                                    cursorColor: Colors.purpleAccent,
-                                    obscureText: _ishidden ? true : false,
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 253, 210, 92)),
-                                    decoration: InputDecoration(
-                                      suffixIcon: IconButton(
-                                        icon: Icon(_ishidden
-                                            ? Icons.visibility_off
-                                            : Icons.visibility),
-                                        onPressed: _toggleVisibility,
-                                      ),
-                                      border: InputBorder.none,
-                                      hintText: "Password",
-                                      hintStyle: TextStyle(
-                                        color: Colors.grey[400],
-                                      ),
-                                    ),
-                                  ),
-                                )
+                                customTextField(
+                                  controller: login.password,
+                                  hintText: "Password",
+                                  obscureText: _ishidden,
+                                  onVisibilityToggle: _toggleVisibility,
+                                  isDark: context.isDark,
+                                ),
                               ],
                             ),
                           ),
