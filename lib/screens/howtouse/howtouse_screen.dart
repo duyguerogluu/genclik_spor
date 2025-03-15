@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/components/custom_button.dart';
 import 'package:genclik_spor/screens/login/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -116,16 +117,19 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
+            child: customButton(
+              context: context,
               onPressed: currentIndex == onboardingData.length - 1
                   ? _completeOnboarding
                   : () => _pageController.nextPage(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut),
-              child: Text(currentIndex == onboardingData.length - 1
-                  ? "Başla"
-                  : "İleri"),
+              text:
+                  currentIndex == onboardingData.length - 1 ? "Başla" : "İleri",
             ),
+          ),
+          const SizedBox(
+            width: 10,
           ),
         ],
       ),

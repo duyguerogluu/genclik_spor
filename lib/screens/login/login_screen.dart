@@ -57,11 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: SizedBox(
-                  height: deviceHeight * 0.2,
+                  height: deviceHeight * 0.24,
                   child: SvgPicture.asset(
                     'assets/images/logo.svg',
                     semanticsLabel: 'Genclik Spor Bakanligi Photo',
-                    color: context.isDark ? white : offred,
+                    color: context.isDark ? white : offdarkblue,
                   ),
                 ),
               ),
