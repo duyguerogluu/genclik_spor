@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:genclik_spor/utils/colors.dart';
+import 'package:genclik_spor/utils/extensions.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -11,17 +15,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Ana Sayfa'),
+      title: Center(
+        child: SizedBox(
+          height: 56,
+          child: SvgPicture.asset(
+            'assets/images/logo.svg',
+            semanticsLabel: 'Genclik Spor Bakanligi Photo',
+            color: context.isDark ? white : offdarkblue,
+          ),
+        ),
+      ),
+      backgroundColor: context.isDark ? offlightblue : white,
       actions: [
         IconButton(
-          icon: const Icon(Icons.account_circle),
+          icon: const Icon(CupertinoIcons.bell),
           onPressed: () {},
         ),
       ],
     );
   }
-}
-
-class ProfileScreen {
-  const ProfileScreen();
 }
