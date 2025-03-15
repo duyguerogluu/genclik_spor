@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
+import 'package:genclik_spor/screens/components/custom_button.dart';
 import 'package:genclik_spor/screens/home/home_screen.dart';
 import 'package:genclik_spor/screens/login/signup_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
+import 'package:genclik_spor/utils/extensions.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -48,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
     double deviceHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: context.isDark ? offdarkblue : white,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -59,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: SvgPicture.asset(
                     'assets/images/logo.svg',
                     semanticsLabel: 'Genclik Spor Bakanligi Photo',
-                    color: offred,
+                    color: context.isDark ? white : offred,
                   ),
                 ),
               ),
@@ -72,7 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _pageLogin
-                          ? const Color.fromARGB(255, 253, 210, 92)
+                          ? context.isDark
+                              ? white
+                              : offdarkblue
                           : Colors.transparent,
                       foregroundColor: Colors.transparent,
                       padding: const EdgeInsets.symmetric(
@@ -87,7 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 18,
                         color: _pageLogin
                             ? Colors.white
-                            : const Color.fromARGB(255, 217, 217, 217),
+                            : context.isDark
+                                ? white
+                                : offdarkblue,
                       ),
                     ),
                   ),
@@ -189,10 +195,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
-                            child: ElevatedButton(
+                            child: customButton(
+                              context: context,
                               onPressed: () async {
                                 final res = await login.fetchLogin();
                                 if (res == true) {
@@ -210,30 +216,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           content: Text("Giriş yapılamadı!")));
                                 }
                               },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: _pageLogin
-                                    ? const Color.fromARGB(255, 253, 210, 92)
-                                    : Colors.transparent,
-                                foregroundColor: Colors.transparent,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 15),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child: Text(
-                                'Giriş Yap',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: _pageLogin
-                                      ? Colors.white
-                                      : Color.fromARGB(255, 217, 217, 217),
-                                ),
-                              ),
+                              text: 'Giriş Yap',
+                              isTransparent: !_pageLogin,
                             ),
                           ),
-
-                          //Şifremi Unuttum
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: InkWell(
@@ -250,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     )
-                  : SignupScreen() //!!!!!!!!!!!!!!!!!!!!!! singupp a yönlendiricem
+                  : SignupScreen()
             ],
           ),
         ),

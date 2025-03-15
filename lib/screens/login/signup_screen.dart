@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/utils/colors.dart';
+import 'package:genclik_spor/utils/extensions.dart';
 
 //Controllerlar eklenecek !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -199,7 +201,9 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
                       },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _pageLogin
-                      ? const Color.fromARGB(255, 253, 210, 92)
+                      ? context.isDark
+                          ? offlightblue
+                          : offdarkblue
                       : Colors.transparent,
                   foregroundColor: Colors.transparent,
                   padding:
