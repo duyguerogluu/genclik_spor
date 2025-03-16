@@ -40,15 +40,15 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
             Container(
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                color: context.isDark ? offdarkblue : white,
+                color: context.isDark ? offdarkblue : white1,
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: offlightblue,
-                    blurRadius: 20.0,
-                    offset: Offset(0, 10),
-                  )
-                ],
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: offlightblue,
+                //     blurRadius: 20.0,
+                //     offset: Offset(0, 10),
+                //   )
+                // ],
               ),
               child: Column(
                 children: <Widget>[
@@ -139,9 +139,8 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
                   'Kaydol',
                   style: TextStyle(
                     fontSize: 18,
-                    color: _pageLogin
-                        ? Colors.white
-                        : Color.fromARGB(255, 217, 217, 217),
+                    color:
+                        _pageLogin ? white : Color.fromARGB(255, 217, 217, 217),
                   ),
                 ),
               ),

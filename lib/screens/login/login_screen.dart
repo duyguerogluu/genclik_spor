@@ -98,16 +98,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           Container(
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                              color:
-                                  context.isDark ? offdarkblue : Colors.white,
+                              color: context.isDark ? offdarkblue : white1,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: offlightblue,
-                                  blurRadius: 20.0,
-                                  offset: const Offset(0, 10),
-                                )
-                              ],
+                              // boxShadow: [
+                              //   BoxShadow(
+                              //     color: offlightblue2,
+                              //     blurRadius: 20.0,
+                              //     offset: const Offset(0, 0.2),
+                              //   )
+                              // ],
                             ),
                             child: Column(
                               children: <Widget>[
