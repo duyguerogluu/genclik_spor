@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/screens/components/sport_list.dart';
-import 'package:genclik_spor/screens/home/components/custom_app_bar.dart';
-import 'package:genclik_spor/screens/home/components/custom_bottom_bar.dart';
-import 'package:genclik_spor/screens/home/components/custom_drawer.dart';
+import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart';
+import 'package:genclik_spor/screens/common/home/components/custom_bottom_bar.dart';
+import 'package:genclik_spor/screens/common/home/components/custom_drawer.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 

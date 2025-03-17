@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/components/custom_button.dart';
 import 'package:genclik_spor/screens/components/custom_text_field.dart';
-import 'package:genclik_spor/screens/home/home_screen.dart';
+import 'package:genclik_spor/screens/common/home/home_screen.dart';
 import 'package:genclik_spor/screens/common/login/signup_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:genclik_spor/screens/home/home_screen.dart';
-import 'package:genclik_spor/screens/profile/profile_screen.dart';
+import 'package:genclik_spor/screens/common/home/home_screen.dart';
+import 'package:genclik_spor/screens/athlete/profile/profile_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
