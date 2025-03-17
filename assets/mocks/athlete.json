@@ -1,0 +1,15 @@
+{
+    "role": "athlete",
+    "age": 25,
+    "height": 180,
+    "weight": 75,
+    "sport": "Athletics",
+    "endurance": 90,
+    "speed": 85,
+    "flexibility": 70,
+    "agility": 80,
+    "trainingHistory": [
+      {"date": "2025-03-10", "sport": "Running", "status": "Completed"},
+      {"date": "2025-03-12", "sport": "Strength Training", "status": "Ongoing"}
+    ]
+  }
