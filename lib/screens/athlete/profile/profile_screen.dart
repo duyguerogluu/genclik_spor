@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/models/athlete_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 
 
 class AthleteProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final athlete = ref.read(athlete1);
+    final athlete = ref.read(athleteRiverpod).athlete!;
 
     return Scaffold(
       appBar: AppBar(title: Text("Sporcu Profili")),
@@ -16,11 +17,11 @@ class AthleteProfileScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildProfileCard(athlete),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildPerformanceAnalysis(athlete),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildTrainingHistory(athlete),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildApplyButton(),
           ],
         ),
@@ -28,7 +29,7 @@ class AthleteProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildProfileCard(Athlete athlete) {
+  Widget _buildProfileCard(AthleteModel athlete) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -55,12 +56,12 @@ class AthleteProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPerformanceAnalysis(Athlete athlete) {
+  Widget _buildPerformanceAnalysis(AthleteModel athlete) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Performans Analizi", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         _buildProgressBar("Dayanıklılık", athlete.endurance),
         _buildProgressBar("Hız", athlete.speed),
         _buildProgressBar("Esneklik", athlete.flexibility),
@@ -69,13 +70,13 @@ class AthleteProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildTrainingHistory(Athlete athlete) {
+  Widget _buildTrainingHistory(AthleteModel athlete) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("Antrenman Geçmişi", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               itemCount: athlete.trainingHistory.length,
@@ -108,44 +109,13 @@ class AthleteProfileScreen extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         LinearProgressIndicator(value: value / 100, minHeight: 8),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
       ],
     );
   }
 }
 
-class Athlete {
-  final String name;
-  final int age;
-  final int height;
-  final int weight;
-  final String sport;
-  final int endurance;
-  final int speed;
-  final int flexibility;
-  final int agility;
-  final List<TrainingSession> trainingHistory;
 
-  Athlete({
-    required this.name,
-    required this.age,
-    required this.height,
-    required this.weight,
-    required this.sport,
-    required this.endurance,
-    required this.speed,
-    required this.flexibility,
-    required this.agility,
-    required this.trainingHistory,
-  });
-}
 
-class TrainingSession {
-  final String date;
-  final String sport;
-  final String status;
-
-  TrainingSession({required this.date, required this.sport, required this.status});
-}

@@ -1,4 +1,5 @@
-class Athlete {
+class AthleteModel {
+  final String name;
   final String role;
   final int age;
   final int height;
@@ -10,7 +11,8 @@ class Athlete {
   final int agility;
   final List<TrainingHistory> trainingHistory;
 
-  Athlete({
+  AthleteModel({
+    required this.name,
     required this.role,
     required this.age,
     required this.height,
@@ -23,8 +25,9 @@ class Athlete {
     required this.trainingHistory,
   });
 
-  factory Athlete.fromMap(Map<String, dynamic> map) {
-    return Athlete(
+  factory AthleteModel.fromMap(Map<String, dynamic> map) {
+    return AthleteModel(
+      name: map['name'],
       role: map['role'],
       age: map['age'],
       height: map['height'],
@@ -42,6 +45,7 @@ class Athlete {
 
   Map<String, dynamic> toMap() {
     return {
+      'name': name,
       'role': role,
       'age': age,
       'height': height,
