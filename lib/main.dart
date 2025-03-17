@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genclik_spor/screens/splash/splash_screen.dart';
+import 'package:genclik_spor/screens/common/splash/splash_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
 void main() {

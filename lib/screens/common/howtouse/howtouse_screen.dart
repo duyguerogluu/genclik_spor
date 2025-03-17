@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/screens/components/custom_button.dart';
-import 'package:genclik_spor/screens/login/login_screen.dart';
+import 'package:genclik_spor/screens/common/login/login_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';

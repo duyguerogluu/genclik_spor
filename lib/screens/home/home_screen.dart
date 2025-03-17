@@ -42,7 +42,7 @@ class HomeScreen extends ConsumerWidget {
               ],
             ),
             Expanded(
-              child: Center(child: SportList(ref)),
+              child: Center(child: Text('home')),
             ),
           ],
         ),
