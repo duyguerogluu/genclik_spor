@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/components/sport_list.dart';
 import 'package:genclik_spor/screens/home/components/custom_app_bar.dart';
 import 'package:genclik_spor/screens/home/components/custom_bottom_bar.dart';
 import 'package:genclik_spor/screens/home/components/custom_drawer.dart';
@@ -32,14 +33,16 @@ class HomeScreen extends ConsumerWidget {
               tabAlignment: TabAlignment.start,
               dividerHeight: 0,
               indicatorWeight: 0.2,
-              tabs: const [
-                Tab(text: "Anasayfa"),
+              tabs: [
+                Tab(
+                  text: "Anasayfa",
+                ),
                 Tab(text: "Antrenörler"),
                 Tab(text: "Spor Salonları"),
               ],
             ),
-            const Expanded(
-              child: Center(child: Text("Content ")),
+            Expanded(
+              child: Center(child: SportList(ref)),
             ),
           ],
         ),
