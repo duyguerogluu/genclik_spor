@@ -6,17 +6,21 @@ import 'package:genclik_spor/riverpod/riverpod_management.dart';
 class AthleteProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final athleteState = ref.read(athleteRiverpod);
+    final athleteState = ref.watch(athleteRiverpod);
     final read = athleteState.athlete;
 
+    if (athleteState.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     if (read == null) {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: Text("Veri yüklenemedi"));
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Sporcu Profili")),
+      appBar: AppBar(title: const Text("Sporcu Profili")),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
