@@ -10,7 +10,11 @@ class AthleteRiverpod extends ChangeNotifier {
   bool isLoading = false;
 
   Future<void> fetchAthlete() async {
-    debugPrint("fetchAthlete çalıştı");
+    if (athlete != null || isLoading) {
+      return;
+    }
+
+    debugPrint("fetchAthlete çalıştı!!!!!!!!!");
     isLoading = true;
     notifyListeners();
 
@@ -18,6 +22,8 @@ class AthleteRiverpod extends ChangeNotifier {
       final String response =
           await rootBundle.loadString('assets/mocks/athlete.json');
       final data = json.decode(response);
+      debugPrint(
+          "Responseeeeeeeeeeeeeeeeeeeeeeeeeeeee!!!!!!!!!!!!!!!!!!!: $data");
       athlete = AthleteModel.fromMap(data);
     } catch (e) {
       debugPrint("Athlete verisi yüklenirken hata oluştu: \$e");

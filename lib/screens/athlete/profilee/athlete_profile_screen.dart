@@ -6,7 +6,9 @@ import 'package:genclik_spor/riverpod/riverpod_management.dart';
 class AthleteProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final athleteState = ref.watch(athleteRiverpod);
+    debugPrint("AthleteProfileScreen build çalıştı!!!!!!!!!!!!!!!!!");
+    final athleteState = ref.watch(athleteRiverpodNotifier);
+    Future.sync(athleteRiverpod.fetchAthlete);
     final read = athleteState.athlete;
 
     if (athleteState.isLoading) {
@@ -47,7 +49,7 @@ class AthleteProfileScreen extends ConsumerWidget {
           children: [
             CircleAvatar(
               radius: 40,
-              backgroundImage: AssetImage("assets/profile_placeholder.png"),
+              // backgroundImage: AssetImage("assets/profile_placeholder.png"),
             ),
             SizedBox(width: 16),
             Column(
