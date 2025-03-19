@@ -43,7 +43,20 @@ class HomeScreen extends ConsumerWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  _buildHomeTabContent(context),
+                  Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFF0F2027),
+                          Color(0xFF203A43),
+                          Color(0xFF2C5364)
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: _buildHomeTabContent(context),
+                  ),
                   const Center(child: Text('Antrenörler')),
                   const Center(child: Text('Spor Salonları')),
                 ],
@@ -58,18 +71,16 @@ class HomeScreen extends ConsumerWidget {
 
 Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
   return GestureDetector(
-    onTap: () {
-      // Navigator.push...
-    },
+    onTap: () {},
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2), // Cam efekti
+            color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white.withOpacity(0.3)),
+            border: Border.all(color: Colors.white),
           ),
           child: Center(
             child: Column(
@@ -104,43 +115,30 @@ Widget _buildHomeTabContent(BuildContext context) {
     {'icon': Icons.app_registration, 'title': 'Başvurularım'},
     {'icon': Icons.article, 'title': 'Duyurular'},
   ];
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Expanded(child: _buildWelcomeCard()),
-      //Expanded(child: _buildMenuGrid(context)),
-      GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: 1,
+  return SingleChildScrollView(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildWelcomeCard(),
+        const SizedBox(height: 16),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 1,
+          ),
+          itemCount: menuItems.length,
+          itemBuilder: (context, index) {
+            final item = menuItems[index];
+            return _buildGlassMenuCard(item['icon'], item['title'], context);
+          },
         ),
-        itemCount: menuItems.length,
-        itemBuilder: (context, index) {
-          final item = menuItems[index];
-          return _buildGlassMenuCard(item['icon'], item['title'], context);
-        },
-      ),
-      /*GridView.count(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          _buildMenuCard(Icons.sports_soccer, "Spor Branşları", context),
-          _buildMenuCard(Icons.fitness_center, "Antrenmanlar", context),
-          _buildMenuCard(Icons.bar_chart, "Performans Analizi", context),
-          _buildMenuCard(Icons.person, "Profilim", context),
-          _buildMenuCard(Icons.app_registration, "Başvurularım", context),
-          _buildMenuCard(Icons.article, "Duyurular", context),
-        ],
-      ),*/
-      // _buildAnnouncements(),
-    ],
+      ],
+    ),
   );
 }
 
