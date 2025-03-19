@@ -28,18 +28,18 @@ class AthleteProfileScreen extends ConsumerWidget {
           children: [
             _buildProfileCard(read),
             const SizedBox(height: 20),
-            // _buildPerformanceAnalysis(read),
+            _buildPerformanceAnalysis(read),
             const SizedBox(height: 20),
-            // _buildTrainingHistory(read),
+            _buildTrainingHistory(read),
             const SizedBox(height: 10),
-            // _buildApplyButton(),
+            _buildApplyButton(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildProfileCard(AthleteModel athlete) {
+  Widget _buildProfileCard(read) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -55,12 +55,12 @@ class AthleteProfileScreen extends ConsumerWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(athlete.name,
+                Text(read.name,
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                Text(athlete.sport, style: TextStyle(color: Colors.grey[700])),
+                Text(read.sport, style: TextStyle(color: Colors.grey[700])),
                 Text(
-                    "Yaş: ${athlete.age} | Boy: ${athlete.height} cm | Kilo: ${athlete.weight} kg"),
+                    "Yaş: ${read.age} | Boy: ${read.height} cm | Kilo: ${read.weight} kg"),
               ],
             )
           ],
@@ -69,22 +69,22 @@ class AthleteProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPerformanceAnalysis(AthleteModel athlete) {
+  Widget _buildPerformanceAnalysis(read) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Performans Analizi",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const SizedBox(height: 10),
-        _buildProgressBar("Dayanıklılık", athlete.endurance),
-        _buildProgressBar("Hız", athlete.speed),
-        _buildProgressBar("Esneklik", athlete.flexibility),
-        _buildProgressBar("Çeviklik", athlete.agility),
+        _buildProgressBar("Dayanıklılık", read.endurance),
+        _buildProgressBar("Hız", read.speed),
+        _buildProgressBar("Esneklik", read.flexibility),
+        _buildProgressBar("Çeviklik", read.agility),
       ],
     );
   }
 
-  Widget _buildTrainingHistory(AthleteModel athlete) {
+  Widget _buildTrainingHistory(read) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,9 +94,9 @@ class AthleteProfileScreen extends ConsumerWidget {
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: athlete.trainingHistory.length,
+              itemCount: read.trainingHistory.length,
               itemBuilder: (context, index) {
-                final session = athlete.trainingHistory[index];
+                final session = read.trainingHistory[index];
                 return ListTile(
                   leading: Icon(Icons.sports_basketball, color: Colors.blue),
                   title: Text(session.date),
