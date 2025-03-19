@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart';
@@ -54,18 +56,80 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
+Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      // Navigator.push...
+    },
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.2), // Cam efekti
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.white.withOpacity(0.3)),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon, size: 40, color: Colors.white),
+                const SizedBox(height: 10),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 Widget _buildHomeTabContent(BuildContext context) {
+  final List<Map<String, dynamic>> menuItems = [
+    {'icon': Icons.sports_soccer, 'title': 'Spor Branşları'},
+    {'icon': Icons.fitness_center, 'title': 'Antrenmanlar'},
+    {'icon': Icons.bar_chart, 'title': 'Performans Analizi'},
+    {'icon': Icons.person, 'title': 'Profilim'},
+    {'icon': Icons.app_registration, 'title': 'Başvurularım'},
+    {'icon': Icons.article, 'title': 'Duyurular'},
+  ];
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Expanded(child: _buildWelcomeCard()),
       //Expanded(child: _buildMenuGrid(context)),
-      GridView.count(
+      GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          childAspectRatio: 1,
+        ),
+        itemCount: menuItems.length,
+        itemBuilder: (context, index) {
+          final item = menuItems[index];
+          return _buildGlassMenuCard(item['icon'], item['title'], context);
+        },
+      ),
+      /*GridView.count(
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(), 
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           _buildMenuCard(Icons.sports_soccer, "Spor Branşları", context),
           _buildMenuCard(Icons.fitness_center, "Antrenmanlar", context),
@@ -74,7 +138,7 @@ Widget _buildHomeTabContent(BuildContext context) {
           _buildMenuCard(Icons.app_registration, "Başvurularım", context),
           _buildMenuCard(Icons.article, "Duyurular", context),
         ],
-      ),
+      ),*/
       // _buildAnnouncements(),
     ],
   );
