@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/common/gyms/gyms_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_bottom_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_drawer.dart';
@@ -36,8 +37,8 @@ class HomeScreen extends ConsumerWidget {
               indicatorWeight: 0.2,
               tabs: const [
                 Tab(text: "Anasayfa"),
-                Tab(text: "Antrenörler"),
                 Tab(text: "Spor Salonları"),
+                Tab(text: "Antrenörler"),
               ],
             ),
             Expanded(
@@ -47,9 +48,9 @@ class HomeScreen extends ConsumerWidget {
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Color(0xFF0F2027),
-                          Color(0xFF203A43),
-                          Color(0xFF2C5364)
+                          Color.fromARGB(255, 91, 177, 214),
+                          Color.fromARGB(255, 167, 227, 247),
+                          Color.fromARGB(255, 255, 255, 255)
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -57,7 +58,7 @@ class HomeScreen extends ConsumerWidget {
                     ),
                     child: _buildHomeTabContent(context),
                   ),
-                  const Center(child: Text('Antrenörler')),
+                  const GymsScreen(),
                   const Center(child: Text('Spor Salonları')),
                 ],
               ),
@@ -76,9 +77,9 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color.fromARGB(200, 255, 255, 255),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white),
+          border: Border.all(color: Colors.transparent),
         ),
         child: Center(
           child: Column(
@@ -88,8 +89,8 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
               const SizedBox(height: 10),
               Text(
                 title,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: grey,
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
                 ),
