@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/models/athlete_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
+import 'package:genclik_spor/utils/colors.dart';
 
 class AthleteProfileScreen extends ConsumerWidget {
   @override
@@ -20,6 +21,7 @@ class AthleteProfileScreen extends ConsumerWidget {
     }
 
     return Scaffold(
+      backgroundColor: white1,
       appBar: AppBar(title: const Text("Sporcu Profili")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,29 +42,35 @@ class AthleteProfileScreen extends ConsumerWidget {
   }
 
   Widget _buildProfileCard(read) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: EdgeInsets.all(16),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        color: white,
+        padding: const EdgeInsets.all(16),
         child: Row(
           children: [
             CircleAvatar(
               radius: 40,
-              // backgroundImage: AssetImage("assets/profile_placeholder.png"),
+              backgroundImage: NetworkImage(
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTU2fQ_VCPdrSaseCDEo_dTbhRo7_Kuoz5zQ&s"),
             ),
             SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(read.name,
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                Text(read.sport, style: TextStyle(color: Colors.grey[700])),
                 Text(
-                    "Yaş: ${read.age} | Boy: ${read.height} cm | Kilo: ${read.weight} kg"),
+                  read.name,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  read.sport,
+                  style: TextStyle(color: Colors.grey[700]),
+                ),
+                Text(
+                  "Yaş: ${read.age} | Boy: ${read.height} cm | Kilo: ${read.weight} kg",
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
