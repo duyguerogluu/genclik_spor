@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/common/coachs/coachs_screen.dart';
 import 'package:genclik_spor/screens/common/gyms/gyms_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_bottom_bar.dart';
@@ -49,7 +50,7 @@ class HomeScreen extends ConsumerWidget {
                     child: _buildHomeTabContent(context),
                   ),
                   const GymsScreen(),
-                  const Center(child: Text('Spor Salonları')),
+                  const CoachsScreen(),
                 ],
               ),
             ),
