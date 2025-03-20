@@ -52,7 +52,7 @@ class AthleteProfileScreen extends ConsumerWidget {
             CircleAvatar(
               radius: 40,
               backgroundImage: NetworkImage(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTU2fQ_VCPdrSaseCDEo_dTbhRo7_Kuoz5zQ&s"),
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh7-m2anFLaH9UxDgrlvlXUwpds79K10S-IQ&s"),
             ),
             SizedBox(width: 16),
             Column(
