@@ -16,27 +16,25 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
   @override
   void initState() {
     super.initState();
-    // _checkFirstTime();
+    _checkFirstTime();
   }
 
-/*
   Future<void> _checkFirstTime() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // final isFirstTime = prefs.getBool('isFirstTime') ?? true;
+    final prefs = await SharedPreferences.getInstance();
+    final isFirstTime = prefs.getBool('isFirstTime') ?? true;
 
-    // if (isFirstTime) {
-    //   Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => const HowToUseScreen()),
-    //   );
-    // } else {
-    //   Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => const HowToUseScreen()),
-    //   );
-    // }
+    if (isFirstTime) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HowToUseScreen()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    }
   }
-  */
 
   final PageController _pageController = PageController();
   int currentIndex = 0;

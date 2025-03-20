@@ -74,31 +74,28 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
     onTap: () {},
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(icon, size: 40, color: Colors.white),
-                const SizedBox(height: 10),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                  textAlign: TextAlign.center,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.white),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 40, color: Colors.white),
+              const SizedBox(height: 10),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
                 ),
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
       ),
@@ -134,8 +131,8 @@ Widget _buildHomeTabContent(BuildContext context) {
           itemCount: menuItems.length,
           itemBuilder: (context, index) {
             final item = menuItems[index];
-            //return _buildGlassMenuCard(item['icon'], item['title'], context);
-            return _buildWelcomeCard();
+            return _buildGlassMenuCard(item['icon'], item['title'], context);
+            //return _buildWelcomeCard();
           },
         ),
       ],
