@@ -134,7 +134,8 @@ Widget _buildHomeTabContent(BuildContext context) {
           itemCount: menuItems.length,
           itemBuilder: (context, index) {
             final item = menuItems[index];
-            return _buildGlassMenuCard(item['icon'], item['title'], context);
+            //return _buildGlassMenuCard(item['icon'], item['title'], context);
+            return _buildWelcomeCard();
           },
         ),
       ],
@@ -146,7 +147,7 @@ Widget _buildWelcomeCard() {
   return Card(
     elevation: 4,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    color: Colors.blue[800],
+    color: Colors.blue[600],
     child: const Padding(
       padding: EdgeInsets.all(20.0),
       child: Column(
