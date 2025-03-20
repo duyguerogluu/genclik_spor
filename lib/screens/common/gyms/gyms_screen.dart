@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/utils/colors.dart';
+import 'package:genclik_spor/utils/extensions.dart';
 
 class GymsScreen extends ConsumerWidget {
   const GymsScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _buildGymsTabContent(context);
+    return Container(
+      color: context.isDark ? offdarkblue : white1,
+      child: _buildGymsTabContent(context),
+    );
   }
 
   Widget _buildGymCard(IconData icon, String name, String adress, String city,
@@ -17,7 +21,7 @@ class GymsScreen extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
         child: Container(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(200, 255, 255, 255),
+            color: white,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.transparent),
           ),

@@ -45,17 +45,7 @@ class HomeScreen extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 91, 177, 214),
-                          Color.fromARGB(255, 167, 227, 247),
-                          Color.fromARGB(255, 255, 255, 255)
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
+                    color: context.isDark ? offdarkblue : white1,
                     child: _buildHomeTabContent(context),
                   ),
                   const GymsScreen(),
