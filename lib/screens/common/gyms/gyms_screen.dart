@@ -17,47 +17,58 @@ class GymsScreen extends ConsumerWidget {
       BuildContext context) {
     return GestureDetector(
       onTap: () {},
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          decoration: BoxDecoration(
-            color: white,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.transparent),
-          ),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        color: white,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.sports_football,
-                    size: 40, color: Colors.white),
-                const SizedBox(height: 10),
-                Text(
-                  'Nevin Yanıt Spor Komplesksi',
-                  style: TextStyle(
-                    color: grey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  textAlign: TextAlign.center,
+                Flexible(
+                  flex: 3,
+                  child: Image.network(
+                      "https://www.hostapark.com/tr/tekno_dosyalar/large/07_09_18_41252_f6ba1346f1ad4a3c01146ce6f6106e9f.jpg"),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  'adress adresss adress adressssss ',
-                  style: TextStyle(
-                    color: grey,
-                    fontSize: 14,
+                Flexible(
+                  flex: 2,
+                  child: Text(
+                    'Nevin Yanıt Spor Komplesksi',
+                    style: TextStyle(
+                      color: grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  'ADANA , Seyhan',
-                  style: TextStyle(
-                    color: grey,
-                    fontSize: 14,
+                Flexible(
+                  flex: 1,
+                  child: Text(
+                    'adress adresss adress adressssss ',
+                    style: TextStyle(
+                      color: grey,
+                      fontSize: 14,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Text(
+                    'ADANA , Seyhan',
+                    style: TextStyle(
+                      color: grey,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
