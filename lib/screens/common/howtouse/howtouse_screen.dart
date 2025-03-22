@@ -26,7 +26,7 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
     if (isFirstTime) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HowToUseScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     } else {
       Navigator.pushReplacement(
@@ -43,42 +43,42 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
     {
       "title": "🏀 Uygulamaya Hoş Geldiniz!",
       "description": """
-           📌 Nasıl Giriş Yapılır?
-           ✔ TC Kimlik Numaran ile giriş yaparsın.
-           ✔ e-Devlet bağlantısı ile bağlan.
-           ✔ Başvuruların ve geçmiş verilerin gör.
-           ✔ Kendi spor geçmişini takip edebilirsin.
-           ✔ Öğrencini veya çocuğunu takip edebilirsin.
-           🔍 Girişten Sonra Neler Yapabilirsin?
-            • Spor geçmişini gör
-            • Antrenmanlarını takip et
-            • Veliysen çocuklarının kayıtlarını kontrol et
+        📌 Nasıl Giriş Yapılır?
+         ✔ TC Kimlik Numaran ile giriş yaparsın.
+         ✔ e-Devlet bağlantısı ile bağlan.
+         ✔ Başvuruların ve geçmiş verilerin gör.
+         ✔ Kendi spor geçmişini takip edebilirsin.
+         ✔ Öğrencini veya çocuğunu takip edebilirsin.
+        🔍 Girişten Sonra Neler Yapabilirsin?
+         • Spor geçmişini gör
+         • Antrenmanlarını takip et
+         • Veliysen çocuklarının kayıtlarını kontrol et
        """,
       "image": "assets/images/images.png"
     },
     {
       "title": "⚽️ Kolay Kullanım",
       "description": """
-            🏅 Spor Branşlarına Nasıl Başvurulur?
-             ✔ Konumunu seç
-             ✔ Mahallende açılan kursları gör
-             ✔ Branş detaylarını incele 
-             ✔ Uygulama içinden başvurunu tamamla
-             📅 Antrenman ve Katılım Takibi
-             🧠 Deep Sport ile Gelişimini Ölç""",
+        🏅 Spor Branşlarına Nasıl Başvurulur?
+          ✔ Konumunu seç
+          ✔ Mahallende açılan kursları gör
+          ✔ Branş detaylarını incele 
+          ✔ Uygulama içinden başvurunu tamamla
+        📅 Antrenman ve Katılım Takibi
+        🧠 Deep Sport ile Gelişimini Ölç""",
       "image": "assets/images/images.png"
     },
     {
       "title": "🎾 Hadi Başlayalım!",
       "description": """
-            🧑‍🏫 Antrenör Paneli
-            🏛 Spor Bakanlığı Paneli
-            📎 Ek Modüller:
-            ✅ e-Devlet Spor Bilgi Sistemi giriş
-            ✅ İllerin antrenör listeleri
-            ✅ WADA dosya erişimi
-            ✅ Ölçüm ve test alanları
-            ✅ Deep Sport'a geçiş modülü
+        🧑‍🏫 Antrenör Paneli
+        🏛 Spor Bakanlığı Paneli
+        📎 Ek Modüller:
+          ✅ e-Devlet Spor Bilgi Sistemi giriş
+          ✅ İllerin antrenör listeleri
+          ✅ WADA dosya erişimi
+          ✅ Ölçüm ve test alanları
+          ✅ Deep Sport'a geçiş modülü
              """,
       "image": "assets/images/images.png"
     }
