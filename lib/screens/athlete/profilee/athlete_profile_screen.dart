@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:genclik_spor/models/athlete_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
+import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
+
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
 class AthleteProfileScreen extends ConsumerWidget {
+  const AthleteProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    debugPrint("AthleteProfileScreen build çalıştı!!!!!!!!!!!!!!!!!");
+    debugPrint("AthleteProfileScreen build çalıştı!");
     final athleteState = ref.watch(athleteRiverpodNotifier);
     Future.sync(athleteRiverpod.fetchAthlete);
     final read = athleteState.athlete;
@@ -40,8 +43,10 @@ class AthleteProfileScreen extends ConsumerWidget {
             _buildPerformanceAnalysis(read),
             const SizedBox(height: 20),
             _buildTrainingHistory(read),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             _buildApplyButton(context),
+            const SizedBox(height: 10),
+            _buildMyApplicationsButton(context),
           ],
         ),
       ),
@@ -49,34 +54,37 @@ class AthleteProfileScreen extends ConsumerWidget {
   }
 
   Widget _buildProfileCard(read) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        color: white,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      color: white,
+      elevation: 0,
+      child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
             CircleAvatar(
               radius: 40,
-              //backgroundImage: NetworkImage(
-              //  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh7-m2anFLaH9UxDgrlvlXUwpds79K10S-IQ&s"),
+              backgroundColor: darkblue,
+              child: Icon(Icons.person, color: white, size: 40),
             ),
-            SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  read.name,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  read.sport,
-                  style: TextStyle(color: Colors.grey[700]),
-                ),
-                Text(
-                  "Yaş: ${read.age} | Boy: ${read.height} cm | Kilo: ${read.weight} kg",
-                ),
-              ],
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(read.name,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
+                  Text(read.sport,
+                      style: TextStyle(color: Colors.grey[700], fontSize: 16)),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Yaş: ${read.age} | Boy: ${read.height} cm | Kilo: ${read.weight} kg",
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -88,7 +96,7 @@ class AthleteProfileScreen extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Performans Analizi",
+        const Text("Performans Analizi",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const SizedBox(height: 10),
         _buildProgressBar("Dayanıklılık", read.endurance),
@@ -104,7 +112,7 @@ class AthleteProfileScreen extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Antrenman Geçmişi",
+          const Text("Antrenman Geçmişi",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const SizedBox(height: 10),
           Expanded(
@@ -112,10 +120,16 @@ class AthleteProfileScreen extends ConsumerWidget {
               itemCount: read.trainingHistory.length,
               itemBuilder: (context, index) {
                 final session = read.trainingHistory[index];
-                return ListTile(
-                  leading: Icon(Icons.sports_basketball, color: Colors.blue),
-                  title: Text(session.date),
-                  subtitle: Text("${session.sport} - ${session.status}"),
+                return Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  color: white,
+                  child: ListTile(
+                    leading: Icon(Icons.sports_gymnastics, color: darkblue),
+                    title: Text(session.date),
+                    subtitle: Text("${session.sport} - ${session.status}"),
+                  ),
                 );
               },
             ),
@@ -125,27 +139,62 @@ class AthleteProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildApplyButton(context) {
+  // YENİ ANTRENMANA BAŞVUR BUTONU
+  Widget _buildApplyButton(BuildContext context) {
     return Center(
-      child: ElevatedButton(
+      child: ElevatedButton.icon(
         onPressed: () {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => TrainingApplicationScreen()));
         },
-        child: Text("Yeni Antrenmana Başvur"),
+        icon: const Icon(Icons.add),
+        label: const Text("Yeni Antrenmana Başvur"),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: darkblue,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
       ),
     );
   }
 
+  Widget _buildMyApplicationsButton(BuildContext context) {
+    return Center(
+      child: ElevatedButton.icon(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const MyApplicationsScreen()));
+        },
+        icon: const Icon(Icons.assignment),
+        label: const Text("Başvurularım"),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange[800],
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      ),
+    );
+  }
+
+  // PERFORMANS BAR
   Widget _buildProgressBar(String label, int value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label),
+        Text(label, style: const TextStyle(fontSize: 16)),
         const SizedBox(height: 5),
-        LinearProgressIndicator(value: value / 100, minHeight: 8),
+        LinearProgressIndicator(
+          value: value / 100,
+          minHeight: 8,
+          backgroundColor: Colors.grey[300],
+          color: darkblue,
+        ),
         const SizedBox(height: 10),
       ],
     );
