@@ -2,11 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
+import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/common/coachs/coachs_screen.dart';
 import 'package:genclik_spor/screens/common/gyms/gyms_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_bottom_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_drawer.dart';
+import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -63,7 +66,20 @@ class HomeScreen extends ConsumerWidget {
 
 Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      if (title == "Profilim") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
+      }
+      if (title == "Başvurularım") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => MyApplicationsScreen()));
+      }
+      if (title == "Duyurular") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => WarningsScreen()));
+      }
+    },
     child: Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -174,9 +190,18 @@ Widget _buildMenuGrid(BuildContext context) {
 Widget _buildMenuCard(IconData icon, String title, BuildContext context) {
   return GestureDetector(
     onTap: () {
-      // if (title == "Spor Branşları") {
-      //   Navigator.push(context, MaterialPageRoute(builder: (_) => SportList(someArgument)));
-      // }      riverpodu yazınca yönlendiricem
+      if (title == "Profilim") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
+      }
+      if (title == "Başvurularım") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => MyApplicationsScreen()));
+      }
+      if (title == "Duyurular") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => WarningsScreen()));
+      }
     },
     child: Card(
       elevation: 3,
