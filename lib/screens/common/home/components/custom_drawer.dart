@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
+import 'package:genclik_spor/screens/common/setting/setting_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -56,7 +57,10 @@ class CustomDrawer extends StatelessWidget {
             context,
             icon: Icons.settings,
             text: 'Ayarlar',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => SettingsScreen()));
+            },
           ),
           const Divider(thickness: 1, color: Colors.grey),
           _buildDrawerItem(
