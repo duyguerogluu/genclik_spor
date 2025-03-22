@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genclik_spor/screens/common/home/home_screen.dart';
 import 'package:genclik_spor/screens/common/notification/notification_screen.dart';
+import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -34,8 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => const NotificationScreen()),
+              MaterialPageRoute(builder: (context) => const WarningsScreen()),
             );
           },
         ),

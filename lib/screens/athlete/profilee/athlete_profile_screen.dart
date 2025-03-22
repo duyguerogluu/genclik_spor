@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/models/athlete_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/utils/colors.dart';
+import 'package:genclik_spor/utils/extensions.dart';
 
 class AthleteProfileScreen extends ConsumerWidget {
   @override
@@ -21,8 +22,13 @@ class AthleteProfileScreen extends ConsumerWidget {
     }
 
     return Scaffold(
-      backgroundColor: white1,
-      appBar: AppBar(title: const Text("Sporcu Profili")),
+      backgroundColor: context.isDark ? offdarkblue : white1,
+      appBar: AppBar(
+        title: const Text("Sporcu Profili"),
+        backgroundColor: darkblue,
+        foregroundColor: white,
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
