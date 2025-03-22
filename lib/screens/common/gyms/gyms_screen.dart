@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/common/gyms/gym_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -16,7 +17,18 @@ class GymsScreen extends ConsumerWidget {
   Widget _buildGymCard(IconData icon, String name, String adress, String city,
       BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GymDetailScreen(
+              gymName: 'Nevin Yanıt Spor Tesisi',
+              address: 'adress adresss adress adressssss',
+              city: 'ADANA , Seyhan',
+            ),
+          ),
+        );
+      },
       child: Card(
         elevation: 0,
         shape: RoundedRectangleBorder(
