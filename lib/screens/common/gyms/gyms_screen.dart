@@ -30,9 +30,17 @@ class GymsScreen extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(
-                flex: 3,
-                child: Image.network(
-                    "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG"),
+                flex: 4,
+                child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(20)),
+                  child: Image.network(
+                    "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
+                    width: double.infinity,
+                    height: 120,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               Flexible(
                 flex: 2,
@@ -51,7 +59,7 @@ class GymsScreen extends ConsumerWidget {
                 child: Text(
                   'adress adresss adress adressssss ',
                   style: TextStyle(
-                    color: grey,
+                    color: Colors.grey,
                     fontSize: 14,
                   ),
                   maxLines: 1,
