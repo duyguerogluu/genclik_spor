@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
+import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -8,35 +10,83 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: context.isDark ? offdarkblue1 : white,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: offdarkblue,
+              color: darkblue,
             ),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: MediaQuery.of(context).size.width * 0.1,
+            child: Center(
               child: SvgPicture.asset(
                 'assets/images/logo.svg',
-                semanticsLabel: 'Genclik Spor Bakanligi Photo',
+                semanticsLabel: 'Gençlik Spor Bakanlığı Logo',
                 color: white,
+                width: 160,
               ),
             ),
           ),
-          ListTile(
-            title: const Text('Ana Sayfa'),
+          _buildDrawerItem(
+            context,
+            icon: Icons.home,
+            text: 'Ana Sayfa',
             onTap: () {
               Navigator.pop(context);
             },
           ),
-          ListTile(
-            title: const Text('Ayarlar'),
+          _buildDrawerItem(
+            context,
+            icon: Icons.person,
+            text: 'Profilim',
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
+            },
+          ),
+          _buildDrawerItem(
+            context,
+            icon: Icons.assignment,
+            text: 'Başvurularım',
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => MyApplicationsScreen()));
+            },
+          ),
+          _buildDrawerItem(
+            context,
+            icon: Icons.settings,
+            text: 'Ayarlar',
             onTap: () {},
+          ),
+          const Divider(thickness: 1, color: Colors.grey),
+          _buildDrawerItem(
+            context,
+            icon: Icons.exit_to_app,
+            text: 'Çıkış Yap',
+            onTap: () {},
+            color: Colors.redAccent,
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(BuildContext context,
+      {required IconData icon,
+      required String text,
+      required VoidCallback onTap,
+      Color? color}) {
+    return ListTile(
+      leading: Icon(icon, color: color ?? darkblue),
+      title: Text(
+        text,
+        style: TextStyle(
+          color: color ?? (context.isDark ? white : darkblue),
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      hoverColor: context.isDark ? darkblue : Colors.grey[200],
+      onTap: onTap,
     );
   }
 }
