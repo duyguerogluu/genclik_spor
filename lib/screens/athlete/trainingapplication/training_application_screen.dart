@@ -6,12 +6,16 @@ class TrainingApplicationScreen extends StatefulWidget {
   const TrainingApplicationScreen({super.key});
 
   @override
-  State<TrainingApplicationScreen> createState() => _TrainingApplicationScreenState();
+  State<TrainingApplicationScreen> createState() =>
+      _TrainingApplicationScreenState();
 }
 
 class _TrainingApplicationScreenState extends State<TrainingApplicationScreen> {
   final _formKey = GlobalKey<FormState>();
+
   String selectedBranch = 'Basketbol';
+  String selectedGym = 'Nevin Yanıt Spor Salonu';
+  String selectedCoach = 'Ahmet Yılmaz';
   final TextEditingController notesController = TextEditingController();
 
   final List<String> branches = [
@@ -19,8 +23,14 @@ class _TrainingApplicationScreenState extends State<TrainingApplicationScreen> {
     'Voleybol',
     'Yüzme',
     'Futbol',
-    'Tenis',
+    'Tenis'
   ];
+  final List<String> gyms = [
+    'Nevin Yanıt Spor Salonu',
+    'Adnan Menderes Spor Kompleksi',
+    'Çukurova Spor Salonu'
+  ];
+  final List<String> coaches = ['Ahmet Yılmaz', 'Mehmet Demir', 'Ayşe Kaya'];
 
   @override
   Widget build(BuildContext context) {
@@ -35,33 +45,27 @@ class _TrainingApplicationScreenState extends State<TrainingApplicationScreen> {
         padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
-              const Text(
-                'Branş Seçiniz',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              DropdownButtonFormField<String>(
-                value: selectedBranch,
-                items: branches.map((branch) {
-                  return DropdownMenuItem(
-                    value: branch,
-                    child: Text(branch),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedBranch = value!;
-                  });
-                },
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-              ),
+              _buildDropdown('Branş Seçiniz', branches, selectedBranch,
+                  (value) {
+                setState(() {
+                  selectedBranch = value!;
+                });
+              }),
+              const SizedBox(height: 16),
+              _buildDropdown('Spor Salonu Seçiniz', gyms, selectedGym, (value) {
+                setState(() {
+                  selectedGym = value!;
+                });
+              }),
+              const SizedBox(height: 16),
+              _buildDropdown('Antrenör Seçiniz', coaches, selectedCoach,
+                  (value) {
+                setState(() {
+                  selectedCoach = value!;
+                });
+              }),
               const SizedBox(height: 16),
               const Text(
                 'Notlar (Opsiyonel)',
@@ -75,7 +79,8 @@ class _TrainingApplicationScreenState extends State<TrainingApplicationScreen> {
                   hintText: 'Eklemek istediğin notları yaz...',
                   filled: true,
                   fillColor: white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12)),
                 ),
               ),
               const SizedBox(height: 24),
@@ -85,7 +90,8 @@ class _TrainingApplicationScreenState extends State<TrainingApplicationScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: darkblue,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -102,6 +108,30 @@ class _TrainingApplicationScreenState extends State<TrainingApplicationScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildDropdown(String title, List<String> items, String selectedValue,
+      Function(String?) onChanged) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<String>(
+          value: selectedValue,
+          items: items
+              .map((item) => DropdownMenuItem(value: item, child: Text(item)))
+              .toList(),
+          onChanged: onChanged,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: white,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+      ],
     );
   }
 }

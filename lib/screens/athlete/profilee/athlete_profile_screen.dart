@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/models/athlete_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
+import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -40,7 +41,7 @@ class AthleteProfileScreen extends ConsumerWidget {
             const SizedBox(height: 20),
             _buildTrainingHistory(read),
             const SizedBox(height: 10),
-            _buildApplyButton(),
+            _buildApplyButton(context),
           ],
         ),
       ),
@@ -124,10 +125,15 @@ class AthleteProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildApplyButton() {
+  Widget _buildApplyButton(context) {
     return Center(
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => TrainingApplicationScreen()));
+        },
         child: Text("Yeni Antrenmana Başvur"),
       ),
     );
