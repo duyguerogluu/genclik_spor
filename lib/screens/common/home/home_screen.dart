@@ -25,21 +25,41 @@ class HomeScreen extends ConsumerWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TabBar(
-              labelColor: context.isDark ? white : offdarkblue,
-              unselectedLabelColor: Colors.grey,
-              indicatorColor: context.isDark ? white : offdarkblue,
-              isScrollable: true,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              indicatorPadding: EdgeInsets.zero,
-              indicatorSize: TabBarIndicatorSize.label,
-              tabAlignment: TabAlignment.start,
-              dividerHeight: 0,
-              indicatorWeight: 0.2,
-              tabs: const [
-                Tab(text: "Anasayfa"),
-                Tab(text: "Spor Salonları"),
-                Tab(text: "Antrenörler"),
+            Stack(
+              children: [
+                PreferredSize(
+                  preferredSize: Size(MediaQuery.of(context).size.width, 22),
+                  child: Container(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                        child: Container(
+                          height: 50,
+                          width: double.infinity,
+                          color: const Color.fromARGB(40, 255, 255, 255),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                TabBar(
+                  labelColor: context.isDark ? white : offdarkblue,
+                  unselectedLabelColor: Colors.grey,
+                  indicatorColor: context.isDark ? white : offdarkblue,
+                  isScrollable: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  indicatorPadding: EdgeInsets.zero,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  tabAlignment: TabAlignment.start,
+                  dividerHeight: 0,
+                  indicatorWeight: 0.2,
+                  tabs: const [
+                    Tab(text: "Anasayfa"),
+                    Tab(text: "Spor Salonları"),
+                    Tab(text: "Antrenörler"),
+                  ],
+                ),
               ],
             ),
             Expanded(
