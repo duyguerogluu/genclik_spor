@@ -25,41 +25,21 @@ class HomeScreen extends ConsumerWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stack(
-              children: [
-                PreferredSize(
-                  preferredSize: Size(MediaQuery.of(context).size.width, 22),
-                  child: Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                        child: Container(
-                          height: 50,
-                          width: double.infinity,
-                          color: const Color.fromARGB(40, 255, 255, 255),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                TabBar(
-                  labelColor: context.isDark ? white : offdarkblue,
-                  unselectedLabelColor: Colors.grey,
-                  indicatorColor: context.isDark ? white : offdarkblue,
-                  isScrollable: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  indicatorPadding: EdgeInsets.zero,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  tabAlignment: TabAlignment.start,
-                  dividerHeight: 0,
-                  indicatorWeight: 0.2,
-                  tabs: const [
-                    Tab(text: "Anasayfa"),
-                    Tab(text: "Spor Salonları"),
-                    Tab(text: "Antrenörler"),
-                  ],
-                ),
+            TabBar(
+              labelColor: context.isDark ? white : offdarkblue,
+              unselectedLabelColor: Colors.grey,
+              indicatorColor: context.isDark ? white : offdarkblue,
+              isScrollable: true,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              indicatorPadding: EdgeInsets.zero,
+              indicatorSize: TabBarIndicatorSize.label,
+              tabAlignment: TabAlignment.start,
+              dividerHeight: 0,
+              indicatorWeight: 0.2,
+              tabs: const [
+                Tab(text: "Anasayfa"),
+                Tab(text: "Spor Salonları"),
+                Tab(text: "Antrenörler"),
               ],
             ),
             Expanded(
@@ -84,31 +64,28 @@ class HomeScreen extends ConsumerWidget {
 Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
   return GestureDetector(
     onTap: () {},
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(200, 255, 255, 255),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.transparent),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, size: 40, color: Colors.white),
-              const SizedBox(height: 10),
-              Text(
-                title,
-                style: TextStyle(
-                  color: grey,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-                textAlign: TextAlign.center,
+    child: Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      color: const Color.fromARGB(200, 255, 255, 255),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 40, color: darkblue),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              style: TextStyle(
+                color: grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
               ),
-            ],
-          ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     ),
@@ -154,7 +131,7 @@ Widget _buildHomeTabContent(BuildContext context) {
 
 Widget _buildWelcomeCard() {
   return Card(
-    elevation: 4,
+    elevation: 0,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     color: Colors.blue[600],
     child: const Padding(
