@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
+import 'package:genclik_spor/screens/common/setting/setting_screen.dart';
 
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
@@ -28,7 +29,23 @@ class AthleteProfileScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white1,
       appBar: AppBar(
-        title: const Text("Sporcu Profili"),
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("Sporcu Profili"),
+            GestureDetector(
+              child: Icon(Icons.settings, color: white),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SettingsScreen(),
+                    ));
+              },
+            ),
+          ],
+        ),
         backgroundColor: darkblue,
         foregroundColor: white,
         elevation: 0,
@@ -139,7 +156,6 @@ class AthleteProfileScreen extends ConsumerWidget {
     );
   }
 
-  // YENİ ANTRENMANA BAŞVUR BUTONU
   Widget _buildApplyButton(BuildContext context) {
     return Center(
       child: ElevatedButton.icon(
@@ -182,7 +198,6 @@ class AthleteProfileScreen extends ConsumerWidget {
     );
   }
 
-  // PERFORMANS BAR
   Widget _buildProgressBar(String label, int value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
