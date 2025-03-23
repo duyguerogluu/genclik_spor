@@ -25,7 +25,7 @@ class MyApplicationsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white1,
-      appBar: customAppBar('başvurularım'),
+      appBar: customAppBar('Başvurularım'),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: applications.length,

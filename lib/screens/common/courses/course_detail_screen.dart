@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
 import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
@@ -77,6 +78,11 @@ class CourseDetailScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16)),
                 ),
                 onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const TrainingApplicationScreen(),
+                    ),
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                         content: Text(
@@ -95,6 +101,4 @@ class CourseDetailScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }

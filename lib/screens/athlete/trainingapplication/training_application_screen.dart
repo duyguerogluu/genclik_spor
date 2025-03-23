@@ -92,13 +92,14 @@ class _TrainingApplicationScreenState extends State<TrainingApplicationScreen> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // API isteği buraya gelecek
+                      // API
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Başvurun alındı!')),
                       );
                     }
                   },
-                  child: const Text('Başvur', style: TextStyle(fontSize: 16)),
+                  child: const Text('Başvur',
+                      style: TextStyle(fontSize: 16, color: Colors.white)),
                 ),
               ),
             ],
