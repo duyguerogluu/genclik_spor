@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/coach/create_course_screen.dart';
+import 'package:genclik_spor/screens/coach/performance_analysis_screen.dart';
 import 'package:genclik_spor/screens/common/home/home_screen.dart';
 import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
@@ -46,7 +48,8 @@ class CustomBottomBar extends StatelessWidget {
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AthleteProfileScreen()),
+                MaterialPageRoute(
+                    builder: (context) => PerformanceAnalysisScreen()),
               );
               break;
             case 2:
