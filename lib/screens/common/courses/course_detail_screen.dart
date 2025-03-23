@@ -24,11 +24,7 @@ class CourseDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white1,
-      appBar: AppBar(
-        backgroundColor: darkblue,
-        title: Text(courseName, style: const TextStyle(color: Colors.white)),
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
+      appBar: appBar(courseName),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -73,16 +69,17 @@ class CourseDetailScreen extends StatelessWidget {
             Center(
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: darkblue,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 32, vertical: 14),
+                  backgroundColor: offdarkblue,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
                 ),
                 onPressed: () {
-                  
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Kursa kayıt ekranına yönlendiriliyorsunuz...")),
+                    const SnackBar(
+                        content: Text(
+                            "Kursa kayıt ekranına yönlendiriliyorsunuz...")),
                   );
                 },
                 icon: const Icon(Icons.app_registration, color: Colors.white),
@@ -97,4 +94,6 @@ class CourseDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+
 }

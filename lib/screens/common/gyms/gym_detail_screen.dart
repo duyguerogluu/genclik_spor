@@ -66,7 +66,7 @@ class GymDetailScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(backgroundColor: darkblue),
+              style: ElevatedButton.styleFrom(backgroundColor: offdarkblue),
               onPressed: () => _launchMapsUrl('$gymName $city'),
               icon: const Icon(Icons.directions, color: Colors.white),
               label: const Text("Yol Tarifi Al",
@@ -108,7 +108,8 @@ class GymDetailScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => CourseDetailScreen(
                           courseName: "Basketbol Kursu",
-                          imageUrl: "https://example.com/course.jpg",
+                          imageUrl:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi69qwf8QOi-kpIUVyqgGHom14wa9TsBaEAA&s",
                           description:
                               "Profesyonel antrenörler eşliğinde basketbol temel teknikleri ve ileri seviye eğitimler.",
                           duration: "3 Ay",
