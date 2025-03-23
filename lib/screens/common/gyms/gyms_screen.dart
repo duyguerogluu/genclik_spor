@@ -22,6 +22,7 @@ class GymsScreen extends ConsumerWidget {
           context,
           MaterialPageRoute(
             builder: (context) => GymDetailScreen(
+              imgUrl:"https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
               gymName: 'Nevin Yanıt Spor Tesisi',
               address: 'adress adresss adress adressssss',
               city: 'ADANA , Seyhan',
