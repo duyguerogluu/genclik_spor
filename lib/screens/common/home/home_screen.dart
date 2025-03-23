@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/common/coachs/coachs_screen.dart';
+import 'package:genclik_spor/screens/common/courses/courses_screen.dart';
 import 'package:genclik_spor/screens/common/gyms/gyms_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_bottom_bar.dart';
@@ -67,6 +68,10 @@ class HomeScreen extends ConsumerWidget {
 Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
   return GestureDetector(
     onTap: () {
+      if (title == "Kurslar") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => CoursesScreen()));
+      }
       if (title == "Profilim") {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
@@ -110,7 +115,7 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
 
 Widget _buildHomeTabContent(BuildContext context) {
   final List<Map<String, dynamic>> menuItems = [
-    {'icon': Icons.sports_soccer, 'title': 'Spor Branşları'},
+    {'icon': Icons.sports_soccer, 'title': 'Kurslar'},
     {'icon': Icons.fitness_center, 'title': 'Antrenmanlar'},
     {'icon': Icons.bar_chart, 'title': 'Performans Analizi'},
     {'icon': Icons.person, 'title': 'Profilim'},
