@@ -57,8 +57,9 @@ class GymDetailScreen extends StatelessWidget {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(backgroundColor: darkblue),
               onPressed: () => _launchMapsUrl('$gymName $city'),
-              icon: const Icon(Icons.directions),
-              label: const Text("Yol Tarifi Al"),
+              icon: const Icon(Icons.directions, color: Colors.white),
+              label: const Text("Yol Tarifi Al",
+                  style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 24),
             Text("Antrenörler",
