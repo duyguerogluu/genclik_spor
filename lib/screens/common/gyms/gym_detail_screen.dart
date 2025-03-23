@@ -45,46 +45,69 @@ class GymDetailScreen extends StatelessWidget {
         backgroundColor: offdarkblue,
       ),
       backgroundColor: context.isDark ? offdarkblue : white1,
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: ListView(
-          children: [
-            Text(
+      body: ListView(
+        children: [
+          Image.network(
+            imgUrl,
+            width: double.infinity,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
               "Adres: $address\n$city",
               style: TextStyle(fontSize: 16, color: grey),
             ),
-            const SizedBox(height: 16),
-            ElevatedButton.icon(
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(backgroundColor: darkblue),
               onPressed: () => _launchMapsUrl('$gymName $city'),
               icon: const Icon(Icons.directions, color: Colors.white),
               label: const Text("Yol Tarifi Al",
                   style: TextStyle(color: Colors.white)),
             ),
-            const SizedBox(height: 24),
-            Text("Antrenörler",
+          ),
+          const SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text("Antrenörler",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: darkblue)),
-            const SizedBox(height: 8),
-            ...coaches.map((coach) => ListTile(
+          ),
+          const SizedBox(height: 8),
+          ...coaches.map((coach) => Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                child: ListTile(
                   leading: const Icon(Icons.person),
                   title: Text(coach),
-                )),
-            const SizedBox(height: 24),
-            Text("Kurslar",
+                ),
+              )),
+          const SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+            child: Text("Kurslar",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: darkblue)),
-            const SizedBox(height: 8),
-            ...courses.map((course) => ListTile(
+          ),
+          const SizedBox(height: 8),
+          ...courses.map((course) => Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                child: ListTile(
                   leading: const Icon(Icons.fitness_center),
                   title: Text(course),
-                )),
-          ],
-        ),
+                ),
+              )),
+        ],
       ),
     );
   }
