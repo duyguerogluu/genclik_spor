@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/screens/common/coachs/components/coach_card.dart';
+import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/screens/common/courses/course_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
@@ -39,13 +40,7 @@ class GymDetailScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          gymName,
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: offdarkblue,
-      ),
+      appBar: customAppBar(gymName),
       backgroundColor: context.isDark ? offdarkblue : white1,
       body: ListView(
         children: [

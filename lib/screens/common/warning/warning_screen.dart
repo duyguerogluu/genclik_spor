@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -28,12 +29,7 @@ class WarningsScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white1,
-      appBar: AppBar(
-        title: const Text('Uyarılar'),
-        backgroundColor: darkblue,
-        foregroundColor: white,
-        elevation: 0,
-      ),
+      appBar: customAppBar('Duyurular'),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: warnings.length,

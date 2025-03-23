@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -24,11 +25,7 @@ class MyApplicationsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white1,
-      appBar: AppBar(
-        title: const Text('Başvurularım'),
-        backgroundColor: darkblue,
-        foregroundColor: white,
-      ),
+      appBar: customAppBar('başvurularım'),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: applications.length,

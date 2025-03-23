@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -24,7 +25,7 @@ class CourseDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white1,
-      appBar: appBar(courseName),
+      appBar: customAppBar(courseName),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
