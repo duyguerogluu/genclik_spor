@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/common/coachs/components/coach_card.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -83,11 +84,8 @@ class GymDetailScreen extends StatelessWidget {
           const SizedBox(height: 8),
           ...coaches.map((coach) => Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-                child: ListTile(
-                  leading: const Icon(Icons.person),
-                  title: Text(coach),
-                ),
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+                child: coachCard(context, 'coachname', "Atletizm", 'gymName'),
               )),
           const SizedBox(height: 24),
           Padding(
