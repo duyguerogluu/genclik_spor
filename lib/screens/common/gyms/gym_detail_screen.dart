@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/screens/common/coachs/components/coach_card.dart';
+import 'package:genclik_spor/screens/common/courses/course_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -100,9 +101,27 @@ class GymDetailScreen extends StatelessWidget {
           ...courses.map((course) => Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-                child: ListTile(
-                  leading: const Icon(Icons.fitness_center),
-                  title: Text(course),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CourseDetailScreen(
+                          courseName: "Basketbol Kursu",
+                          imageUrl: "https://example.com/course.jpg",
+                          description:
+                              "Profesyonel antrenörler eşliğinde basketbol temel teknikleri ve ileri seviye eğitimler.",
+                          duration: "3 Ay",
+                          capacity: 20,
+                          price: "1500₺",
+                        ),
+                      ),
+                    );
+                  },
+                  child: ListTile(
+                    leading: const Icon(Icons.fitness_center),
+                    title: const Text("Basketbol Kursu"),
+                  ),
                 ),
               )),
         ],
