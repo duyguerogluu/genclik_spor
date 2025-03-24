@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
+import 'package:genclik_spor/screens/athlete/performanceanalysis/performance_analysis_screen.dart';
 import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/common/coachs/coachs_screen.dart';
 import 'package:genclik_spor/screens/common/courses/courses_screen.dart';
@@ -75,6 +76,10 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
       if (title == "Profilim") {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
+      }
+      if (title == "Performans Analizi") {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => PerformanceAnalysisScreen()));
       }
       if (title == "Başvurularım") {
         Navigator.push(
