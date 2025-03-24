@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/performanceanalysis/performance_analysis_screen.dart';
 import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
+import 'package:genclik_spor/screens/athlete/training/training_screen.dart';
 import 'package:genclik_spor/screens/common/coachs/coachs_screen.dart';
 import 'package:genclik_spor/screens/common/courses/courses_screen.dart';
 import 'package:genclik_spor/screens/common/gyms/gyms_screen.dart';
@@ -72,6 +73,10 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
       if (title == "Kurslar") {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => CoursesScreen()));
+      }
+      if (title == "Antrenmanlar") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => TrainingsScreen()));
       }
       if (title == "Profilim") {
         Navigator.push(
