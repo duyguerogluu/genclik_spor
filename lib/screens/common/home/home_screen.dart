@@ -12,6 +12,8 @@ import 'package:genclik_spor/screens/common/gyms/gyms_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_bottom_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_drawer.dart';
+import 'package:genclik_spor/screens/common/home/components/news_marquee.dart';
+import 'package:genclik_spor/screens/common/home/components/photo_slider.dart';
 import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
@@ -133,7 +135,6 @@ Widget _buildHomeTabContent(BuildContext context) {
     {'icon': Icons.article, 'title': 'Duyurular'},
   ];
   return SingleChildScrollView(
-    padding: const EdgeInsets.all(16),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -161,28 +162,50 @@ Widget _buildHomeTabContent(BuildContext context) {
 }
 
 Widget _buildWelcomeCard() {
-  return Card(
-    elevation: 0,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    color: Colors.blue[600],
-    child: const Padding(
-      padding: EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Hoş Geldiniz!",
-            style: TextStyle(
-                color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          Text(
-            "Spor branşlarına başvurabilir, antrenman programınızı takip edebilir ve performans analizlerinizi görüntüleyebilirsiniz.",
-            style: TextStyle(color: Colors.white70),
-          ),
+  return Column(
+    children: [
+      PhotoSlider(
+        imageUrls: [
+          'https://ankara.gsb.gov.tr/public/Images/GSB/012014/whatsapp-image-2025-03-23-at-180129.jpg',
+          'https://ankara.gsb.gov.tr/public/Images/GSB/012014/whatsapp-image-2025-03-15-at-123715.jpg',
+          'https://ankara.gsb.gov.tr/public/Images/GSB/012014/whatsapp-image-2025-03-12-at-202523.jpg',
+          'https://ankara.gsb.gov.tr/public/Images/GSB/012014/whatsapp-image-2025-03-11-at-103405.jpg',
         ],
       ),
-    ),
+      NewsMarquee(
+        newsList: [
+          'Gençlik Spor Bakanlığı yeni projelerini duyurdu!',
+          'Sporcular için özel eğitim programı başlıyor!',
+          'Tesis başvuruları için son gün 30 Mart!',
+          'Antrenman programlarına katılım zorunludur.',
+        ],
+      ),
+      // Card(
+      //   elevation: 0,
+      //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      //   color: Colors.blue[600],
+      //   child: const Padding(
+      //     padding: EdgeInsets.all(20.0),
+      //     child: Column(
+      //       crossAxisAlignment: CrossAxisAlignment.start,
+      //       children: [
+      //         Text(
+      //           "Hoş Geldiniz!",
+      //           style: TextStyle(
+      //               color: Colors.white,
+      //               fontSize: 22,
+      //               fontWeight: FontWeight.bold),
+      //         ),
+      //         SizedBox(height: 10),
+      //         Text(
+      //           "Spor branşlarına başvurabilir, antrenman programınızı takip edebilir ve performans analizlerinizi görüntüleyebilirsiniz.",
+      //           style: TextStyle(color: Colors.white70),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+    ],
   );
 }
 
@@ -203,33 +226,36 @@ Widget _buildMenuGrid(BuildContext context) {
 }
 
 Widget _buildMenuCard(IconData icon, String title, BuildContext context) {
-  return GestureDetector(
-    onTap: () {
-      if (title == "Profilim") {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
-      }
-      if (title == "Başvurularım") {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => MyApplicationsScreen()));
-      }
-      if (title == "Duyurular") {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => WarningsScreen()));
-      }
-    },
-    child: Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      color: Colors.white,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 40, color: Colors.blue[700]),
-            const SizedBox(height: 10),
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-          ],
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+    child: GestureDetector(
+      onTap: () {
+        if (title == "Profilim") {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
+        }
+        if (title == "Başvurularım") {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => MyApplicationsScreen()));
+        }
+        if (title == "Duyurular") {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => WarningsScreen()));
+        }
+      },
+      child: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        color: Colors.white,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 40, color: Colors.blue[700]),
+              const SizedBox(height: 10),
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
         ),
       ),
     ),
@@ -237,21 +263,25 @@ Widget _buildMenuCard(IconData icon, String title, BuildContext context) {
 }
 
 Widget _buildAnnouncements() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text("📢 Duyurular",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-      const SizedBox(height: 10),
-      Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-              "Yeni sezon kayıtları başladı! Başvuru için Spor Branşları bölümünü ziyaret edin."),
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text("📢 Duyurular",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 10),
+        Card(
+          elevation: 2,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+                "Yeni sezon kayıtları başladı! Başvuru için Spor Branşları bölümünü ziyaret edin."),
+          ),
         ),
-      ),
-    ],
+      ],
+    ),
   );
 }
