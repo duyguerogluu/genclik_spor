@@ -11,7 +11,7 @@ Widget customTextField({
   return Container(
     padding: const EdgeInsets.all(5),
     decoration: BoxDecoration(
-      color: isDark ? offdarkblue : white1,
+      color: isDark ? offdarkblue : white,
       border: Border(
         bottom: BorderSide(
           color: offlightblue2,
@@ -21,7 +21,7 @@ Widget customTextField({
         BoxShadow(
           color: Colors.transparent,
           blurRadius: 20.0,
-          offset:  Offset(0, 10),
+          offset: Offset(0, 10),
         ),
       ],
     ),
@@ -32,7 +32,7 @@ Widget customTextField({
       style: TextStyle(color: isDark ? white : black),
       decoration: InputDecoration(
         filled: true,
-        fillColor: isDark ? offdarkblue : white1,
+        fillColor: isDark ? offdarkblue : white,
         border: InputBorder.none,
         hintText: hintText,
         hintStyle: TextStyle(color: isDark ? Colors.white70 : Colors.black45),

@@ -4,7 +4,7 @@ Color offdarkblue = const Color(0xFF00235A);
 Color offdarkblue1 = const Color.fromARGB(255, 0, 47, 123);
 Color offlightblue = const Color(0xFF3C6BC3);
 Color offlightblue1 = const Color.fromARGB(255, 107, 159, 255);
-Color offlightblue2 = const Color.fromARGB(255, 196, 214, 247);
+Color offlightblue2 = const Color.fromARGB(81, 132, 166, 229);
 Color offred = const Color(0xFFC30000);
 
 Color green = const Color(0xFF03A373);

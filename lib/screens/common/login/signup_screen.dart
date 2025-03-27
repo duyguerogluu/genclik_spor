@@ -54,12 +54,8 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
                 children: <Widget>[
                   Container(
                     padding: const EdgeInsets.all(8.0),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Colors.transparent,
-                        ),
-                      ),
+                    decoration: BoxDecoration(
+                      color: context.isDark ? offdarkblue : white,
                     ),
                     child: Column(
                       children: <Widget>[
