@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/utils/colors.dart';
 
 class NewsSlider extends StatelessWidget {
   final List<Map<String, String>> newsList = [
@@ -50,14 +51,14 @@ class NewsSlider extends StatelessWidget {
                   left: 16,
                   right: 16,
                   child: Container(
-                    padding: EdgeInsets.all(12),
+                    padding:const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
+                      color: blacko,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
                       news["title"]!,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style:const TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ),

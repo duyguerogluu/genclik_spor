@@ -13,6 +13,7 @@ import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart'
 import 'package:genclik_spor/screens/common/home/components/custom_bottom_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_drawer.dart';
 import 'package:genclik_spor/screens/common/home/components/news_marquee.dart';
+import 'package:genclik_spor/screens/common/home/components/news_slider.dart';
 import 'package:genclik_spor/screens/common/home/components/photo_slider.dart';
 import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
@@ -164,6 +165,7 @@ Widget _buildHomeTabContent(BuildContext context) {
 Widget _buildWelcomeCard() {
   return Column(
     children: [
+      NewsSlider(),
       Stack(
         children: [
           const Padding(
