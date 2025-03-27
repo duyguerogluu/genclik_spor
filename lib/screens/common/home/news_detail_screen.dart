@@ -19,15 +19,15 @@ class NewsDetailScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: Image.network(news["image"]!),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               news["title"]!,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               news["content"]!,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),

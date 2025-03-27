@@ -139,7 +139,7 @@ Widget _buildHomeTabContent(BuildContext context) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildWelcomeCard(),
+        _buildNewsSlider(),
         const SizedBox(height: 16),
         GridView.builder(
           shrinkWrap: true,
@@ -162,11 +162,10 @@ Widget _buildHomeTabContent(BuildContext context) {
   );
 }
 
-Widget _buildWelcomeCard() {
+Widget _buildNewsSlider() {
   return Column(
     children: [
       NewsSlider(),
-
       NewsMarquee(
         newsList: [
           'Gençlik Spor Bakanlığı yeni projelerini duyurdu!',
@@ -175,7 +174,6 @@ Widget _buildWelcomeCard() {
           'Antrenman programlarına katılım zorunludur.',
         ],
       ),
-
     ],
   );
 }
@@ -215,14 +213,15 @@ Widget _buildMenuCard(IconData icon, String title, BuildContext context) {
         }
       },
       child: Card(
-        elevation: 3,
+        elevation: 10,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: Colors.white,
+        color: Colors.red,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 40, color: Colors.blue[700]),
+              Icon(icon,
+                  size: 4, color: const Color.fromARGB(255, 210, 25, 84)),
               const SizedBox(height: 10),
               Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
             ],
@@ -233,26 +232,3 @@ Widget _buildMenuCard(IconData icon, String title, BuildContext context) {
   );
 }
 
-Widget _buildAnnouncements() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("📢 Duyurular",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 10),
-        Card(
-          elevation: 2,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-                "Yeni sezon kayıtları başladı! Başvuru için Spor Branşları bölümünü ziyaret edin."),
-          ),
-        ),
-      ],
-    ),
-  );
-}
