@@ -8,7 +8,8 @@ Color offlightblue2 = const Color.fromARGB(81, 132, 166, 229);
 Color offred = const Color(0xFFC30000);
 
 Color green = const Color(0xFF03A373);
-Color black = const Color(0xFF15161A);
+Color black = const Color.fromARGB(255, 0, 0, 0);
+Color blacko = const Color.fromARGB(81, 0, 0, 0);
 Color white = const Color(0xFFFFFFFF);
 Color white1 = const Color.fromARGB(255, 243, 243, 243);
 Color grey = const Color.fromARGB(255, 45, 46, 47);
