@@ -12,12 +12,16 @@ Widget customTextField({
     padding: const EdgeInsets.all(5),
     decoration: BoxDecoration(
       color: isDark ? offdarkblue : white1,
-      borderRadius: BorderRadius.circular(10),
+      border: Border(
+        bottom: BorderSide(
+          color: offlightblue2,
+        ),
+      ),
       boxShadow: const [
         BoxShadow(
           color: Colors.transparent,
           blurRadius: 20.0,
-          offset: Offset(0, 10),
+          offset:  Offset(0, 10),
         ),
       ],
     ),
