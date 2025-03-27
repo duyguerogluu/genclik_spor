@@ -1,8 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/screens/common/home/news_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
-class NewsSlider extends StatelessWidget {
+class NewsSlider extends StatefulWidget {
+  @override
+  State<NewsSlider> createState() => _NewsSliderState();
+}
+
+class _NewsSliderState extends State<NewsSlider> {
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
+  Timer? _timer;
+
   final List<Map<String, String>> newsList = [
     {
       "image":
@@ -35,10 +46,39 @@ class NewsSlider extends StatelessWidget {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _startAutoScroll();
+  }
+
+  void _startAutoScroll() {
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      if (_currentIndex < newsList.length - 1) {
+        _currentIndex++;
+      } else {
+        _currentIndex = 0;
+      }
+      _pageController.animateToPage(
+        _currentIndex,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 250,
       child: PageView.builder(
+        controller: _pageController,
         itemCount: newsList.length,
         itemBuilder: (context, index) {
           final news = newsList[index];
@@ -74,7 +114,7 @@ class NewsSlider extends StatelessWidget {
                     ),
                     child: Text(
                       news["title"]!,
-                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: white, fontSize: 16),
                     ),
                   ),
                 ),

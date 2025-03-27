@@ -166,38 +166,6 @@ Widget _buildWelcomeCard() {
   return Column(
     children: [
       NewsSlider(),
-      
-      Stack(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 8.0),
-            child: PhotoSlider(
-              imageUrls: [
-                'https://ankara.gsb.gov.tr/public/Images/GSB/012014/whatsapp-image-2025-03-23-at-180129.jpg',
-                'https://ankara.gsb.gov.tr/public/Images/GSB/012014/whatsapp-image-2025-03-15-at-123715.jpg',
-                'https://ankara.gsb.gov.tr/public/Images/GSB/012014/whatsapp-image-2025-03-12-at-202523.jpg',
-                'https://ankara.gsb.gov.tr/public/Images/GSB/012014/whatsapp-image-2025-03-11-at-103405.jpg',
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 16,
-            left: 16,
-            right: 16,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: blacko,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Text(
-                "Son Dakika: Gençlik Spor Bakanlığı yeni projelerini duyurdu!",
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-            ),
-          ),
-        ],
-      ),
 
       NewsMarquee(
         newsList: [
@@ -207,31 +175,7 @@ Widget _buildWelcomeCard() {
           'Antrenman programlarına katılım zorunludur.',
         ],
       ),
-      // Card(
-      //   elevation: 0,
-      //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      //   color: Colors.blue[600],
-      //   child: const Padding(
-      //     padding: EdgeInsets.all(20.0),
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         Text(
-      //           "Hoş Geldiniz!",
-      //           style: TextStyle(
-      //               color: Colors.white,
-      //               fontSize: 22,
-      //               fontWeight: FontWeight.bold),
-      //         ),
-      //         SizedBox(height: 10),
-      //         Text(
-      //           "Spor branşlarına başvurabilir, antrenman programınızı takip edebilir ve performans analizlerinizi görüntüleyebilirsiniz.",
-      //           style: TextStyle(color: Colors.white70),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
+
     ],
   );
 }
