@@ -114,6 +114,8 @@ class _NewsSliderState extends State<NewsSlider> {
                     ),
                     child: Text(
                       news["title"]!,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                       style: TextStyle(color: white, fontSize: 16),
                     ),
                   ),
