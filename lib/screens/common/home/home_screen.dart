@@ -166,6 +166,7 @@ Widget _buildWelcomeCard() {
   return Column(
     children: [
       NewsSlider(),
+      
       Stack(
         children: [
           const Padding(
