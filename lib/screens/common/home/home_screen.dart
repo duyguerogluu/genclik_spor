@@ -137,6 +137,7 @@ Widget _buildHomeTabContent(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         NewsSlider(),
+        _annonces(),
         const SizedBox(height: 16),
         GridView.builder(
           shrinkWrap: true,
