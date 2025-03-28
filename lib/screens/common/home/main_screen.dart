@@ -16,8 +16,8 @@ import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+class MainScreen extends ConsumerWidget {
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -95,28 +95,33 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
             context, MaterialPageRoute(builder: (_) => WarningsScreen()));
       }
     },
-    child: Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      color: const Color.fromARGB(200, 255, 255, 255),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 40, color: darkblue),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              style: TextStyle(
-                color: grey,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
+    child: Container(
+      width: 100,
+      height: 100,
+      margin: const EdgeInsets.all(8),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        color: const Color.fromARGB(200, 255, 255, 255),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 40, color: darkblue),
+              const SizedBox(height: 10),
+              Text(
+                title,
+                style: TextStyle(
+                  color: grey,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     ),
@@ -139,20 +144,18 @@ Widget _buildHomeTabContent(BuildContext context) {
         NewsSlider(),
         _annonces(),
         const SizedBox(height: 16),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 1,
+        SizedBox(
+          height: 100,
+          child: ListView.builder(
+            shrinkWrap: false,
+            physics: const AlwaysScrollableScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemCount: menuItems.length,
+            itemBuilder: (context, index) {
+              final item = menuItems[index];
+              return _buildGlassMenuCard(item['icon'], item['title'], context);
+            },
           ),
-          itemCount: menuItems.length,
-          itemBuilder: (context, index) {
-            final item = menuItems[index];
-            return _buildGlassMenuCard(item['icon'], item['title'], context);
-          },
         ),
       ],
     ),
@@ -169,4 +172,3 @@ Widget _annonces() {
     ],
   );
 }
-
