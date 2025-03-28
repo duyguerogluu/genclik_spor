@@ -19,3 +19,4 @@ Color blue = const Color(0xFF385D80);
 Color darkblue = const Color(0xFF00375C);
 Color blue1 = const Color(0xFF0095D4);
 Color blue2 = const Color(0xFF176096);
+Color purple = const Color(0xFF6F2C91);

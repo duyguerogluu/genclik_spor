@@ -19,15 +19,15 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
-                    color: context.isDark ? offdarkblue : white1,
+      color: context.isDark ? offdarkblue : white,
       child: _buildHomeTabContent(context),
     );
   }
 }
+
 Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
   return GestureDetector(
     onTap: () {
@@ -60,26 +60,51 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
       width: 100,
       height: 100,
       margin: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          colors: [
+            context.isDark ? purple : white,
+            context.isDark ? offdarkblue1 : white
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: offlightblue2,
+            blurRadius: 6,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
       child: Card(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        color: const Color.fromARGB(200, 255, 255, 255),
+        color: Colors.transparent,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 40, color: darkblue),
-              const SizedBox(height: 10),
-              Text(
-                title,
-                style: TextStyle(
-                  color: grey,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
+              Flexible(
+                  flex: 3,
+                  child: Icon(
+                    icon,
+                    size: 24,
+                    color: context.isDark ? white : offdarkblue,
+                  )),
+              Flexible(
+                flex: 2,
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: context.isDark ? white : offdarkblue,
+                    fontSize: 10,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ],
           ),
