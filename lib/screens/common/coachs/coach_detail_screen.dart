@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
@@ -23,13 +24,7 @@ class CoachDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.isDark ? offdarkblue : white,
-      appBar: AppBar(
-        backgroundColor: offdarkblue,
-        title: Text(name),
-        iconTheme: const IconThemeData(color: Colors.white),
-        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
-      ),
+      appBar: customAppBar('$name'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

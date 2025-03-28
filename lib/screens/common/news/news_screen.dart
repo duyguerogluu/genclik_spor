@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/screens/common/news/news_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
@@ -10,10 +11,7 @@ class NewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Haberler'),
-        backgroundColor: offdarkblue,
-      ),
+      appBar: customAppBar('Haberler'),
       body: ListView.builder(
         itemCount: newsList.length,
         itemBuilder: (context, index) {
