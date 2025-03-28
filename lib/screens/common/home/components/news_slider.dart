@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:genclik_spor/screens/common/home/news_detail_screen.dart';
+import 'package:genclik_spor/screens/common/news/news_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
 class NewsSlider extends StatefulWidget {
