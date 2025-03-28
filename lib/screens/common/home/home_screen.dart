@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
@@ -14,7 +12,6 @@ import 'package:genclik_spor/screens/common/home/components/custom_bottom_bar.da
 import 'package:genclik_spor/screens/common/home/components/custom_drawer.dart';
 import 'package:genclik_spor/screens/common/home/components/news_marquee.dart';
 import 'package:genclik_spor/screens/common/home/components/news_slider.dart';
-import 'package:genclik_spor/screens/common/home/components/photo_slider.dart';
 import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
@@ -139,7 +136,7 @@ Widget _buildHomeTabContent(BuildContext context) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildNewsSlider(),
+        NewsSlider(),
         const SizedBox(height: 16),
         GridView.builder(
           shrinkWrap: true,
@@ -154,7 +151,6 @@ Widget _buildHomeTabContent(BuildContext context) {
           itemBuilder: (context, index) {
             final item = menuItems[index];
             return _buildGlassMenuCard(item['icon'], item['title'], context);
-            //return _buildWelcomeCard();
           },
         ),
       ],
@@ -162,18 +158,13 @@ Widget _buildHomeTabContent(BuildContext context) {
   );
 }
 
-Widget _buildNewsSlider() {
-  return Column(
-    children: [
-      NewsSlider(),
-      NewsMarquee(
-        newsList: [
-          'Gençlik Spor Bakanlığı yeni projelerini duyurdu!',
-          'Sporcular için özel eğitim programı başlıyor!',
-          'Tesis başvuruları için son gün 30 Mart!',
-          'Antrenman programlarına katılım zorunludur.',
-        ],
-      ),
+Widget _annonces() {
+  return const NewsMarquee(
+    newsList: [
+      'Gençlik Spor Bakanlığı yeni projelerini duyurdu!',
+      'Sporcular için özel eğitim programı başlıyor!',
+      'Tesis başvuruları için son gün 30 Mart!',
+      'Antrenman programlarına katılım zorunludur.',
     ],
   );
 }
@@ -231,4 +222,3 @@ Widget _buildMenuCard(IconData icon, String title, BuildContext context) {
     ),
   );
 }
-
