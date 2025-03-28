@@ -25,7 +25,7 @@ ElevatedButton customButton({
     child: Text(
       text,
       style: TextStyle(
-        fontSize: 18,
+        fontSize: 12,
         color: isTransparent
             ? const Color.fromARGB(255, 217, 217, 217)
             : Colors.white,

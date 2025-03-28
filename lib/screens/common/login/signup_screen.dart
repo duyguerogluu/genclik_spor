@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/common/components/custom_button.dart';
 import 'package:genclik_spor/screens/common/components/custom_text_field.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
@@ -16,6 +17,7 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
   bool _ishidden = true;
   bool isProcessing = false;
   bool _pageLogin = true;
+  bool isTransparent = false;
 
   String initValue = "Select your Birth Date";
   bool isDateSelected = false;
@@ -119,11 +121,11 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
                         });
                       },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _pageLogin
-                      ? context.isDark
+                  backgroundColor: isTransparent
+                      ? Colors.transparent
+                      : context.isDark
                           ? offlightblue
-                          : offdarkblue
-                      : Colors.transparent,
+                          : offdarkblue,
                   foregroundColor: Colors.transparent,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -134,7 +136,7 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
                 child: Text(
                   'Kaydol',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 12,
                     color:
                         _pageLogin ? white : Color.fromARGB(255, 217, 217, 217),
                   ),
