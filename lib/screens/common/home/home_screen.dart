@@ -6,7 +6,7 @@ import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dar
 import 'package:genclik_spor/screens/athlete/training/training_screen.dart';
 import 'package:genclik_spor/screens/common/courses/courses_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/news_marquee.dart';
-import 'package:genclik_spor/screens/common/home/components/news_slider.dart';
+import 'package:genclik_spor/screens/common/news/news_slider.dart';
 import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
