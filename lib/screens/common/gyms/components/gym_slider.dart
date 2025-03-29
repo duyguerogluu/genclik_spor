@@ -58,7 +58,7 @@ class _GymSliderState extends State<GymSlider> {
           bool isActive = index == _currentIndex;
           return Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 0.0),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -72,10 +72,10 @@ class _GymSliderState extends State<GymSlider> {
                 duration: Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
                 margin: EdgeInsets.symmetric(
-                    horizontal: isActive ? 20 : 15, vertical: 10),
+                    horizontal: isActive ? 10 : 30, vertical: 10),
                 transform: Matrix4.identity()
                   ..scale(isActive ? 1.1 : 1.0)
-                  ..rotateZ(isActive ? 0.01 : 0.0),
+                  ..rotateZ(isActive ? 0.0 : 0.01),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
@@ -115,7 +115,7 @@ class _GymSliderState extends State<GymSlider> {
                             const SizedBox(height: 4),
                             Text(
                               gym["city"]!,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,
                               ),
