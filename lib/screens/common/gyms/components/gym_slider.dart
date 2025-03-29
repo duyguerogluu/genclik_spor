@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/screens/common/gyms/gym_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
 class GymSlider extends StatefulWidget {
@@ -58,63 +59,73 @@ class _GymSliderState extends State<GymSlider> {
           return Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
-            child: AnimatedContainer(
-              duration: Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              margin: EdgeInsets.symmetric(
-                  horizontal: isActive ? 20 : 15, vertical: 10),
-              transform: Matrix4.identity()
-                ..scale(isActive ? 1.1 : 1.0)
-                ..rotateZ(isActive ? 0.01 : 0.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: blacko,
-                    blurRadius: isActive ? 10 : 5,
-                    spreadRadius: isActive ? 3 : 1,
-                  )
-                ],
-                image: DecorationImage(
-                  image: NetworkImage(gym["imgUrl"]!),
-                  fit: BoxFit.cover,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GymDetailScreen(gym: gym),
+                  ),
+                );
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                margin: EdgeInsets.symmetric(
+                    horizontal: isActive ? 20 : 15, vertical: 10),
+                transform: Matrix4.identity()
+                  ..scale(isActive ? 1.1 : 1.0)
+                  ..rotateZ(isActive ? 0.01 : 0.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: blacko,
+                      blurRadius: isActive ? 10 : 5,
+                      spreadRadius: isActive ? 3 : 1,
+                    )
+                  ],
+                  image: DecorationImage(
+                    image: NetworkImage(gym["imgUrl"]!),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: 15,
-                    left: 15,
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: blacko,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            gym["gymName"]!,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      bottom: 15,
+                      left: 15,
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: blacko,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              gym["gymName"]!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            gym["city"]!,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
+                            const SizedBox(height: 4),
+                            Text(
+                              gym["city"]!,
+                              style:const TextStyle(
+                                color: Colors.white70,
+                                fontSize: 12,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           );

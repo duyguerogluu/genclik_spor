@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 'Şifremi Unuttum',
                                 style: TextStyle(
                                   color: context.isDark ? white : offdarkblue,
-                                  fontSize: 16,
+                                  fontSize: 12,
                                 ),
                               ),
                               onTap: () {},
