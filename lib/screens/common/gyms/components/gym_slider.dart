@@ -4,17 +4,20 @@ class GymSlider extends StatelessWidget {
   final List<Map<String, String>> gyms = [
     {
       "name": "Power Gym",
-      "image": "https://via.placeholder.com/150",
+      "image":
+          "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
       "location": "Kadıköy, İstanbul"
     },
     {
       "name": "FitLife Center",
-      "image": "https://via.placeholder.com/150",
+      "image":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi69qwf8QOi-kpIUVyqgGHom14wa9TsBaEAA&s",
       "location": "Beşiktaş, İstanbul"
     },
     {
       "name": "Elite Sports Club",
-      "image": "https://via.placeholder.com/150",
+      "image":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi69qwf8QOi-kpIUVyqgGHom14wa9TsBaEAA&s",
       "location": "Şişli, İstanbul"
     },
   ];
