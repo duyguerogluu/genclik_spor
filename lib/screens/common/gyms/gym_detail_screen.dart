@@ -7,17 +7,11 @@ import 'package:genclik_spor/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GymDetailScreen extends StatelessWidget {
-  final String imgUrl;
-  final String gymName;
-  final String address;
-  final String city;
+  final Map<String, dynamic> gym;
 
   const GymDetailScreen({
     super.key,
-    required this.imgUrl,
-    required this.gymName,
-    required this.address,
-    required this.city,
+    required this.gym,
   });
 
   void _launchMapsUrl(String query) async {
@@ -40,12 +34,12 @@ class GymDetailScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: customAppBar(gymName),
+      appBar: customAppBar(gym['gymName']!),
       backgroundColor: context.isDark ? offdarkblue : white1,
       body: ListView(
         children: [
           Image.network(
-            imgUrl,
+            gym['imgUrl']!,
             width: double.infinity,
             height: 200,
             fit: BoxFit.cover,
@@ -53,7 +47,7 @@ class GymDetailScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
-              "Adres: $address\n$city",
+              "Adres: ${gym['address']}\n${gym['city']}",
               style: TextStyle(fontSize: 16, color: grey),
             ),
           ),
@@ -62,7 +56,8 @@ class GymDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(backgroundColor: offdarkblue),
-              onPressed: () => _launchMapsUrl('$gymName $city'),
+              onPressed: () => _launchMapsUrl(
+                  '${gym['gymName']!.replaceAll(' ', '+')}+${gym['city']}'),
               icon: const Icon(Icons.directions, color: Colors.white),
               label: const Text("Yol Tarifi Al",
                   style: TextStyle(color: Colors.white)),

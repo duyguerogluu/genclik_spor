@@ -1,80 +1,121 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/utils/colors.dart';
 
-class GymSlider extends StatelessWidget {
-  final List<Map<String, String>> gyms = [
+class GymSlider extends StatefulWidget {
+  @override
+  _GymSliderState createState() => _GymSliderState();
+}
+
+class _GymSliderState extends State<GymSlider> {
+  final List<Map<String, dynamic>> gyms = [
     {
-      "name": "Power Gym",
-      "image":
+      "imgUrl":
           "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
-      "location": "Kadıköy, İstanbul"
+      "gymName": 'Nevin Yanıt Spor Tesisi',
+      "address": 'adress adresss adress adressssss',
+      "city": 'ADANA , Seyhan',
     },
     {
-      "name": "FitLife Center",
-      "image":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi69qwf8QOi-kpIUVyqgGHom14wa9TsBaEAA&s",
-      "location": "Beşiktaş, İstanbul"
+      "imgUrl":
+          "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
+      "gymName": '3 Ocak Spor Tesisi',
+      "address": 'adress adresss adress adressssss',
+      "city": 'ADANA , Seyhan',
     },
     {
-      "name": "Elite Sports Club",
-      "image":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi69qwf8QOi-kpIUVyqgGHom14wa9TsBaEAA&s",
-      "location": "Şişli, İstanbul"
+      "imgUrl":
+          "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
+      "gymName": 'Edip Burhan Spor Tesisi',
+      "address": 'adress adresss adress adressssss',
+      "city": 'ADANA , Seyhan',
     },
+    {
+      "imgUrl":
+          "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
+      "gymName": 'Yenişehir Spor Tesisi',
+      "address": 'adress adresss adress adressssss',
+      "city": 'ADANA , Seyhan',
+    }
   ];
+
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
+    return Container(
+      height: 240,
       child: PageView.builder(
         itemCount: gyms.length,
-        controller: PageController(viewportFraction: 0.8),
+        controller: PageController(viewportFraction: 0.75),
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         itemBuilder: (context, index) {
           final gym = gyms[index];
-          return AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                image: NetworkImage(gym["image"]!),
-                fit: BoxFit.cover,
+          bool isActive = index == _currentIndex;
+          return Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              margin: EdgeInsets.symmetric(
+                  horizontal: isActive ? 20 : 15, vertical: 10),
+              transform: Matrix4.identity()
+                ..scale(isActive ? 1.1 : 1.0)
+                ..rotateZ(isActive ? 0.01 : 0.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: blacko,
+                    blurRadius: isActive ? 10 : 5,
+                    spreadRadius: isActive ? 3 : 1,
+                  )
+                ],
+                image: DecorationImage(
+                  image: NetworkImage(gym["imgUrl"]!),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                  bottom: 10,
-                  left: 10,
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          gym["name"]!,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom: 15,
+                    left: 15,
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: blacko,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            gym["gymName"]!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          gym["location"]!,
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 14,
+                          SizedBox(height: 4),
+                          Text(
+                            gym["city"]!,
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           );
         },

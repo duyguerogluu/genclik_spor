@@ -41,12 +41,12 @@ class MainScreen extends ConsumerWidget {
                 Tab(text: "Antrenörler"),
               ],
             ),
-            const Expanded(
+            Expanded(
               child: TabBarView(
                 children: [
-                  HomeScreen(),
+                  const HomeScreen(),
                   GymsScreen(),
-                  CoachsScreen(),
+                  const CoachsScreen(),
                 ],
               ),
             ),
