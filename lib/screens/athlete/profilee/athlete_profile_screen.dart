@@ -46,7 +46,7 @@ class AthleteProfileScreen extends ConsumerWidget {
             ),
           ],
         ),
-        backgroundColor: darkblue,
+        backgroundColor: offlightblue,
         foregroundColor: white,
         elevation: 0,
       ),

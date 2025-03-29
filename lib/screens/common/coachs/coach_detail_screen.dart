@@ -24,7 +24,7 @@ class CoachDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar('$name'),
+      appBar: customAppBar(name),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
