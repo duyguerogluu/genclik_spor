@@ -9,22 +9,27 @@ class LoginService {
     String password,
   ) async {
     final url = Uri.parse("$baseUrl/login");
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: jsonEncode({
-        "email": email,
-        "password": password,
-      }),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/login'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+      );
 
-    if (response.statusCode == 200) {
-      return LoginModel.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception("Giriş başarısız!");
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return LoginModel.fromJson(data);
+      }
+      throw Exception('Giriş başarısız');
+    } catch (e) {
+      print('Login error: $e');
+      throw Exception('Bir hata oluştu: $e');
     }
   }
 }
