@@ -6,11 +6,17 @@ class LoginService {
   static const String baseUrl =
       "https://gncspor.sinbadbilgiteknolojileri.com/api/v1";
 
-  Future<LoginModel> login(String email, String password) async {
+  Future<LoginModel> loginCall(
+    String email,
+    String password,
+  ) async {
     final url = Uri.parse("$baseUrl/login");
     final response = await http.post(
       url,
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
       body: jsonEncode({
         "email": email,
         "password": password,

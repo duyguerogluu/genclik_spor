@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/components/loading_popup.dart';
 
 class LoginRiverpod extends ChangeNotifier {
   BuildContext? context;
@@ -6,7 +7,7 @@ class LoginRiverpod extends ChangeNotifier {
   TextEditingController password = TextEditingController();
 
   Future<bool?> fetchLogin() async {
-    debugPrint("fetchLogin  çalıştı. Tel: ${telNo.text} Pass: ${password.text}");
-    return true;
+    debugPrint("fetchLogin çalıştı");
+    loadingPopup();
   }
 }
