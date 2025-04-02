@@ -76,7 +76,7 @@ class _NewsSliderState extends State<NewsSlider> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
+      height: 240,
       child: PageView.builder(
         controller: _pageController,
         itemCount: newsList.length,
@@ -107,7 +107,7 @@ class _NewsSliderState extends State<NewsSlider> {
                   left: 16,
                   right: 16,
                   child: Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: blacko,
                       borderRadius: BorderRadius.circular(10),
@@ -116,7 +116,7 @@ class _NewsSliderState extends State<NewsSlider> {
                       news["title"]!,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(color: white, fontSize: 16),
+                      style: TextStyle(color: white, fontSize: 12),
                     ),
                   ),
                 ),

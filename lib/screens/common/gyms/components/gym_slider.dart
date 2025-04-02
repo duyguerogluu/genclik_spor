@@ -69,7 +69,7 @@ class _GymSliderState extends State<GymSlider> {
                 );
               },
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
                 margin: EdgeInsets.symmetric(
                     horizontal: isActive ? 10 : 30, vertical: 10),

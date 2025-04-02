@@ -158,5 +158,6 @@ Widget _annonces() {
       'Tesis başvuruları için son gün 30 Mart!',
       'Antrenman programlarına katılım zorunludur.',
     ],
+    
   );
 }
