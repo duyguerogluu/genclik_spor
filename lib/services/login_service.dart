@@ -4,10 +4,10 @@ import 'package:genclik_spor/utils/const.dart';
 import 'package:http/http.dart' as http;
 
 class LoginService {
-  static Future<LoginModel> loginCall(
-    String email,
-    String password,
-  ) async {
+  static Future<LoginModel> loginCall({
+    required String email,
+    required String password,
+  }) async {
     final url = Uri.parse("$baseUrl/login");
     try {
       final response = await http.post(
