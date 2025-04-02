@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     if (kDebugMode) {
-      login.telNo.text = "05554443311";
+      login.email.text = "05554443311";
       login.password.text = "10";
     }
   }
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Column(
                               children: <Widget>[
                                 customTextField(
-                                  controller: login.telNo,
+                                  controller: login.email,
                                   hintText: "Phone number",
                                   obscureText: false,
                                   onVisibilityToggle: () {},

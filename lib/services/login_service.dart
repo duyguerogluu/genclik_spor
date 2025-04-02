@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:genclik_spor/models/login_model.dart';
+import 'package:genclik_spor/utils/const.dart';
 import 'package:http/http.dart' as http;
 
 class LoginService {
-  static const String baseUrl =
-      "https://gncspor.sinbadbilgiteknolojileri.com/api/v1";
-
-  Future<LoginModel> loginCall(
+  static Future<LoginModel> loginCall(
     String email,
     String password,
   ) async {
