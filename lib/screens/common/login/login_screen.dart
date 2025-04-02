@@ -22,8 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     if (kDebugMode) {
-      login.email.text = "05554443311";
-      login.password.text = "10";
+      login.email.text = "duygu@gmail.com";
+      login.password.text = "123456";
     }
   }
 
@@ -134,6 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: () async {
                                 final res = await login.fetchLogin();
                                 if (res == true) {
+                                  debugPrint('res true!!!!!!!!!! ');
                                   // ignore: use_build_context_synchronously
                                   Navigator.push(
                                     context,
