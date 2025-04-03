@@ -6,22 +6,32 @@ import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
 import 'package:genclik_spor/screens/common/setting/setting_screen.dart';
-
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
-class AthleteProfileScreen extends ConsumerWidget {
+class AthleteProfileScreen extends ConsumerStatefulWidget {
   const AthleteProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _AthleteProfileScreenState createState() => _AthleteProfileScreenState();
+}
+
+class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    String token = ""; 
+    _loadProfile(token);
+  }
+
+  Future<void> _loadProfile(String token) async {
+    await ref.read(profileRiverpodNotifier.notifier).fetchProfile(token);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     debugPrint("AthleteProfileScreen build çalıştı!");
     final profileState = ref.watch(profileRiverpodNotifier);
-    //Future.sync(profileRiverpod.fetchProfile(token) );
-
-    Future<void> _loadProfile(String token) async {
-  Future.sync(() => profileRiverpod.fetchProfile(token));
-}
 
     if (profileState.isLoading) {
       return const Center(child: CircularProgressIndicator());
