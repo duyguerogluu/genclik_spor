@@ -27,20 +27,20 @@ class AthleteModel {
     required this.trainingHistory,
   });
 
-  factory AthleteModel.fromMap(Map<String, dynamic> map) {
+  factory AthleteModel.fromJson(Map<String, dynamic> json) {
     return AthleteModel(
-      firstName: map['first_name'] ?? '',
-      lastName: map['last_name'] ?? '',
-      role: map['role'] ?? 'Unknown',
-      age: map['age'] ?? 0,
-      height: map['height'] ?? 0,
-      weight: map['weight'] ?? 0,
-      sport: map['sport'] ?? 'Unknown',
-      endurance: map['endurance'] ?? 0,
-      speed: map['speed'] ?? 0,
-      flexibility: map['flexibility'] ?? 0,
-      agility: map['agility'] ?? 0,
-      trainingHistory: (map['training_histories'] as List<dynamic>?)
+      firstName: json['first_name'] ?? '',
+      lastName: json['last_name'] ?? '',
+      role: json['role'] ?? 'Unknown',
+      age: json['age'] ?? 0,
+      height: json['height'] ?? 0,
+      weight: json['weight'] ?? 0,
+      sport: json['sport'] ?? 'Unknown',
+      endurance: json['endurance'] ?? 0,
+      speed: json['speed'] ?? 0,
+      flexibility: json['flexibility'] ?? 0,
+      agility: json['agility'] ?? 0,
+      trainingHistory: (json['training_histories'] as List<dynamic>?)
               ?.map((item) => TrainingHistory.fromMap(item))
               .toList() ??
           [],

@@ -24,7 +24,7 @@ class AthleteRiverpod extends ChangeNotifier {
       final data = json.decode(response);
       debugPrint(
           "Responseeeeeeeeeeeeeeeeeeeeeeeeeeeee!!!!!!!!!!!!!!!!!!!: $data");
-      athlete = AthleteModel.fromMap(data);
+      athlete = AthleteModel.fromJson(data);
     } catch (e) {
       debugPrint("Athlete verisi yüklenirken hata oluştu: \$e");
     }
