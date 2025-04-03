@@ -4,7 +4,6 @@ import 'package:genclik_spor/components/loading_popup.dart';
 import 'package:genclik_spor/main.dart';
 import 'package:genclik_spor/screens/common/home/main_screen.dart';
 import 'package:genclik_spor/services/login_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginRiverpod extends ChangeNotifier {
   BuildContext? context;
@@ -52,4 +51,8 @@ class LoginRiverpod extends ChangeNotifier {
       return false;
     }
   }
+   
+  
+
+
 }
