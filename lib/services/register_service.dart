@@ -30,8 +30,9 @@ class RegisterService {
           'password_confirmation': confirmPassword,
         }),
       );
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+
+      final data = jsonDecode(response.body);
+      if (response.statusCode == 200 && data["status"] == "true") {
         return RegisterModel.fromJson(data);
       } else {
         throw Exception('Kayıt başarısız, ${response.body}');
