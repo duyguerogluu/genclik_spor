@@ -33,8 +33,9 @@ class RegisterService {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return RegisterModel.fromJson(data);
+      } else {
+        throw Exception('Kayıt başarısız, ${response.body}');
       }
-      throw Exception('Kayıt BAşarısız');
     } catch (e) {
       print('Login error: $e');
       throw Exception('Bir hata oluştu: $e');
