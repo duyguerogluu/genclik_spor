@@ -6,12 +6,15 @@ import 'package:http/http.dart' as http;
 
 class RegisterService {
   static Future<RegisterModel> registerCall({
-    required String first_name,
-    required String last_name,
+    required String firstName,
+    required String lastName,
     required String email,
     required String password,
-    required String password_confirmation,
+    required String confirmPassword,
   }) async {
+    if (password != confirmPassword) {
+      throw Exception("Şifreler uyuşmuyor!");
+    }
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/register'),
@@ -20,11 +23,11 @@ class RegisterService {
           'Accept': 'application/json',
         },
         body: jsonEncode({
-          'first_name': first_name,
-          'last_name': last_name,
+          'first_name': firstName,
+          'last_name': lastName,
           'email': email,
           'password': password,
-          'password_confirmation': password_confirmation,
+          'password_confirmation': confirmPassword,
         }),
       );
       if (response.statusCode == 200) {
