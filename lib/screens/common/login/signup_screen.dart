@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/common/components/custom_button.dart';
 import 'package:genclik_spor/screens/common/components/custom_text_field.dart';
+import 'package:genclik_spor/screens/common/login/login_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
-//Controllerlar eklenecek !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 class SignupScreen extends ConsumerStatefulWidget {
+  const SignupScreen({super.key});
+
   @override
   _SignupPageState createState() => _SignupPageState();
 }
 
 class _SignupPageState extends ConsumerState<SignupScreen> {
-  TextEditingController telNo = TextEditingController();
   bool _ishidden = true;
   bool isProcessing = false;
   bool _pageLogin = true;
@@ -63,41 +64,40 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
                     child: Column(
                       children: <Widget>[
                         customTextField(
-                          controller: telNo,
+                          controller: register.firstName,
                           hintText: "Ad",
                           obscureText: false,
                           onVisibilityToggle: () {},
                           isDark: context.isDark,
                         ),
                         customTextField(
-                          controller: telNo,
+                          controller: register.lastName,
                           hintText: "Soyad",
                           obscureText: false,
                           onVisibilityToggle: () {},
                           isDark: context.isDark,
                         ),
                         customTextField(
-                          controller: telNo,
-                          hintText: "Telefon Numarası",
-                          obscureText: false,
-                          onVisibilityToggle: () {},
-                          isDark: context.isDark,
-                        ),
-                        customTextField(
-                          controller: telNo,
+                          controller: register.email,
                           hintText: "Email",
                           obscureText: false,
                           onVisibilityToggle: () {},
                           isDark: context.isDark,
                         ),
                         customTextField(
-                          controller: telNo,
-                          hintText: "Şifre",
+                          controller: register.password,
+                          hintText: "password",
                           obscureText: false,
                           onVisibilityToggle: () {},
                           isDark: context.isDark,
                         ),
-                        //ConfirmPassword(),
+                        customTextField(
+                          controller: register.confirmPassword,
+                          hintText: "Password confirm",
+                          obscureText: false,
+                          onVisibilityToggle: () {},
+                          isDark: context.isDark,
+                        ),
                       ],
                     ),
                   ),
@@ -116,10 +116,26 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
                         setState(() {
                           isProcessing = true;
                         });
-                        // await model.fetchSignup(context);
+                        bool? isRegistered = await register.fetchRegister();
                         setState(() {
                           isProcessing = false;
                         });
+
+                        if (isRegistered ?? false) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const LoginScreen(),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Kayıt başarısız oldu'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
                       },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isTransparent
