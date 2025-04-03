@@ -34,6 +34,7 @@ class _SignupPageState extends ConsumerState<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("Register!!!!");
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(30.0),
