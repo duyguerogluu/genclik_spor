@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
@@ -14,17 +16,22 @@ class AthleteProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     debugPrint("AthleteProfileScreen build çalıştı!");
-    final athleteState = ref.watch(athleteRiverpodNotifier);
-    Future.sync(athleteRiverpod.fetchAthlete);
-    final read = athleteState.athlete;
+    final profileState = ref.watch(profileRiverpodNotifier);
+    //Future.sync(profileRiverpod.fetchProfile(token) );
 
-    if (athleteState.isLoading) {
+    Future<void> _loadProfile(String token) async {
+  Future.sync(() => profileRiverpod.fetchProfile(token));
+}
+
+    if (profileState.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (read == null) {
-      return const Center(child: Text("Veri yüklenemedi"));
+    if (profileState.memberProfile == null) {
+      return const Center(child: Text("Profil bilgileri yüklenemedi"));
     }
+
+    final read = profileState.memberProfile!;
 
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white1,
@@ -82,6 +89,7 @@ class AthleteProfileScreen extends ConsumerWidget {
             CircleAvatar(
               radius: 40,
               backgroundColor: darkblue,
+              backgroundImage: NetworkImage(read.avatarUrl ?? ""),
               child: Icon(Icons.person, color: white, size: 40),
             ),
             const SizedBox(width: 16),
@@ -89,7 +97,7 @@ class AthleteProfileScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(read.name,
+                  Text(read.firstName ?? "Bilgi Yok",
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
@@ -97,7 +105,7 @@ class AthleteProfileScreen extends ConsumerWidget {
                       style: TextStyle(color: Colors.grey[700], fontSize: 16)),
                   const SizedBox(height: 8),
                   Text(
-                    "Yaş: ${read.age} | Boy: ${read.height} cm | Kilo: ${read.weight} kg",
+                    "Yaş: ${read.age ?? 'Bilinmiyor'} | Boy: ${read.height ?? 'Bilinmiyor'} cm | Kilo: ${read.weight ?? 'Bilinmiyor'} kg",
                     style: const TextStyle(fontSize: 14),
                   ),
                 ],
