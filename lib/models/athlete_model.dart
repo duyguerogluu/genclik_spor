@@ -1,5 +1,6 @@
 class AthleteModel {
-  final String name;
+  final String firstName;
+  final String lastName;
   final String role;
   final int age;
   final int height;
@@ -12,7 +13,8 @@ class AthleteModel {
   final List<TrainingHistory> trainingHistory;
 
   AthleteModel({
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     required this.role,
     required this.age,
     required this.height,
@@ -27,25 +29,28 @@ class AthleteModel {
 
   factory AthleteModel.fromMap(Map<String, dynamic> map) {
     return AthleteModel(
-      name: map['name'],
-      role: map['role'],
-      age: map['age'],
-      height: map['height'],
-      weight: map['weight'],
-      sport: map['sport'],
-      endurance: map['endurance'],
-      speed: map['speed'],
-      flexibility: map['flexibility'],
-      agility: map['agility'],
-      trainingHistory: (map['trainingHistory'] as List)
-          .map((item) => TrainingHistory.fromMap(item))
-          .toList(),
+      firstName: map['first_name'] ?? '',
+      lastName: map['last_name'] ?? '',
+      role: map['role'] ?? 'Unknown',
+      age: map['age'] ?? 0,
+      height: map['height'] ?? 0,
+      weight: map['weight'] ?? 0,
+      sport: map['sport'] ?? 'Unknown',
+      endurance: map['endurance'] ?? 0,
+      speed: map['speed'] ?? 0,
+      flexibility: map['flexibility'] ?? 0,
+      agility: map['agility'] ?? 0,
+      trainingHistory: (map['training_histories'] as List<dynamic>?)
+              ?.map((item) => TrainingHistory.fromMap(item))
+              .toList() ??
+          [],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
+      'first_name': firstName,
+      'last_name': lastName,
       'role': role,
       'age': age,
       'height': height,
@@ -55,35 +60,35 @@ class AthleteModel {
       'speed': speed,
       'flexibility': flexibility,
       'agility': agility,
-      'trainingHistory': trainingHistory.map((e) => e.toMap()).toList(),
+      'training_histories': trainingHistory.map((e) => e.toMap()).toList(),
     };
   }
 }
 
 class TrainingHistory {
   final String date;
-  final String sport;
-  final String status;
+  final int duration;
+  final String focus;
 
   TrainingHistory({
     required this.date,
-    required this.sport,
-    required this.status,
+    required this.duration,
+    required this.focus,
   });
 
   factory TrainingHistory.fromMap(Map<String, dynamic> map) {
     return TrainingHistory(
-      date: map['date'],
-      sport: map['sport'],
-      status: map['status'],
+      date: map['date'] ?? '',
+      duration: map['duration'] ?? 0,
+      focus: map['focus'] ?? '',
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'date': date,
-      'sport': sport,
-      'status': status,
+      'duration': duration,
+      'focus': focus,
     };
   }
 }
