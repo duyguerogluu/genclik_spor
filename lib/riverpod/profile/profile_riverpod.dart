@@ -6,11 +6,16 @@ import 'package:genclik_spor/services/profile_service.dart';
 class ProfileRiverpod extends ChangeNotifier {
   MemberProfileModel? memberProfile;
   bool isLoading = false;
-  final FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
    
 
   Future<void> fetchProfile(String token) async {
+    debugPrint("Fetching profile...!!!!!!!!!!!!!!!!!");
+    debugPrint("Token: $token");
+    if (token.isEmpty) {
+      debugPrint("Token is empty, cannot fetch profile.");
+      return;
+    }
     if (memberProfile != null || isLoading) {
       return;
     }
@@ -21,7 +26,7 @@ class ProfileRiverpod extends ChangeNotifier {
     try {
       memberProfile = await ProfileService.getProfile(token);
     } catch (e) {
-      print("Profile fetch error: $e");
+      debugPrint("Profile fetch error: $e");
     }
 
     isLoading = false;
