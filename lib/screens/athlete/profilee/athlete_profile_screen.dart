@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/models/member_profile_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
@@ -19,12 +20,11 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
   @override
   void initState() {
     super.initState();
-    String token = ""; 
-    _loadProfile(token);
+    _loadProfile();
   }
 
-  Future<void> _loadProfile(String token) async {
-    await ref.read(profileRiverpodNotifier.notifier).fetchProfile(token);
+  Future<void> _loadProfile() async {
+    await ref.read(profileRiverpodNotifier.notifier).fetchProfile();
   }
 
   @override
@@ -34,12 +34,16 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
 
     if (profileState.isLoading) {
       return Scaffold(
-      backgroundColor: context.isDark ? offdarkblue : white1, body: const Center(child: CircularProgressIndicator()),);
+        backgroundColor: context.isDark ? offdarkblue : white1,
+        body: const Center(child: CircularProgressIndicator()),
+      );
     }
 
     if (profileState.memberProfile == null) {
       return Scaffold(
-      backgroundColor: context.isDark ? offdarkblue : white1, body: const Center(child: Text("Profil bilgileri yüklenemedi")),);
+        backgroundColor: context.isDark ? offdarkblue : white1,
+        body: const Center(child: Text("Profil bilgileri yüklenemedi")),
+      );
     }
 
     final read = profileState.memberProfile!;
@@ -75,11 +79,11 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
           children: [
             _buildProfileCard(read),
             const SizedBox(height: 20),
-           // _buildPerformanceAnalysis(read),
+            // _buildPerformanceAnalysis(read),
             const SizedBox(height: 20),
-           // _buildTrainingHistory(read),
+            // _buildTrainingHistory(read),
             const SizedBox(height: 20),
-           // _buildApplyButton(context),
+            // _buildApplyButton(context),
             const SizedBox(height: 10),
             //_buildMyApplicationsButton(context),
           ],
@@ -88,7 +92,7 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
     );
   }
 
-  Widget _buildProfileCard(read) {
+  Widget _buildProfileCard(MemberProfileModel read) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       color: white,
@@ -112,11 +116,11 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
-                  Text(read.sport,
+                  Text(read.athleteProfile?.sport ?? 'Bilgi yok',
                       style: TextStyle(color: Colors.grey[700], fontSize: 16)),
                   const SizedBox(height: 8),
                   Text(
-                    "Yaş: ${read.age ?? 'Bilinmiyor'} | Boy: ${read.height ?? 'Bilinmiyor'} cm | Kilo: ${read.weight ?? 'Bilinmiyor'} kg",
+                    "Yaş: ${read.athleteProfile?.age ?? 'Bilinmiyor'} | Boy: ${read.athleteProfile?.height ?? 'Bilinmiyor'} cm | Kilo: ${read.athleteProfile?.weight ?? 'Bilinmiyor'} kg",
                     style: const TextStyle(fontSize: 14),
                   ),
                 ],

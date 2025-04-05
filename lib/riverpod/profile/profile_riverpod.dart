@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:genclik_spor/models/member_profile_model.dart';
 import 'package:genclik_spor/services/profile_service.dart';
+import 'package:genclik_spor/utils/holder.dart';
 
 class ProfileRiverpod extends ChangeNotifier {
   MemberProfileModel? memberProfile;
   bool isLoading = false;
 
-   
-
-  Future<void> fetchProfile(String token) async {
+  Future<void> fetchProfile() async {
     debugPrint("Fetching profile...!!!!!!!!!!!!!!!!!");
+    final token = await DataHolder.secureStorage!.read(key: 'token');
     debugPrint("Token: $token");
-    if (token.isEmpty) {
+    if (token?.isEmpty ?? false) {
       debugPrint("Token is empty, cannot fetch profile.");
       return;
     }
@@ -24,7 +24,7 @@ class ProfileRiverpod extends ChangeNotifier {
     notifyListeners();
 
     try {
-      memberProfile = await ProfileService.getProfile(token);
+      memberProfile = await ProfileService.getProfile(token!);
     } catch (e) {
       debugPrint("Profile fetch error: $e");
     }

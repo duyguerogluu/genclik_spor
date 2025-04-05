@@ -90,7 +90,7 @@ class CustomBottomBar extends StatelessWidget {
             case 2:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AthleteProfileScreen()),
+                MaterialPageRoute(builder: (context) => const AthleteProfileScreen()),
               );
               break;
           }
