@@ -33,11 +33,13 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
     final profileState = ref.watch(profileRiverpodNotifier);
 
     if (profileState.isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return Scaffold(
+      backgroundColor: context.isDark ? offdarkblue : white1, body: const Center(child: CircularProgressIndicator()),);
     }
 
     if (profileState.memberProfile == null) {
-      return const Center(child: Text("Profil bilgileri yüklenemedi"));
+      return Scaffold(
+      backgroundColor: context.isDark ? offdarkblue : white1, body: const Center(child: Text("Profil bilgileri yüklenemedi")),);
     }
 
     final read = profileState.memberProfile!;
@@ -73,13 +75,13 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
           children: [
             _buildProfileCard(read),
             const SizedBox(height: 20),
-            _buildPerformanceAnalysis(read),
+           // _buildPerformanceAnalysis(read),
             const SizedBox(height: 20),
-            _buildTrainingHistory(read),
+           // _buildTrainingHistory(read),
             const SizedBox(height: 20),
-            _buildApplyButton(context),
+           // _buildApplyButton(context),
             const SizedBox(height: 10),
-            _buildMyApplicationsButton(context),
+            //_buildMyApplicationsButton(context),
           ],
         ),
       ),
