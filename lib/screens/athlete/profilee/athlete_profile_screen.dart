@@ -57,7 +57,7 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
           children: [
             const Text("Sporcu Profili"),
             GestureDetector(
-              child: Icon(Icons.settings, color: white),
+              child: Icon(Icons.edit, color: white),
               onTap: () {
                 Navigator.push(
                     context,
