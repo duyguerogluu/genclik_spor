@@ -7,6 +7,7 @@ Widget customTextField({
   required bool obscureText,
   required Function() onVisibilityToggle,
   required bool isDark,
+  bool numberOnly = false,
 }) {
   return Container(
     padding: const EdgeInsets.all(5),
