@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
 Widget customTextField({
@@ -45,6 +46,15 @@ Widget customTextField({
               )
             : null,
       ),
+      inputFormatters: [
+        if (numberOnly)
+          TextInputFormatter.withFunction(
+            (_, newValue) => TextEditingValue(
+              text: newValue.text.replaceAll('[^0-9]', ''),
+              selection: newValue.selection,
+            ),
+          ),
+      ],
     ),
   );
 }
