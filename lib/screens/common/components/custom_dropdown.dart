@@ -20,34 +20,42 @@ extension SportTypeExtension on SportType {
 }
 
 class CustomDropdown extends StatelessWidget {
-  final SportType? selectedSport;
-  final void Function(SportType?) onChanged;
+  final ValueNotifier<SportType?> controller;
+  final String label;
+  
 
   const CustomDropdown({
     super.key,
-    required this.selectedSport,
-    required this.onChanged,
+    required this.controller,
+    required this.label,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<SportType>(
-      value: selectedSport,
-      onChanged: onChanged,
-      decoration: InputDecoration(
-        labelText: 'Spor Dalı Seç Aşko',
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      ),
-      items: SportType.values.map((sport) {
-        return DropdownMenuItem(
-          value: sport,
-          child: Text(sport.displayName),
+    return ValueListenableBuilder<SportType?>(
+      valueListenable: controller,
+      builder: (context, selectedSport, _) {
+        return DropdownButtonFormField<SportType>(
+          value: selectedSport,
+          onChanged: (value) {
+            controller.value = value;
+          },
+          decoration: InputDecoration(
+            labelText: label,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          ),
+          items: SportType.values.map((sport) {
+            return DropdownMenuItem(
+              value: sport,
+              child: Text(sport.displayName),
+            );
+          }).toList(),
         );
-      }).toList(),
+      },
     );
   }
 }

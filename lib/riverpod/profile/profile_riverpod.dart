@@ -9,6 +9,15 @@ class ProfileRiverpod extends ChangeNotifier {
   MemberProfileModel? memberProfile;
   AthleteModel? athleteProfile;
   bool isLoading = false;
+  final sportageController = TextEditingController();
+  final ageController = TextEditingController();
+  final heightController = TextEditingController();
+  final weightController = TextEditingController();
+  final sportController = TextEditingController();
+  final enduranceController = TextEditingController();
+  final speedController = TextEditingController();
+  final flexibilityController = TextEditingController();
+  final agilityController = TextEditingController();
 
   Future<void> fetchProfile() async {
     debugPrint("Fetching profile...!!!!!!!!!!!!!!!!!");
@@ -28,8 +37,6 @@ class ProfileRiverpod extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
-
-
 
   Future<bool> fetchAthleteProfile(AthleteModel profile) async {
     debugPrint("Updating profile...!!!!!!!!!!!!!!!!!");
