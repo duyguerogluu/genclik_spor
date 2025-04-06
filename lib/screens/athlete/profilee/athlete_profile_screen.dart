@@ -5,18 +5,19 @@ import 'package:genclik_spor/models/member_profile_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
+import 'package:genclik_spor/screens/common/components/custom_button.dart';
 import 'package:genclik_spor/screens/common/setting/setting_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
-class AthleteProfileScreen extends ConsumerStatefulWidget {
-  const AthleteProfileScreen({super.key});
+class MemberProfileScreen extends ConsumerStatefulWidget {
+  const MemberProfileScreen({super.key});
 
   @override
   _AthleteProfileScreenState createState() => _AthleteProfileScreenState();
 }
 
-class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
+class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
   @override
   void initState() {
     super.initState();
@@ -55,7 +56,7 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Sporcu Profili"),
+            const Text("Üye Profili"),
             GestureDetector(
               child: Icon(Icons.edit, color: white),
               onTap: () {
@@ -79,13 +80,15 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
           children: [
             _buildProfileCard(read),
             const SizedBox(height: 20),
+            customButton(context: context, onPressed: (){}, text: 'Sporcu Bilgilerini Gir'),
             // _buildPerformanceAnalysis(read),
             const SizedBox(height: 20),
             // _buildTrainingHistory(read),
+
             const SizedBox(height: 20),
-            // _buildApplyButton(context),
+            _buildApplyButton(context),
             const SizedBox(height: 10),
-            //_buildMyApplicationsButton(context),
+            _buildMyApplicationsButton(context),
           ],
         ),
       ),
@@ -112,7 +115,11 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(read.firstName ?? "Bilgi Yok",
+                  const Text("Üye Bilgileri",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
+                  Text('${read.firstName} ${read.lastName}' ?? "Bilgi Yok",
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
@@ -188,10 +195,10 @@ class _AthleteProfileScreenState extends ConsumerState<AthleteProfileScreen> {
               MaterialPageRoute(
                   builder: (context) => TrainingApplicationScreen()));
         },
-        icon: const Icon(Icons.add),
-        label: const Text("Yeni Antrenmana Başvur"),
+        icon: Icon(Icons.add, color: white),
+        label: Text("Yeni Antrenmana Başvur", style: TextStyle(color: white)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: darkblue,
+          backgroundColor: offlightblue,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

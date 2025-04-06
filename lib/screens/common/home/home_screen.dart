@@ -42,7 +42,7 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
       }
       if (title == "Profilim") {
         Navigator.push(
-            context, MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
+            context, MaterialPageRoute(builder: (_) => MemberProfileScreen()));
       }
       if (title == "Performans Analizi") {
         Navigator.push(context,
@@ -158,6 +158,5 @@ Widget _annonces() {
       'Tesis başvuruları için son gün 30 Mart!',
       'Antrenman programlarına katılım zorunludur.',
     ],
-    
   );
 }

@@ -6,29 +6,30 @@ ElevatedButton customButton({
   required BuildContext context,
   required VoidCallback onPressed,
   required String text,
+  Icon? icon,
   bool isTransparent = false,
 }) {
-  return ElevatedButton(
+  return ElevatedButton.icon(
     onPressed: onPressed,
+    icon: icon ?? const SizedBox.shrink(),
+    label: Text(
+      text,
+      style: TextStyle(
+        color: isTransparent
+            ? const Color.fromARGB(255, 217, 217, 217)
+            : Colors.white,
+      ),
+    ),
     style: ElevatedButton.styleFrom(
       backgroundColor: isTransparent
           ? Colors.transparent
           : context.isDark
               ? offlightblue
-              : offdarkblue,
+              : offlightblue,
       foregroundColor: Colors.transparent,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-    ),
-    child: Text(
-      text,
-      style: TextStyle(
-        fontSize: 12,
-        color: isTransparent
-            ? const Color.fromARGB(255, 217, 217, 217)
-            : Colors.white,
+        borderRadius: BorderRadius.circular(12),
       ),
     ),
   );

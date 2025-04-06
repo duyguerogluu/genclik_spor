@@ -41,7 +41,7 @@ class CustomDrawer extends StatelessWidget {
             text: 'Profilim',
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => AthleteProfileScreen()));
+                  MaterialPageRoute(builder: (_) => MemberProfileScreen()));
             },
           ),
           _buildDrawerItem(
