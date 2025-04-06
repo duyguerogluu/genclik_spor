@@ -22,6 +22,8 @@ class _ManageAthleteProfileScreenState
   final sportController = TextEditingController();
   final enduranceController = TextEditingController();
   final speedController = TextEditingController();
+  final flexibilityController = TextEditingController();
+  final agilityController = TextEditingController();
 
   @override
   void dispose() {
@@ -31,6 +33,8 @@ class _ManageAthleteProfileScreenState
     sportController.dispose();
     enduranceController.dispose();
     speedController.dispose();
+    flexibilityController.dispose();
+    agilityController.dispose();
     super.dispose();
   }
 
@@ -103,6 +107,22 @@ class _ManageAthleteProfileScreenState
                   onVisibilityToggle: () {},
                   isDark: false,
                 ),
+                const SizedBox(height: 16),
+                customTextField(
+                  controller: flexibilityController,
+                  hintText: 'Esneklik',
+                  obscureText: false,
+                  onVisibilityToggle: () {},
+                  isDark: false,
+                ),
+                const SizedBox(height: 16),
+                customTextField(
+                  controller: agilityController,
+                  hintText: 'Çeviklik',
+                  obscureText: false,
+                  onVisibilityToggle: () {},
+                  isDark: false,
+                ),
               ],
             ),
           ),
@@ -112,9 +132,11 @@ class _ManageAthleteProfileScreenState
               debugPrint('Soyad: ${ageController.text}');
               debugPrint('Email: ${heightController.text}');
               debugPrint('Telefon: ${weightController.text}');
-              debugPrint('Telefon: ${sportController.text}');
-              debugPrint('Telefon: ${enduranceController.text}');
-              debugPrint('Telefon: ${speedController.text}');
+              debugPrint('sport: ${sportController.text}');
+              debugPrint('endurance: ${enduranceController.text}');
+              debugPrint('speed: ${speedController.text}');
+              debugPrint('flexibility: ${flexibilityController.text}');
+              debugPrint('agility: ${agilityController.text}');
             },
             child: const Text('Kaydet'),
           ),
