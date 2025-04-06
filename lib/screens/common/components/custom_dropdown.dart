@@ -10,11 +10,11 @@ extension SportTypeExtension on SportType {
   String get displayName {
     switch (this) {
       case SportType.football:
-        return 'Futbol';
+        return 'Profesyonel Sporcu';
       case SportType.basketball:
-        return 'Basketbol';
+        return 'Amatör Sporcu';
       case SportType.taekwondo:
-        return 'Taekwondo';
+        return 'Gönüllü Sporcu';
     }
   }
 }
@@ -39,7 +39,8 @@ class CustomDropdown extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
       items: SportType.values.map((sport) {
         return DropdownMenuItem(
