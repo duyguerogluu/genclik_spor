@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/models/member_profile_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
+import 'package:genclik_spor/screens/athlete/profilee/manage_athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
 import 'package:genclik_spor/screens/common/components/custom_button.dart';
 import 'package:genclik_spor/screens/common/setting/setting_screen.dart';
@@ -80,7 +81,18 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
           children: [
             _buildProfileCard(read),
             const SizedBox(height: 20),
-            customButton(context: context, onPressed: (){}, text: 'Sporcu Bilgilerini Gir'),
+            Center(
+              child: customButton(
+                  context: context,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const ManageAthleteProfileScreen()));
+                  },
+                  text: 'Sporcu Bilgilerini Gir'),
+            ),
             // _buildPerformanceAnalysis(read),
             const SizedBox(height: 20),
             // _buildTrainingHistory(read),

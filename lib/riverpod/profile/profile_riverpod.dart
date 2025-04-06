@@ -10,12 +10,6 @@ class ProfileRiverpod extends ChangeNotifier {
 
   Future<void> fetchProfile() async {
     debugPrint("Fetching profile...!!!!!!!!!!!!!!!!!");
-    final token = await DataHolder.secureStorage!.read(key: 'token');
-    debugPrint("Token: $token");
-    if (token?.isEmpty ?? false) {
-      debugPrint("Token is empty, cannot fetch profile.");
-      return;
-    }
     if (memberProfile != null || isLoading) {
       return;
     }
@@ -24,7 +18,7 @@ class ProfileRiverpod extends ChangeNotifier {
     notifyListeners();
 
     try {
-      memberProfile = await ProfileService.getProfile(token!);
+      memberProfile = await ProfileService.getProfile();
     } catch (e) {
       debugPrint("Profile fetch error: $e");
     }
