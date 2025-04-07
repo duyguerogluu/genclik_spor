@@ -19,9 +19,6 @@ class _MapComponentState extends State<MapComponent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Spor Salonları'),
-      ),
       body: GoogleMap(
         initialCameraPosition: _initialPosition,
         onMapCreated: _onMapCreated,
