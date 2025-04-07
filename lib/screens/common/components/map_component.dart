@@ -12,7 +12,7 @@ class _MapComponentState extends State<MapComponent> {
   late GoogleMapController _mapController;
   final Set<Marker> _markers = {};
   final CameraPosition _initialPosition = CameraPosition(
-    target: LatLng(37.070893009029035, 37.380999852130806),
+    target: LatLng(37.7749, -122.4194),
     zoom: 10,
   );
 
