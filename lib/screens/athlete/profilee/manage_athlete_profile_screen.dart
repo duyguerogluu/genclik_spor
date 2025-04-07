@@ -16,18 +16,27 @@ class ManageAthleteProfileScreen extends ConsumerStatefulWidget {
 class _ManageAthleteProfileScreenState
     extends ConsumerState<ManageAthleteProfileScreen> {
   SportType? selectedSport;
+  final roleController = ValueNotifier<SportType?>(null);
+  final ageController = TextEditingController();
+  final heightController = TextEditingController();
+  final weightController = TextEditingController();
+  final sportController = TextEditingController();
+  final enduranceController = TextEditingController();
+  final speedController = TextEditingController();
+  final flexibilityController = TextEditingController();
+  final agilityController = TextEditingController();
 
   @override
   void dispose() {
-    profile.roleController.dispose();
-    profile.ageController.dispose();
-    profile.heightController.dispose();
-    profile.weightController.dispose();
-    profile.sportController.dispose();
-    profile.enduranceController.dispose();
-    profile.speedController.dispose();
-    profile.flexibilityController.dispose();
-    profile.agilityController.dispose();
+    roleController.dispose();
+    ageController.dispose();
+    heightController.dispose();
+    weightController.dispose();
+    sportController.dispose();
+    enduranceController.dispose();
+    speedController.dispose();
+    flexibilityController.dispose();
+    agilityController.dispose();
     super.dispose();
   }
 
@@ -51,12 +60,12 @@ class _ManageAthleteProfileScreenState
               padding: const EdgeInsets.all(16),
               children: [
                 CustomDropdown(
-                  controller: profile.roleController,
+                  controller: roleController,
                   label: 'Seviye Seçin',
                 ),
                 const SizedBox(height: 16),
                 customTextField(
-                  controller: profile.ageController,
+                  controller: ageController,
                   hintText: 'Yaş',
                   obscureText: false,
                   onVisibilityToggle: () {},
@@ -65,7 +74,7 @@ class _ManageAthleteProfileScreenState
                 ),
                 const SizedBox(height: 16),
                 customTextField(
-                  controller: profile.weightController,
+                  controller: weightController,
                   hintText: 'Kilo',
                   obscureText: false,
                   onVisibilityToggle: () {},
@@ -74,7 +83,7 @@ class _ManageAthleteProfileScreenState
                 ),
                 const SizedBox(height: 16),
                 customTextField(
-                  controller: profile.sportController,
+                  controller: sportController,
                   hintText: 'Spor Alanın (Örn: Futbol)',
                   obscureText: false,
                   onVisibilityToggle: () {},
@@ -82,7 +91,7 @@ class _ManageAthleteProfileScreenState
                 ),
                 const SizedBox(height: 16),
                 customTextField(
-                  controller: profile.enduranceController,
+                  controller: enduranceController,
                   hintText: 'endurance',
                   obscureText: false,
                   onVisibilityToggle: () {},
@@ -90,7 +99,7 @@ class _ManageAthleteProfileScreenState
                 ),
                 const SizedBox(height: 16),
                 customTextField(
-                  controller: profile.speedController,
+                  controller: speedController,
                   hintText: 'speed',
                   obscureText: false,
                   onVisibilityToggle: () {},
@@ -98,7 +107,7 @@ class _ManageAthleteProfileScreenState
                 ),
                 const SizedBox(height: 16),
                 customTextField(
-                  controller: profile.flexibilityController,
+                  controller: flexibilityController,
                   hintText: 'Esneklik',
                   obscureText: false,
                   onVisibilityToggle: () {},
@@ -106,7 +115,7 @@ class _ManageAthleteProfileScreenState
                 ),
                 const SizedBox(height: 16),
                 customTextField(
-                  controller: profile.agilityController,
+                  controller: agilityController,
                   hintText: 'Çeviklik',
                   obscureText: false,
                   onVisibilityToggle: () {},
@@ -117,15 +126,15 @@ class _ManageAthleteProfileScreenState
           ),
           ElevatedButton(
             onPressed: () async {
-              debugPrint('Soyad: ${profile.roleController}');
-              debugPrint('Soyad: ${profile.ageController.text}');
-              debugPrint('Email: ${profile.heightController.text}');
-              debugPrint('Telefon: ${profile.weightController.text}');
-              debugPrint('sport: ${profile.sportController.text}');
-              debugPrint('endurance: ${profile.enduranceController.text}');
-              debugPrint('speed: ${profile.speedController.text}');
-              debugPrint('flexibility: ${profile.flexibilityController.text}');
-              debugPrint('agility: ${profile.agilityController.text}');
+              debugPrint('Soyad: ${roleController}');
+              debugPrint('Soyad: ${ageController.text}');
+              debugPrint('Email: ${heightController.text}');
+              debugPrint('Telefon: ${weightController.text}');
+              debugPrint('sport: ${sportController.text}');
+              debugPrint('endurance: ${enduranceController.text}');
+              debugPrint('speed: ${speedController.text}');
+              debugPrint('flexibility: ${flexibilityController.text}');
+              debugPrint('agility: ${agilityController.text}');
               final res =
                   await profile.fetchAthleteProfile(profile.athleteProfile!);
               if (res == true) {
