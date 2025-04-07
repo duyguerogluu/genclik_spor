@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/screens/common/components/custom_map.dart';
 import 'package:genclik_spor/screens/common/components/map_component.dart';
 import 'package:genclik_spor/screens/common/gyms/components/gym_slider.dart';
 import 'package:genclik_spor/screens/common/gyms/gym_detail_screen.dart';
@@ -12,7 +13,7 @@ class GymsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        Expanded(child: MapComponent()),
+        Expanded(child: CustomMap()),
         Expanded(child: GymSlider()),
       ],
     );
