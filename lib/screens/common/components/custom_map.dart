@@ -11,21 +11,27 @@ class CustomMap extends StatelessWidget {
     Key? key,
     this.center = const LatLng(37.06406415751307, 37.362847029935075),
     this.zoom = 13.0,
-    this.markers = const [],
+    this.markers = const [
+      Marker(
+        point: LatLng(37.06406415751307, 37.362847029935075),
+        child: Icon(Icons.abc_rounded),
+        //  builder: (context) => const Icon(Icons.location_on, color: Colors.red, size: 40),
+      ),
+    ],
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
-        initialCenter : center,
-        initialZoom : zoom,
+        initialCenter: center,
+        initialZoom: zoom,
       ),
       children: [
         TileLayer(
           urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           subdomains: ['a', 'b', 'c'],
-          userAgentPackageName: 'com.example.genclik_spor', 
+          userAgentPackageName: 'com.example.genclik_spor',
         ),
         MarkerLayer(
           markers: markers,
