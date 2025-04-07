@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:genclik_spor/models/athlete_model.dart';
 import 'package:genclik_spor/models/member_profile_model.dart';
+import 'package:genclik_spor/screens/common/components/custom_dropdown.dart';
 import 'package:genclik_spor/services/profile_service.dart';
 import 'package:genclik_spor/utils/holder.dart';
 
@@ -9,7 +10,7 @@ class ProfileRiverpod extends ChangeNotifier {
   MemberProfileModel? memberProfile;
   AthleteModel? athleteProfile;
   bool isLoading = false;
-  final sportageController = TextEditingController();
+  final roleController = ValueNotifier<SportType?>(null);
   final ageController = TextEditingController();
   final heightController = TextEditingController();
   final weightController = TextEditingController();

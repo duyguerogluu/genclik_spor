@@ -19,6 +19,7 @@ class _ManageAthleteProfileScreenState
 
   @override
   void dispose() {
+    profile.roleController.dispose();
     profile.ageController.dispose();
     profile.heightController.dispose();
     profile.weightController.dispose();
@@ -50,12 +51,8 @@ class _ManageAthleteProfileScreenState
               padding: const EdgeInsets.all(16),
               children: [
                 CustomDropdown(
-                  selectedSport: selectedSport,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedSport = value;
-                    });
-                  },
+                  controller: profile.roleController,
+                  label: 'Seviye Seçin',
                 ),
                 const SizedBox(height: 16),
                 customTextField(
@@ -86,7 +83,7 @@ class _ManageAthleteProfileScreenState
                 const SizedBox(height: 16),
                 customTextField(
                   controller: profile.enduranceController,
-                  hintText: 'Spor Alanın (Örn: Futbol)',
+                  hintText: 'endurance',
                   obscureText: false,
                   onVisibilityToggle: () {},
                   isDark: false,
@@ -94,7 +91,7 @@ class _ManageAthleteProfileScreenState
                 const SizedBox(height: 16),
                 customTextField(
                   controller: profile.speedController,
-                  hintText: 'Spor Alanın (Örn: Futbol)',
+                  hintText: 'speed',
                   obscureText: false,
                   onVisibilityToggle: () {},
                   isDark: false,
@@ -119,8 +116,8 @@ class _ManageAthleteProfileScreenState
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              debugPrint('Seçilen Spor: $selectedSport');
+            onPressed: () async {
+              debugPrint('Soyad: ${profile.roleController}');
               debugPrint('Soyad: ${profile.ageController.text}');
               debugPrint('Email: ${profile.heightController.text}');
               debugPrint('Telefon: ${profile.weightController.text}');
@@ -129,6 +126,17 @@ class _ManageAthleteProfileScreenState
               debugPrint('speed: ${profile.speedController.text}');
               debugPrint('flexibility: ${profile.flexibilityController.text}');
               debugPrint('agility: ${profile.agilityController.text}');
+              final res =
+                  await profile.fetchAthleteProfile(profile.athleteProfile!);
+              if (res == true) {
+                debugPrint('Profil güncellendi!!!!!!!!!!!');
+                Navigator.pop(context);
+              } else {
+                debugPrint('Profil güncellenemedi!');
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Profil güncellenemedi!")));
+              }
             },
             child: const Text('Kaydet'),
           ),
