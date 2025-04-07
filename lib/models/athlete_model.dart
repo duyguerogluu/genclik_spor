@@ -1,6 +1,6 @@
 class AthleteModel {
-  final String firstName;
-  final String lastName;
+  final int? id;
+  final int? memberID;
   final String role;
   final int age;
   final int height;
@@ -13,8 +13,8 @@ class AthleteModel {
   final List<TrainingHistory> trainingHistory;
 
   AthleteModel({
-    required this.firstName,
-    required this.lastName,
+    this.id,
+    this.memberID,
     required this.role,
     required this.age,
     required this.height,
@@ -24,13 +24,13 @@ class AthleteModel {
     required this.speed,
     required this.flexibility,
     required this.agility,
-    required this.trainingHistory,
+    this.trainingHistory = const[],
   });
 
   factory AthleteModel.fromJson(Map<String, dynamic> json) {
     return AthleteModel(
-      firstName: json['first_name'] ?? '',
-      lastName: json['last_name'] ?? '',
+      id: json['id'],
+      memberID: json['member_id'],
       role: json['role'] ?? 'Unknown',
       age: json['age'] ?? 0,
       height: json['height'] ?? 0,
@@ -49,8 +49,8 @@ class AthleteModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'first_name': firstName,
-      'last_name': lastName,
+      if (id != null) 'id': id,
+      if (memberID != null) 'member_id': memberID,
       'role': role,
       'age': age,
       'height': height,

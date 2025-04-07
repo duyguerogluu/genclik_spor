@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/models/athlete_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/screens/common/components/custom_dropdown.dart';
@@ -16,7 +17,7 @@ class ManageAthleteProfileScreen extends ConsumerStatefulWidget {
 class _ManageAthleteProfileScreenState
     extends ConsumerState<ManageAthleteProfileScreen> {
   SportType? selectedSport;
-  final roleController = ValueNotifier<SportType?>(null);
+  final roleController = TextEditingController();
   final ageController = TextEditingController();
   final heightController = TextEditingController();
   final weightController = TextEditingController();
@@ -40,6 +41,27 @@ class _ManageAthleteProfileScreenState
     super.dispose();
   }
 
+  void initState() {
+    super.initState();
+    final athlete = ref.read(profileRiverpodNotifier).athleteProfile;
+    if (athlete == null) {
+      debugPrint('Athlete bilgileri bulunamadı!');
+      return;
+    }
+
+    if (athlete != null) {
+      roleController.text = athlete.role?.toString() ?? '';
+      ageController.text = athlete.age?.toString() ?? '';
+      heightController.text = athlete.height?.toString() ?? '';
+      weightController.text = athlete.weight?.toString() ?? '';
+      sportController.text = athlete.sport ?? '';
+      enduranceController.text = athlete.endurance?.toString() ?? '';
+      speedController.text = athlete.speed?.toString() ?? '';
+      flexibilityController.text = athlete.flexibility?.toString() ?? '';
+      agilityController.text = athlete.agility?.toString() ?? '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,9 +81,18 @@ class _ManageAthleteProfileScreenState
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                CustomDropdown(
+                // CustomDropdown(
+                //   controller: roleController,
+                //   label: 'Seviye Seçin',
+                // ),
+                // const SizedBox(height: 16),
+                customTextField(
                   controller: roleController,
-                  label: 'Seviye Seçin',
+                  hintText: 'Seviyeniz Nedir? (Örn: Profesyonel)',
+                  obscureText: false,
+                  onVisibilityToggle: () {},
+                  isDark: false,
+                  numberOnly: true,
                 ),
                 const SizedBox(height: 16),
                 customTextField(
@@ -126,7 +157,7 @@ class _ManageAthleteProfileScreenState
           ),
           ElevatedButton(
             onPressed: () async {
-              debugPrint('Soyad: ${roleController}');
+              debugPrint('Soyad: ${roleController.text}');
               debugPrint('Soyad: ${ageController.text}');
               debugPrint('Email: ${heightController.text}');
               debugPrint('Telefon: ${weightController.text}');
@@ -136,9 +167,22 @@ class _ManageAthleteProfileScreenState
               debugPrint('flexibility: ${flexibilityController.text}');
               debugPrint('agility: ${agilityController.text}');
               final res =
-                  await profile.fetchAthleteProfile(profile.athleteProfile!);
+                  await ref.read(profileRiverpodNotifier).updateAthleteProfile(
+                        AthleteModel(
+                          role: roleController.text,
+                          age: int.parse(ageController.text),
+                          height: int.parse(heightController.text),
+                          weight: int.parse(weightController.text),
+                          sport: sportController.text,
+                          endurance: int.parse(enduranceController.text),
+                          speed: int.parse(speedController.text),
+                          flexibility: int.parse(flexibilityController.text),
+                          agility: int.parse(agilityController.text),
+                        ),
+                      );
               if (res == true) {
                 debugPrint('Profil güncellendi!!!!!!!!!!!');
+                // ignore: use_build_context_synchronously
                 Navigator.pop(context);
               } else {
                 debugPrint('Profil güncellenemedi!');

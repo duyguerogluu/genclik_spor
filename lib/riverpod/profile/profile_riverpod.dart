@@ -11,7 +11,6 @@ class ProfileRiverpod extends ChangeNotifier {
   AthleteModel? athleteProfile;
   bool isLoading = false;
 
-
   Future<void> fetchProfile() async {
     debugPrint("Fetching profile...!!!!!!!!!!!!!!!!!");
     if (memberProfile != null || isLoading) {
@@ -31,7 +30,7 @@ class ProfileRiverpod extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> fetchAthleteProfile(AthleteModel profile) async {
+  Future<bool> updateAthleteProfile(AthleteModel profile) async {
     debugPrint("Updating profile...!!!!!!!!!!!!!!!!!");
     isLoading = true;
     notifyListeners();
