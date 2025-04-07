@@ -3,42 +3,14 @@ import 'package:genclik_spor/screens/common/gyms/gym_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
 class GymSlider extends StatefulWidget {
+  final List<Map<String, dynamic>> gyms;
+  const GymSlider({super.key, required this.gyms});
+
   @override
   _GymSliderState createState() => _GymSliderState();
 }
 
 class _GymSliderState extends State<GymSlider> {
-  final List<Map<String, dynamic>> gyms = [
-    {
-      "imgUrl":
-          "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
-      "gymName": 'Nevin Yanıt Spor Tesisi',
-      "address": 'adress adresss adress adressssss',
-      "city": 'ADANA , Seyhan',
-    },
-    {
-      "imgUrl":
-          "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
-      "gymName": '3 Ocak Spor Tesisi',
-      "address": 'adress adresss adress adressssss',
-      "city": 'ADANA , Seyhan',
-    },
-    {
-      "imgUrl":
-          "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
-      "gymName": 'Edip Burhan Spor Tesisi',
-      "address": 'adress adresss adress adressssss',
-      "city": 'ADANA , Seyhan',
-    },
-    {
-      "imgUrl":
-          "https://www.mersinsinemaofisi.com/File_Uploadx/Sayfa/buyuk/mersin-sinema-ofisi-nevin-yanit-atletizm-kompleksi-167363.JPG",
-      "gymName": 'Yenişehir Spor Tesisi',
-      "address": 'adress adresss adress adressssss',
-      "city": 'ADANA , Seyhan',
-    }
-  ];
-
   int _currentIndex = 0;
 
   @override
@@ -46,7 +18,7 @@ class _GymSliderState extends State<GymSlider> {
     return Container(
       height: 240,
       child: PageView.builder(
-        itemCount: gyms.length,
+        itemCount: widget.gyms.length,
         controller: PageController(viewportFraction: 0.75),
         onPageChanged: (index) {
           setState(() {
@@ -54,11 +26,10 @@ class _GymSliderState extends State<GymSlider> {
           });
         },
         itemBuilder: (context, index) {
-          final gym = gyms[index];
+          final gym = widget.gyms[index];
           bool isActive = index == _currentIndex;
           return Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 0.0),
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -86,7 +57,7 @@ class _GymSliderState extends State<GymSlider> {
                     )
                   ],
                   image: DecorationImage(
-                    image: NetworkImage(gym["imgUrl"]!),
+                    image: NetworkImage(gym["imgUrl"] ?? ""),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -105,7 +76,7 @@ class _GymSliderState extends State<GymSlider> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              gym["gymName"]!,
+                              gym["gymName"] ?? "",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -114,7 +85,7 @@ class _GymSliderState extends State<GymSlider> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              gym["city"]!,
+                              gym["city"] ?? "",
                               style: const TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,

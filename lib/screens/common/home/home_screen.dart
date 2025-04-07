@@ -124,6 +124,20 @@ Widget _buildHomeTabContent(BuildContext context) {
     {'icon': Icons.app_registration, 'title': 'Başvurularım'},
     {'icon': Icons.article, 'title': 'Duyurular'},
   ];
+  List<Map<String, dynamic>> dummyGyms = [
+    {
+      "gymName": "Ataköy Spor Salonu",
+      "city": "İstanbul",
+      "imgUrl":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5f7YDAhKDtFzpwTchRd0u8dXigClijtdfSw&s",
+    },
+    {
+      "gymName": "Konak Gençlik Merkezi",
+      "city": "İzmir",
+      "imgUrl":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT5s0VbnC4TUFrk85VT8-UOKSXasFaRSDrrw&s",
+    },
+  ];
   return SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +158,7 @@ Widget _buildHomeTabContent(BuildContext context) {
             },
           ),
         ),
-        GymSlider(),
+        GymSlider(gyms: dummyGyms),
       ],
     ),
   );

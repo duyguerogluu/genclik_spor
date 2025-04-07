@@ -15,7 +15,6 @@ class CustomMap extends StatelessWidget {
       Marker(
         point: LatLng(37.06406415751307, 37.362847029935075),
         child: Icon(Icons.abc_rounded),
-        //  builder: (context) => const Icon(Icons.location_on, color: Colors.red, size: 40),
       ),
     ],
   }) : super(key: key);
