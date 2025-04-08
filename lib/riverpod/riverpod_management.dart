@@ -3,6 +3,7 @@ import 'package:genclik_spor/riverpod/athlete/athlete_riverpod.dart';
 import 'package:genclik_spor/riverpod/common/location_logic.dart';
 import 'package:genclik_spor/riverpod/common/login_riverpod.dart';
 import 'package:genclik_spor/riverpod/common/register_riverpod.dart';
+import 'package:genclik_spor/riverpod/gym/gym_riverpod.dart';
 import 'package:genclik_spor/riverpod/profile/profile_riverpod.dart';
 
 final login = LoginRiverpod();
@@ -17,3 +18,7 @@ final profileRiverpodNotifier =
 final locationLogic = LocationLogic();
 final locationLogicProvider =
     StateNotifierProvider<LocationLogic, LocationState>((ref) => locationLogic);
+
+final gym = GymRiverpod(); 
+final gymRiverpodNotifier =
+    ChangeNotifierProvider<GymRiverpod>((_) => gym);
