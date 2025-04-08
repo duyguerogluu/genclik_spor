@@ -1,40 +1,39 @@
-import 'package:genclik_spor/models/coach_model.dart';
-import 'package:genclik_spor/models/course_model.dart';
-
 class GymModel {
+  final int id;
   final String name;
-  final String imageUrl;
   final String address;
-  final String city;
-  final List<CoachModel> coaches;
-  final List<CourseModel> courses;
+  final double latitude;
+  final double longitude;
+  final String? photoUrl;
 
   GymModel({
+    required this.id,
     required this.name,
-    required this.imageUrl,
     required this.address,
-    required this.city,
-    required this.coaches,
-    required this.courses,
+    required this.latitude,
+    required this.longitude,
+    this.photoUrl,
   });
 
-  factory GymModel.fromJson(Map<String, dynamic> json) => GymModel(
-        name: json['name'],
-        imageUrl: json['imageUrl'],
-        address: json['address'],
-        city: json['city'],
-        coaches:
-            (json['coaches'] as List).map((e) => CoachModel.fromJson(e)).toList(),
-        courses:
-            (json['courses'] as List).map((e) => CourseModel.fromJson(e)).toList(),
-      );
+  factory GymModel.fromJson(Map<String, dynamic> json) {
+    return GymModel(
+      id: json['id'],
+      name: json['name'],
+      address: json['address'],
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      photoUrl: json['photo_url'],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'imageUrl': imageUrl,
-        'address': address,
-        'city': city,
-        'coaches': coaches.map((e) => e.toJson()).toList(),
-        'courses': courses.map((e) => e.toJson()).toList(),
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
+      'photo_url': photoUrl,
+    };
+  }
 }

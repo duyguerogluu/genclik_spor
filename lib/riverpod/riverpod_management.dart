@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/riverpod/athlete/athlete_riverpod.dart';
+import 'package:genclik_spor/riverpod/common/location_logic.dart';
 import 'package:genclik_spor/riverpod/common/login_riverpod.dart';
 import 'package:genclik_spor/riverpod/common/register_riverpod.dart';
 import 'package:genclik_spor/riverpod/profile/profile_riverpod.dart';
@@ -12,3 +13,7 @@ final athleteRiverpodNotifier =
     ChangeNotifierProvider<AthleteRiverpod>((_) => athleteRiverpod);
 final profileRiverpodNotifier =
     ChangeNotifierProvider<ProfileRiverpod>((_) => profile);
+
+final locationLogic = LocationLogic();
+final locationLogicProvider =
+    StateNotifierProvider<LocationLogic, LocationState>((ref) => locationLogic);

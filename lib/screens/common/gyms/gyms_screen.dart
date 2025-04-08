@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/riverpod/common/location_logic.dart';
+import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/common/components/custom_map.dart';
 import 'package:genclik_spor/screens/common/components/map_component.dart';
 import 'package:genclik_spor/screens/common/gyms/components/gym_slider.dart';
@@ -9,7 +11,20 @@ import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 
-class GymsScreen extends ConsumerWidget {
+class GymsScreen extends ConsumerStatefulWidget {
+  const GymsScreen({super.key});
+
+  @override
+  _GymsScreenState createState() => _GymsScreenState();
+}
+
+class _GymsScreenState extends ConsumerState<GymsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(locationLogicProvider.notifier).fetchLocation();
+  }
+
   final List<Map<String, dynamic>> gyms = [
     {
       "imgUrl":
@@ -40,9 +55,8 @@ class GymsScreen extends ConsumerWidget {
     },
   ];
 
-  GymsScreen({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
