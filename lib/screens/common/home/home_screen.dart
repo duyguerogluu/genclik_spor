@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/models/gym_model.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
 import 'package:genclik_spor/screens/athlete/performanceanalysis/performance_analysis_screen.dart';
 import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
@@ -116,6 +117,7 @@ Widget _buildGlassMenuCard(IconData icon, String title, BuildContext context) {
 }
 
 Widget _buildHomeTabContent(BuildContext context) {
+  final List<GymModel> gyms;
   final List<Map<String, dynamic>> menuItems = [
     {'icon': Icons.sports_soccer, 'title': 'Kurslar'},
     {'icon': Icons.fitness_center, 'title': 'Antrenmanlar'},
@@ -124,20 +126,7 @@ Widget _buildHomeTabContent(BuildContext context) {
     {'icon': Icons.app_registration, 'title': 'Başvurularım'},
     {'icon': Icons.article, 'title': 'Duyurular'},
   ];
-  List<Map<String, dynamic>> dummyGyms = [
-    {
-      "gymName": "Ataköy Spor Salonu",
-      "city": "İstanbul",
-      "imgUrl":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5f7YDAhKDtFzpwTchRd0u8dXigClijtdfSw&s",
-    },
-    {
-      "gymName": "Konak Gençlik Merkezi",
-      "city": "İzmir",
-      "imgUrl":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT5s0VbnC4TUFrk85VT8-UOKSXasFaRSDrrw&s",
-    },
-  ];
+
   return SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,7 +147,7 @@ Widget _buildHomeTabContent(BuildContext context) {
             },
           ),
         ),
-        GymSlider(gyms: dummyGyms),
+        //GymSlider(gyms: gyms),
       ],
     ),
   );

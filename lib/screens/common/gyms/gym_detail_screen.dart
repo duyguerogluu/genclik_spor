@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/models/gym_model.dart';
 import 'package:genclik_spor/screens/common/coachs/components/coach_card.dart';
 import 'package:genclik_spor/screens/common/components/custom_appbar.dart';
 import 'package:genclik_spor/screens/common/courses/course_detail_screen.dart';
@@ -7,7 +8,7 @@ import 'package:genclik_spor/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GymDetailScreen extends StatelessWidget {
-  final Map<String, dynamic> gym;
+  final GymModel gym;
 
   const GymDetailScreen({
     super.key,
@@ -34,12 +35,13 @@ class GymDetailScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: customAppBar(gym['gymName']!),
+      appBar: customAppBar(gym.name!),
       backgroundColor: context.isDark ? offdarkblue : white1,
       body: ListView(
         children: [
           Image.network(
-            gym['imgUrl']!,
+            gym.photoUrl ??
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtjoMkGYtYSrHSgf55BCUmoTr9g89xYMXrpQ&s',
             width: double.infinity,
             height: 200,
             fit: BoxFit.cover,
@@ -47,7 +49,7 @@ class GymDetailScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
-              "Adres: ${gym['address']}\n${gym['city']}",
+              "Adres: ${gym.address}",
               style: TextStyle(fontSize: 16, color: grey),
             ),
           ),
@@ -57,7 +59,7 @@ class GymDetailScreen extends StatelessWidget {
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(backgroundColor: offdarkblue),
               onPressed: () => _launchMapsUrl(
-                  '${gym['gymName']!.replaceAll(' ', '+')}+${gym['city']}'),
+                  '${gym.name!.replaceAll(' ', '+')}+${gym.address}'),
               icon: const Icon(Icons.directions, color: Colors.white),
               label: const Text("Yol Tarifi Al",
                   style: TextStyle(color: Colors.white)),

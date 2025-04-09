@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/models/gym_model.dart';
 import 'package:genclik_spor/screens/common/gyms/gym_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
 class GymSlider extends StatefulWidget {
-  final List<Map<String, dynamic>> gyms;
+  final List<GymModel> gyms;
   const GymSlider({super.key, required this.gyms});
 
   @override
@@ -57,7 +58,7 @@ class _GymSliderState extends State<GymSlider> {
                     )
                   ],
                   image: DecorationImage(
-                    image: NetworkImage(gym["imgUrl"] ?? ""),
+                    image: NetworkImage(gym.photoUrl ?? ""),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -76,7 +77,7 @@ class _GymSliderState extends State<GymSlider> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              gym["gymName"] ?? "",
+                              gym.name ?? "",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -85,7 +86,7 @@ class _GymSliderState extends State<GymSlider> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              gym["city"] ?? "",
+                              gym.address ?? "",
                               style: const TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,
