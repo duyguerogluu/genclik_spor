@@ -202,9 +202,9 @@ Widget communication(BuildContext context) {
                   children: [
                     Expanded(
                       child: IconButton(
-                        icon: FaIcon(
+                        icon: const FaIcon(
                           FontAwesomeIcons.facebook,
-                          color: offdarkblue,
+                          color: Colors.blue,
                         ),
                         onPressed: () {
                           _launchUrl(facebookUrl);
@@ -213,9 +213,9 @@ Widget communication(BuildContext context) {
                     ),
                     Expanded(
                       child: IconButton(
-                          icon: FaIcon(
+                          icon: const FaIcon(
                             FontAwesomeIcons.xTwitter,
-                            color: offdarkblue,
+                            color: Colors.blue,
                           ),
                           onPressed: () {
                             _launchUrl(twitterUrl);
@@ -223,9 +223,9 @@ Widget communication(BuildContext context) {
                     ),
                     Expanded(
                       child: IconButton(
-                        icon: FaIcon(
+                        icon: const FaIcon(
                           FontAwesomeIcons.instagram,
-                          color: offdarkblue,
+                          color: Colors.purple,
                         ),
                         onPressed: () {
                           _launchUrl(instagramUrl);
@@ -234,9 +234,9 @@ Widget communication(BuildContext context) {
                     ),
                     Expanded(
                       child: IconButton(
-                        icon: FaIcon(
+                        icon: const FaIcon(
                           FontAwesomeIcons.youtube,
-                          color: offdarkblue,
+                          color: Colors.red,
                         ),
                         onPressed: () {
                           _launchUrl(youtubeUrl);
