@@ -35,12 +35,12 @@ class GymDetailScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: customAppBar(gym.name!),
+      appBar: customAppBar(gym.gymName!),
       backgroundColor: context.isDark ? offdarkblue : white1,
       body: ListView(
         children: [
           Image.network(
-            gym.photoUrl ??
+            gym.gymName ??
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtjoMkGYtYSrHSgf55BCUmoTr9g89xYMXrpQ&s',
             width: double.infinity,
             height: 200,
@@ -59,7 +59,7 @@ class GymDetailScreen extends StatelessWidget {
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(backgroundColor: offdarkblue),
               onPressed: () => _launchMapsUrl(
-                  '${gym.name!.replaceAll(' ', '+')}+${gym.address}'),
+                  '${gym.gymName!.replaceAll(' ', '+')}+${gym.address}'),
               icon: const Icon(Icons.directions, color: Colors.white),
               label: const Text("Yol Tarifi Al",
                   style: TextStyle(color: Colors.white)),

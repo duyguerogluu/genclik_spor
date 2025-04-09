@@ -1,39 +1,37 @@
 class GymModel {
-  final int id;
-  final String name;
+  final String gymName;
   final String address;
-  final double latitude;
-  final double longitude;
-  final String? photoUrl;
+  final String imgUrl;
+  final double lat;
+  final double lng;
 
   GymModel({
-    required this.id,
-    required this.name,
+    required this.gymName,
     required this.address,
-    required this.latitude,
-    required this.longitude,
-    this.photoUrl,
+    required this.imgUrl,
+    required this.lat,
+    required this.lng,
   });
 
+  // JSON'dan GymModel oluşturma
   factory GymModel.fromJson(Map<String, dynamic> json) {
     return GymModel(
-      id: json['id'],
-      name: json['name'],
-      address: json['address'],
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-      photoUrl: json['photo_url'],
+      gymName: json['gymName'] ?? '',
+      address: json['address'] ?? '',
+      imgUrl: json['imgUrl'] ?? '',
+      lat: json['lat'] ?? 0.0,
+      lng: json['lng'] ?? 0.0,
     );
   }
 
+  // GymModel'den JSON'a dönüştürme
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'name': name,
+      'gymName': gymName,
       'address': address,
-      'latitude': latitude,
-      'longitude': longitude,
-      'photo_url': photoUrl,
+      'imgUrl': imgUrl,
+      'lat': lat,
+      'lng': lng,
     };
   }
 }

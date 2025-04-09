@@ -58,7 +58,7 @@ class _GymSliderState extends State<GymSlider> {
                     )
                   ],
                   image: DecorationImage(
-                    image: NetworkImage(gym.photoUrl ?? ""),
+                    image: NetworkImage(gym.imgUrl ?? ""),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -77,7 +77,7 @@ class _GymSliderState extends State<GymSlider> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              gym.name ?? "",
+                              gym.gymName ?? "",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,

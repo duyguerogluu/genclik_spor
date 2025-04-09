@@ -4,27 +4,24 @@ import 'package:genclik_spor/utils/const.dart';
 import 'package:http/http.dart' as http;
 
 class GymService {
-  static Future<List<GymModel>> getGyms({
-    required String city,
-    required String district,
-  }) async {
-    final url = Uri.parse("$baseUrl/maps/search");
+  static Future<List<GymModel>> getGyms() async {
+    //final url = Uri.parse("$baseUrl/maps/search");
 
     final response = await http.post(
-      url,
-      body: jsonEncode({
-        'city': city,
-        'district': district,
-      }),
+      Uri.parse("$baseUrl/maps/search"),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
+      body: jsonEncode({"ilce": "Şahinbey", "il": "Gaziantep"}),
     );
 
     final data = jsonDecode(response.body);
     if (response.statusCode == 200 && data["status"] == "true") {
-      return data.map((gymJson) => GymModel.fromJson(gymJson)).toList();
+      print("Response Body: ${response.body}");
+      print("Response Status Code signupCall: ${response.statusCode}");
+      print("Response Data: ${data['data']}");
+      return data['data'];
     } else {
       return throw Exception('Kayıt başarısız, ${response.body}');
     }

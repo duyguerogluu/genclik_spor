@@ -19,7 +19,9 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(gymRiverpod.notifier).fetchGyms();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(gymRiverpod.notifier).fetchGyms();
+    });
   }
 
   @override
@@ -27,7 +29,7 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
     final gyms = ref.watch(gymRiverpod).gyms;
 
     return gyms.isEmpty
-        ? const Center(child: CircularProgressIndicator()) 
+        ? const Center(child: CircularProgressIndicator())
         : Column(
             children: [
               Expanded(
@@ -35,7 +37,7 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
                   zoom: 15.0,
                   markers: gyms.map((gym) {
                     return Marker(
-                      point: LatLng(gym.latitude, gym.longitude),
+                      point: LatLng(gym.lat, gym.lng),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -55,7 +57,7 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
                   }).toList(),
                 ),
               ),
-              Expanded(child: GymSlider(gyms: gyms)),
+              // Expanded(child: GymSlider(gyms: gyms)),
             ],
           );
   }

@@ -15,10 +15,7 @@ class GymRiverpod extends ChangeNotifier {
     notifyListeners();
 
     try {
-      gyms = await GymService.getGyms(
-        city: "Gaziantep",
-        district: "Şahinbey",
-      );
+      gyms = await GymService.getGyms();
     } catch (e) {
       debugPrint("Gym fetch error: $e");
     }
