@@ -57,7 +57,7 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
                   }).toList(),
                 ),
               ),
-              // Expanded(child: GymSlider(gyms: gyms)),
+              Expanded(child: GymSlider(gyms: gyms)),
             ],
           );
   }
