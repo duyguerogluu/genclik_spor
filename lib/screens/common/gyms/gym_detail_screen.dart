@@ -40,8 +40,7 @@ class GymDetailScreen extends StatelessWidget {
       body: ListView(
         children: [
           Image.network(
-            gym.gymName ??
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtjoMkGYtYSrHSgf55BCUmoTr9g89xYMXrpQ&s',
+            gym.imgUrl ?? '',
             width: double.infinity,
             height: 200,
             fit: BoxFit.cover,
