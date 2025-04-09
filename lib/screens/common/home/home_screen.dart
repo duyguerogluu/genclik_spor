@@ -6,8 +6,6 @@ import 'package:genclik_spor/screens/athlete/performanceanalysis/performance_ana
 import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/athlete/training/training_screen.dart';
 import 'package:genclik_spor/screens/common/courses/courses_screen.dart';
-import 'package:genclik_spor/screens/common/gyms/components/gym_slider.dart';
-import 'package:genclik_spor/screens/common/history/history_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/news_marquee.dart';
 import 'package:genclik_spor/screens/common/news/news_slider.dart';
 import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
@@ -134,7 +132,14 @@ Widget _buildHomeTabContent(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         NewsSlider(),
-        _annonces(),
+        NewsMarquee(
+          newsList: [
+            'Gençlik Spor Bakanlığı yeni projelerini duyurdu!',
+            'Sporcular için özel eğitim programı başlıyor!',
+            'Tesis başvuruları için son gün 30 Mart!',
+            'Antrenman programlarına katılım zorunludur.',
+          ],
+        ),
         const SizedBox(height: 16),
         SizedBox(
           height: 100,
@@ -156,13 +161,3 @@ Widget _buildHomeTabContent(BuildContext context) {
   );
 }
 
-Widget _annonces() {
-  return const NewsMarquee(
-    newsList: [
-      'Gençlik Spor Bakanlığı yeni projelerini duyurdu!',
-      'Sporcular için özel eğitim programı başlıyor!',
-      'Tesis başvuruları için son gün 30 Mart!',
-      'Antrenman programlarına katılım zorunludur.',
-    ],
-  );
-}
