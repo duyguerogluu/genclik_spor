@@ -6,6 +6,7 @@ import 'package:genclik_spor/screens/athlete/performanceanalysis/performance_ana
 import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/athlete/training/training_screen.dart';
 import 'package:genclik_spor/screens/common/courses/courses_screen.dart';
+import 'package:genclik_spor/screens/common/home/components/communication.dart';
 import 'package:genclik_spor/screens/common/home/components/news_marquee.dart';
 import 'package:genclik_spor/screens/common/news/news_slider.dart';
 import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
@@ -156,6 +157,7 @@ Widget _buildHomeTabContent(BuildContext context) {
         ),
         //GymSlider(gyms: gyms),
         history(context),
+        communication(),
       ],
     ),
   );

@@ -1,46 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Widget communication(BuildContext context) {
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(Uri.parse('https://www.cimer.gov.tr/'))) {
-      throw Exception('Site açılamadı');
-    }
-  }
+Widget communication() {
+  final Uri facebookUrl = Uri.parse('https://facebook.com');
+  final Uri twitterUrl = Uri.parse('https://twitter.com');
+  final Uri instagramUrl = Uri.parse('https://instagram.com');
+  final Uri youtubeUrl = Uri.parse('https://youtube.com');
 
-  Future<void> _launchUrlFace() async {
-    if (!await launchUrl(
-      Uri.parse('https://www.facebook.com/gencliksporbak'),
-      mode: LaunchMode.inAppWebView,
-    )) {
-      throw Exception('Site açılamadı');
-    }
-  }
-
-  Future<void> _launchUrlX() async {
-    if (!await launchUrl(
-      Uri.parse('https://x.com/gencliksporbak'),
-      mode: LaunchMode.inAppWebView,
-    )) {
-      throw Exception('Site açılamadı');
-    }
-  }
-
-  Future<void> _launchUrlInsta() async {
-    if (!await launchUrl(
-      Uri.parse('https://www.instagram.com/gencliksporbak/'),
-      mode: LaunchMode.inAppWebView,
-    )) {
-      throw Exception('Site açılamadı');
-    }
-  }
-
-  Future<void> _launchUrlYoutube() async {
-    if (!await launchUrl(
-      Uri.parse('https://www.youtube.com/gencliksporbak'),
-      mode: LaunchMode.inAppWebView,
-    )) {
-      throw Exception('Site açılamadı');
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.inAppWebView)) {
+      throw Exception('URL açılamadı: $url');
     }
   }
 
@@ -75,7 +45,6 @@ Widget communication(BuildContext context) {
         ),
       ),
       GestureDetector(
-        onTap: _launchUrl,
         child: Card(
           child: Column(
             children: [
@@ -98,19 +67,26 @@ Widget communication(BuildContext context) {
               children: [
                 IconButton(
                   icon: Image.network('https://example.com/facebook.png'),
-                  onPressed: _launchUrlFace,
+                  onPressed: () {
+                    _launchUrl(facebookUrl);
+                  },
                 ),
                 IconButton(
-                  icon: Image.network('https://example.com/twitter.png'),
-                  onPressed: _launchUrlX,
+                    icon: FaIcon(FontAwesomeIcons.facebook),
+                    onPressed: () {
+                      _launchUrl(twitterUrl);
+                    }),
+                IconButton(
+                  icon: FaIcon(FontAwesomeIcons.xTwitter),
+                  onPressed: () {
+                    _launchUrl(instagramUrl);
+                  },
                 ),
                 IconButton(
-                  icon: Image.network('https://example.com/instagram.png'),
-                  onPressed: _launchUrlInsta,
-                ),
-                IconButton(
-                  icon: Image.network('https://example.com/youtube.png'),
-                  onPressed: _launchUrlYoutube,
+                  icon: FaIcon(FontAwesomeIcons.youtube),
+                  onPressed: () {
+                    _launchUrl(youtubeUrl);
+                  },
                 ),
               ],
             ),
