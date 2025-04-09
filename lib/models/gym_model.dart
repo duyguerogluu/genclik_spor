@@ -1,3 +1,5 @@
+import 'package:genclik_spor/utils/const.dart';
+
 class GymModel {
   final String gymName;
   final String address;
@@ -13,18 +15,18 @@ class GymModel {
     required this.lng,
   });
 
-  // JSON'dan GymModel oluşturma
   factory GymModel.fromJson(Map<String, dynamic> json) {
+    String rawUrl = json['imgUrl'] ?? '';
+    String imgUrl = rawUrl.replaceAll("YOUR_PLACES_API_KEY", googleApiKey);
     return GymModel(
       gymName: json['gymName'] ?? '',
       address: json['address'] ?? '',
-      imgUrl: json['imgUrl'] ?? '',
+      imgUrl: imgUrl,
       lat: json['lat'] ?? 0.0,
       lng: json['lng'] ?? 0.0,
     );
   }
 
-  // GymModel'den JSON'a dönüştürme
   Map<String, dynamic> toJson() {
     return {
       'gymName': gymName,
