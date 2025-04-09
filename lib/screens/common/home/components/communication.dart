@@ -14,6 +14,16 @@ Widget communication() {
     }
   }
 
+  final Uri phoneNumber = Uri(scheme: 'tel', path: '4440472');
+
+  Future<void> _makePhoneCall() async {
+    if (await canLaunchUrl(phoneNumber)) {
+      await launchUrl(phoneNumber);
+    } else {
+      throw 'Arama yapılamıyor: $phoneNumber';
+    }
+  }
+
   return Column(
     children: [
       const Card(
@@ -30,6 +40,7 @@ Widget communication() {
         ),
       ),
       GestureDetector(
+        onTap: _makePhoneCall,
         child: const Card(
           child: Column(
             children: [
@@ -65,28 +76,36 @@ Widget communication() {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                IconButton(
-                  icon: Image.network('https://example.com/facebook.png'),
-                  onPressed: () {
-                    _launchUrl(facebookUrl);
-                  },
-                ),
-                IconButton(
-                    icon: FaIcon(FontAwesomeIcons.facebook),
+                Expanded(
+                  child: IconButton(
+                    icon: Image.network('https://example.com/facebook.png'),
                     onPressed: () {
-                      _launchUrl(twitterUrl);
-                    }),
-                IconButton(
-                  icon: FaIcon(FontAwesomeIcons.xTwitter),
-                  onPressed: () {
-                    _launchUrl(instagramUrl);
-                  },
+                      _launchUrl(facebookUrl);
+                    },
+                  ),
                 ),
-                IconButton(
-                  icon: FaIcon(FontAwesomeIcons.youtube),
-                  onPressed: () {
-                    _launchUrl(youtubeUrl);
-                  },
+                Expanded(
+                  child: IconButton(
+                      icon: FaIcon(FontAwesomeIcons.facebook),
+                      onPressed: () {
+                        _launchUrl(twitterUrl);
+                      }),
+                ),
+                Expanded(
+                  child: IconButton(
+                    icon: FaIcon(FontAwesomeIcons.xTwitter),
+                    onPressed: () {
+                      _launchUrl(instagramUrl);
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: IconButton(
+                    icon: FaIcon(FontAwesomeIcons.youtube),
+                    onPressed: () {
+                      _launchUrl(youtubeUrl);
+                    },
+                  ),
                 ),
               ],
             ),
