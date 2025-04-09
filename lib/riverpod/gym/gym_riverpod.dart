@@ -3,22 +3,26 @@ import 'package:genclik_spor/models/gym_model.dart';
 import 'package:genclik_spor/services/gym_service.dart';
 
 class GymRiverpod extends ChangeNotifier {
-  GymModel? gym;
+  List<GymModel> gyms = [];
   bool isLoading = false;
 
-  Future<void> fetchGym() async {
-    if (gym != null || isLoading) {
+  Future<void> fetchGyms() async {
+    if (isLoading) {
       return;
     }
 
+    isLoading = true;
+    notifyListeners();
+
     try {
-      gym = await GymService.getGyms(
+      gyms = await GymService.getGyms(
         city: "Gaziantep",
         district: "Şahinbey",
       );
     } catch (e) {
       debugPrint("Gym fetch error: $e");
     }
+
     isLoading = false;
     notifyListeners();
   }

@@ -4,7 +4,7 @@ import 'package:genclik_spor/utils/const.dart';
 import 'package:http/http.dart' as http;
 
 class GymService {
-  static Future<GymModel> getGyms({
+  static Future<List<GymModel>> getGyms({
     required String city,
     required String district,
   }) async {
@@ -24,7 +24,7 @@ class GymService {
 
     final data = jsonDecode(response.body);
     if (response.statusCode == 200 && data["status"] == "true") {
-      return GymModel.fromJson(data);
+      return data.map((gymJson) => GymModel.fromJson(gymJson)).toList();
     } else {
       return throw Exception('Kayıt başarısız, ${response.body}');
     }
