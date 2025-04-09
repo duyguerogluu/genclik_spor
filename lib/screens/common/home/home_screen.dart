@@ -157,9 +157,8 @@ Widget _buildHomeTabContent(BuildContext context) {
         ),
         //GymSlider(gyms: gyms),
         history(context),
-        communication(),
+        communication(context),
       ],
     ),
   );
 }
-
