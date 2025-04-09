@@ -7,6 +7,7 @@ import 'package:genclik_spor/screens/athlete/profilee/athlete_profile_screen.dar
 import 'package:genclik_spor/screens/athlete/training/training_screen.dart';
 import 'package:genclik_spor/screens/common/courses/courses_screen.dart';
 import 'package:genclik_spor/screens/common/gyms/components/gym_slider.dart';
+import 'package:genclik_spor/screens/common/history/history_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/news_marquee.dart';
 import 'package:genclik_spor/screens/common/news/news_slider.dart';
 import 'package:genclik_spor/screens/common/warning/warning_screen.dart';
@@ -167,6 +168,14 @@ Widget _annonces() {
 
 Widget _history(BuildContext context) {
   return GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HistoryScreen(),
+        ),
+      );
+    },
     child: Container(
       height: 100,
       margin: const EdgeInsets.all(8),
@@ -184,7 +193,7 @@ Widget _history(BuildContext context) {
           BoxShadow(
             color: offlightblue2,
             blurRadius: 6,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
