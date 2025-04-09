@@ -21,7 +21,10 @@ class GymService {
       print("Response Body: ${response.body}");
       print("Response Status Code signupCall: ${response.statusCode}");
       print("Response Data: ${data['data']}");
-      return data['data'];
+      List gyms = jsonDecode(response.body)['data'];
+      return gyms
+          .map<GymModel>((element) => GymModel.fromJson(element))
+          .toList();
     } else {
       return throw Exception('Kayıt başarısız, ${response.body}');
     }
