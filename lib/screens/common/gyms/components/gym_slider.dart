@@ -40,63 +40,66 @@ class _GymSliderState extends State<GymSlider> {
                   ),
                 );
               },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                margin: EdgeInsets.symmetric(
-                    horizontal: isActive ? 10 : 30, vertical: 10),
-                transform: Matrix4.identity()
-                  ..scale(isActive ? 1.1 : 1.0)
-                  ..rotateZ(isActive ? 0.0 : 0.01),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: blacko,
-                      blurRadius: isActive ? 10 : 5,
-                      spreadRadius: isActive ? 3 : 1,
-                    )
-                  ],
-                  image: DecorationImage(
-                    image: NetworkImage(gym.imgUrl ?? ""),
-                    fit: BoxFit.cover,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  margin: EdgeInsets.symmetric(
+                      horizontal: isActive ? 10 : 30, vertical: 10),
+                  transform: Matrix4.identity()
+                    ..scale(isActive ? 1.1 : 1.0)
+                    ..rotateZ(isActive ? 0.0 : 0.01),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: blacko,
+                        blurRadius: isActive ? 10 : 5,
+                        spreadRadius: isActive ? 3 : 1,
+                      )
+                    ],
+                    image: DecorationImage(
+                      image: NetworkImage(gym.imgUrl ?? ""),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 15,
-                      left: 15,
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: blacko,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              gym.gymName ?? "",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: 15,
+                        left: 15,
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: blacko,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                gym.gymName ?? "",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              gym.address ?? "",
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12,
+                              const SizedBox(height: 4),
+                              Text(
+                                gym.address ?? "",
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

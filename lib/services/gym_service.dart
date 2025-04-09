@@ -21,8 +21,7 @@ class GymService {
       print("Response Body: ${response.body}");
       print("Response Status Code signupCall: ${response.statusCode}");
       print("Response Data: ${data['data']}");
-      List gyms = jsonDecode(response.body)['data'];
-      return gyms
+      return data['data']
           .map<GymModel>((element) => GymModel.fromJson(element))
           .toList();
     } else {
