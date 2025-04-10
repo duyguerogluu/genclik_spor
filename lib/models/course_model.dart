@@ -1,4 +1,4 @@
-class Course {
+class CourseModel {
   final int id;
   final String title;
   final String description;
@@ -8,7 +8,7 @@ class Course {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  Course({
+  CourseModel({
     required this.id,
     required this.title,
     required this.description,
@@ -19,8 +19,8 @@ class Course {
     required this.updatedAt,
   });
 
-  factory Course.fromJson(Map<String, dynamic> json) {
-    return Course(
+  factory CourseModel.fromJson(Map<String, dynamic> json) {
+    return CourseModel(
       id: json['id'],
       title: json['title'],
       description: json['description'],
