@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/models/member_profile_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
+import 'package:genclik_spor/screens/athlete/profilee/components/course_button.dart';
 import 'package:genclik_spor/screens/athlete/profilee/manage_athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
 import 'package:genclik_spor/screens/common/components/custom_button.dart';
@@ -96,7 +97,7 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
             // _buildPerformanceAnalysis(read),
             const SizedBox(height: 20),
             // _buildTrainingHistory(read),
-
+            courseButton(context),
             const SizedBox(height: 20),
             _buildApplyButton(context),
             const SizedBox(height: 10),
