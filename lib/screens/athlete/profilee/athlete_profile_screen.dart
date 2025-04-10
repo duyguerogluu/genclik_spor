@@ -16,7 +16,8 @@ class MemberProfileScreen extends ConsumerStatefulWidget {
   const MemberProfileScreen({super.key});
 
   @override
-  ConsumerState<MemberProfileScreen> createState() => _AthleteProfileScreenState();
+  ConsumerState<MemberProfileScreen> createState() =>
+      _AthleteProfileScreenState();
 }
 
 class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
@@ -34,6 +35,7 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
   Widget build(BuildContext context) {
     debugPrint("AthleteProfileScreen build çalıştı!");
     final profileState = ref.watch(profileRiverpodNotifier);
+   
 
     if (profileState.isLoading) {
       return Scaffold(

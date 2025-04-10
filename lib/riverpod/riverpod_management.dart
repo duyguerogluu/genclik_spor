@@ -22,6 +22,7 @@ final locationLogicProvider =
     StateNotifierProvider<LocationLogic, LocationState>((ref) => locationLogic);
 
 final gymRiverpod = ChangeNotifierProvider<GymRiverpod>((ref) => GymRiverpod());
-final courseRiverpod = ChangeNotifierProvider<CourseRiverpod>((ref) => CourseRiverpod());
-
-    
+//final courseRiverpod = ChangeNotifierProvider<CourseRiverpod>((ref) => CourseRiverpod());
+final courseRiverpod = ChangeNotifierProvider<CourseRiverpod>((ref) {
+  return CourseRiverpod();
+});

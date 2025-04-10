@@ -12,19 +12,25 @@ class CoursesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     debugPrint("CoursesScreen build çalıştı!!!!!!!!!!");
-    final courses = ref.watch(courseRiverpod).courses;
+    final courseNotifier = ref.watch(courseRiverpod);
+    final courseProvider = ref.read(courseRiverpod);
+
+    // Eğer kurslar boşsa fetchle
+    if (courseNotifier.courses.isEmpty && !courseNotifier.isLoading) {
+      courseProvider.fetchCourses();
+    }
 
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white1,
       appBar: customAppBar('Kurslar'),
-      body: courses.isEmpty
+      body: courseNotifier.isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               padding: const EdgeInsets.all(16),
-              itemCount: courses.length,
+              itemCount: courseNotifier.courses.length,
               itemBuilder: (context, index) {
-                final course = courses[index];
-                return coursesCard(context, course.toJson());
+                final course = courseNotifier.courses[index];
+                return coursesCard(context, course);
               },
             ),
     );

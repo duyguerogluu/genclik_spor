@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:genclik_spor/models/course_model.dart';
 import 'package:genclik_spor/screens/common/courses/course_detail_screen.dart';
 
-GestureDetector coursesCard(BuildContext context, Map<String, dynamic> course) {
+GestureDetector coursesCard(BuildContext context, CourseModel course) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (_) => CourseDetailScreen(
-            courseName: course['title']!,
-            imageUrl:
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDCU4FBN4XKztadytbSsq90uTmOAyD8hgFaA&s',
-            description: course['description']!,
-            duration: '1 Ay',
+            courseName: course.title,
+            imageUrl: course.imageUrl,
+            description: course.description,
+            duration: course.duration,
             capacity: 20,
             price: '100 TL',
           ),
@@ -28,15 +28,13 @@ GestureDetector coursesCard(BuildContext context, Map<String, dynamic> course) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(course['title']!,
+            Text(course.title,
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            Text(course['description']!),
+            Text(course.description),
             const SizedBox(height: 8),
-            Text('Salon: ${course['gym']}',
-                style: const TextStyle(color: Colors.grey)),
-            Text('Antrenör: ${course['coach']}',
+            Text('Antrenör: ${course.coachName}',
                 style: const TextStyle(color: Colors.grey)),
           ],
         ),
