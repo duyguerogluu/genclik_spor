@@ -12,7 +12,7 @@ Widget communication(BuildContext context) {
   final Uri cimerUrl = Uri.parse('https://www.cimer.gov.tr');
 
   Future<void> _launchUrl(Uri url) async {
-    if (!await launchUrl(url, mode: LaunchMode.inAppWebView)) {
+    if (!await launchUrl(url, mode: LaunchMode.externalNonBrowserApplication)) {
       throw Exception('URL açılamadı: $url');
     }
   }
