@@ -8,6 +8,7 @@ class GymRiverpod extends ChangeNotifier {
   bool isLoading = false;
 
   Future<void> fetchGyms() async {
+    debugPrint('Gyms Riverpod Çalışıyor    ...!!!!!!!!!!!!!!!!!!!!!!');
     if (isLoading) {
       return;
     }
@@ -19,6 +20,7 @@ class GymRiverpod extends ChangeNotifier {
       gyms = [...DataHolder.gymCache!];
     } else {
       try {
+        debugPrint('Gyms Çekiliyor...!!!!!!!!!!!!!!!!!!!!!!');
         gyms = await GymService.getGyms();
         DataHolder.gymCache = [...gyms];
       } catch (e) {

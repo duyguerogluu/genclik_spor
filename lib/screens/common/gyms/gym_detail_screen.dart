@@ -39,11 +39,14 @@ class GymDetailScreen extends StatelessWidget {
       backgroundColor: context.isDark ? offdarkblue : white1,
       body: ListView(
         children: [
-          Image.network(
-            gym.imgUrl ?? '',
-            width: double.infinity,
-            height: 200,
-            fit: BoxFit.cover,
+          Hero(
+            tag: 'gym_image_${gym.lat}${gym.lng}${gym.imgUrl}',
+            child: Image.network(
+              gym.imgUrl,
+              width: double.infinity,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

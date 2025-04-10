@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/models/gym_model.dart';
+import 'package:genclik_spor/riverpod/riverpod_management.dart';
+import 'package:genclik_spor/screens/common/gyms/components/gym_slider.dart';
 import 'package:genclik_spor/screens/common/home/components/build_glass_menu_card.dart';
 import 'package:genclik_spor/screens/common/home/components/communication.dart';
 import 'package:genclik_spor/screens/common/home/components/ehizmet.dart'
@@ -23,13 +25,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     return Container(
       color: context.isDark ? offdarkblue : white,
-      child: _buildHomeTabContent(context),
+      child: _buildHomeTabContent(context, ref),
     );
   }
 }
 
-Widget _buildHomeTabContent(BuildContext context) {
-  final List<GymModel> gyms;
+Widget _buildHomeTabContent(BuildContext context, WidgetRef ref) {
+  final gyms = ref.watch(gymRiverpod).gyms;
   final List<Map<String, dynamic>> menuItems = [
     {'icon': Icons.sports_soccer, 'title': 'Kurslar'},
     {'icon': Icons.fitness_center, 'title': 'Antrenmanlar'},
@@ -66,7 +68,7 @@ Widget _buildHomeTabContent(BuildContext context) {
             },
           ),
         ),
-        //GymSlider(gyms: gyms),
+        GymSlider(gyms: gyms),
         SizedBox(
           height: 180,
           child: ListView.builder(
