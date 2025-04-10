@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:genclik_spor/models/gym_model.dart';
 import 'package:genclik_spor/services/gym_service.dart';
+import 'package:genclik_spor/utils/holder.dart';
 
 class GymRiverpod extends ChangeNotifier {
   List<GymModel> gyms = [];
@@ -14,10 +15,15 @@ class GymRiverpod extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    try {
-      gyms = await GymService.getGyms();
-    } catch (e) {
-      debugPrint("Gym fetch error: $e");
+    if (DataHolder.gymCache != null) {
+      gyms = [...DataHolder.gymCache!];
+    } else {
+      try {
+        gyms = await GymService.getGyms();
+        DataHolder.gymCache = [...gyms];
+      } catch (e) {
+        debugPrint("Gym fetch error: $e");
+      }
     }
 
     isLoading = false;

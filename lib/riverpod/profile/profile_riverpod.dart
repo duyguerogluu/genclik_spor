@@ -20,10 +20,16 @@ class ProfileRiverpod extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    try {
-      memberProfile = await ProfileService.getProfile();
-    } catch (e) {
-      debugPrint("Profile fetch error: $e");
+    if (DataHolder.memberProfile != null) {
+      memberProfile = DataHolder.memberProfile;
+    } else {
+      try {
+        debugPrint('profil bilggileri çekiliyor...!!!!!!!!!!!!!!!!!!!!!!1');
+        memberProfile = await ProfileService.getProfile();
+        DataHolder.memberProfile = memberProfile;
+      } catch (e) {
+        debugPrint("Profile fetch error: $e");
+      }
     }
 
     isLoading = false;

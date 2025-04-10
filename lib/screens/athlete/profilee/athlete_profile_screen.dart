@@ -16,7 +16,7 @@ class MemberProfileScreen extends ConsumerStatefulWidget {
   const MemberProfileScreen({super.key});
 
   @override
-  _AthleteProfileScreenState createState() => _AthleteProfileScreenState();
+  ConsumerState<MemberProfileScreen> createState() => _AthleteProfileScreenState();
 }
 
 class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
