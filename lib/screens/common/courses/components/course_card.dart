@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genclik_spor/screens/common/courses/course_detail_screen.dart';
 
-GestureDetector coursesCard(BuildContext context, Map<String, String> course) {
+GestureDetector coursesCard(BuildContext context, Map<String, dynamic> course) {
   return GestureDetector(
     onTap: () {
       Navigator.push(

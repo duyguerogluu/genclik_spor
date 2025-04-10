@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 class CourseService {
   static Future<List<CourseModel>> getCourses() async {
+    print("CourseService getCourses çalıştı!!!!!!!!!!!!!!!!");
     final url = Uri.parse("$baseUrl/sporcu/courses");
 
     final response = await http.get(
@@ -18,6 +19,9 @@ class CourseService {
 
     final data = jsonDecode(response.body);
     if (response.statusCode == 200 && data["status"] == "true") {
+      print("Response Body: ${response.body}");
+      print("Response Status Code signupCall: ${response.statusCode}");
+      print("Response Data: ${data['data']}");
       return data['data']
           .map<CourseModel>((element) => CourseModel.fromJson(element))
           .toList();

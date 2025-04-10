@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:genclik_spor/screens/common/home/main_screen.dart';
 import 'package:genclik_spor/screens/common/howtouse/howtouse_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
@@ -22,9 +23,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
     DataHolder.secureStorage = const FlutterSecureStorage();
 
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () async {
+      final token = await DataHolder.getToken();
+
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HowToUseScreen()),
+        MaterialPageRoute(
+          builder: (context) => token?.isNotEmpty ?? false
+              ? const MainScreen()
+              : const HowToUseScreen(),
+        ),
       );
     });
   }

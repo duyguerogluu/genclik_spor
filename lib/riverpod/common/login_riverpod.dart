@@ -23,7 +23,7 @@ class LoginRiverpod extends ChangeNotifier {
       );
 
       if (result.status && result.token.isNotEmpty) {
-        await DataHolder.secureStorage!.write(key: 'token', value: result.token);
+        await DataHolder.putToken(result.token);
         final state = MyApp.navigatorKey.currentState!;
         state.pop();
         state.pushReplacement(

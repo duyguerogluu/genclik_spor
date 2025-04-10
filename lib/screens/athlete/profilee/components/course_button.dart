@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
+import 'package:genclik_spor/screens/common/courses/courses_screen.dart';
 
 Widget courseButton(BuildContext context) {
   return ElevatedButton.icon(
     onPressed: () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const MyApplicationsScreen()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const CoursesScreen()));
     },
     icon: const Icon(Icons.assignment),
     label: const Text("Kursları Görüntüle"),

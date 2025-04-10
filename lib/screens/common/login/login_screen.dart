@@ -27,10 +27,10 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _togglePage(bool _switchme) {
+  void _togglePage(bool switchme) {
     setState(
       () {
-        _pageLogin = _switchme;
+        _pageLogin = switchme;
       },
     );
   }

@@ -7,6 +7,7 @@ class CourseRiverpod extends ChangeNotifier {
   bool isLoading = false;
 
   Future<void> fetchCourses() async {
+    debugPrint("fetchCourses() build çalıştı!!!!!!!!!!");
     if (isLoading) {
       return;
     }
