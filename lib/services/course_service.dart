@@ -22,7 +22,7 @@ class CourseService {
       print("Response Body: ${response.body}");
       print("Response Status Code signupCall: ${response.statusCode}");
       print("Response Data: ${data['data']}");
-      return data['data']
+      return data['courses']
           .map<CourseModel>((element) => CourseModel.fromJson(element))
           .toList();
     } else {
