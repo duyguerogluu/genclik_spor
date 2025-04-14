@@ -1,0 +1,2 @@
+D:/genclik_spor/android/app/.cxx/Debug/d3n3g6n6/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/genclik_spor/android/app/.cxx/Debug/d3n3g6n6/armeabi-v7a/CMakeFiles/rebuild_cache.dir
