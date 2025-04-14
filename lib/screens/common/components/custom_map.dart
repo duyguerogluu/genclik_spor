@@ -7,7 +7,7 @@ class CustomMap extends StatelessWidget {
   final double zoom;
   final List<Marker> markers;
 
-   CustomMap({
+  CustomMap({
     Key? key,
     this.center = const LatLng(37.06406415751307, 37.362847029935075),
     this.zoom = 13.0,
@@ -18,8 +18,6 @@ class CustomMap extends StatelessWidget {
       ),
     ],
   }) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {

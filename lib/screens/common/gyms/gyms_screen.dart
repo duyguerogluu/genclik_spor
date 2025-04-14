@@ -31,9 +31,9 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
   List<GymModel> gyms = [];
   final userMarker = const Marker(
     point: LatLng(37.06406415751307, 37.362847029935075),
-    child: const Icon(
-      Icons.my_location,
-      size: 45,
+    child: Icon(
+      Icons.place,
+      size: 50,
       color: Colors.blue,
     ),
   );
