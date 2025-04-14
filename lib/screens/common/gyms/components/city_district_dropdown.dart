@@ -28,46 +28,74 @@ class _CityDistrictDropdownState extends State<CityDistrictDropdown> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: DropdownButton<String>(
-              isExpanded: true,
-              hint: Text("İl seçiniz"),
-              value: selectedCity,
-              items: cities.map((city) {
-                return DropdownMenuItem<String>(
-                  value: city,
-                  child: Text(city),
-                );
-              }).toList(),
-              onChanged: (city) {
-                setState(() {
-                  selectedCity = city;
-                  selectedDistrict = null;
-                });
-              },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.black, width: 1.5),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  hint: const Text(
+                    "İl seçiniz",
+                  ),
+                  value: selectedCity,
+                  icon: const Icon(Icons.keyboard_arrow_down,
+                      color: Colors.black),
+                  dropdownColor: Colors.white,
+                  items: cities.map((city) {
+                    return DropdownMenuItem<String>(
+                      value: city,
+                      child: Text(
+                        city,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (city) {
+                    setState(() {
+                      selectedCity = city;
+                      selectedDistrict = null;
+                    });
+                  },
+                ),
+              ),
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 20),
           Expanded(
-            child: DropdownButton<String>(
-              isExpanded: true,
-              hint: Text("İlçe seçiniz"),
-              value: selectedDistrict,
-              items: districts.map((district) {
-                return DropdownMenuItem<String>(
-                  value: district,
-                  child: Text(district),
-                );
-              }).toList(),
-              onChanged: (district) {
-                setState(() {
-                  selectedDistrict = district;
-                });
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.black, width: 1.5),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  hint: Text("İlçe seçiniz"),
+                  value: selectedDistrict,
+                  items: districts.map((district) {
+                    return DropdownMenuItem<String>(
+                      value: district,
+                      child: Text(district),
+                    );
+                  }).toList(),
+                  onChanged: (district) {
+                    setState(() {
+                      selectedDistrict = district;
+                    });
 
-                widget.onCityDistrictSelected(
-                  selectedCity!,
-                  selectedDistrict!,
-                );
-              },
+                    widget.onCityDistrictSelected(
+                      selectedCity!,
+                      selectedDistrict!,
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ],
