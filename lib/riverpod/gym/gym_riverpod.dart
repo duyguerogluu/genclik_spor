@@ -21,7 +21,7 @@ class GymRiverpod extends ChangeNotifier {
     } else {
       try {
         debugPrint('Gyms Çekiliyor...!!!!!!!!!!!!!!!!!!!!!!');
-        gyms = await GymService.getGyms();
+        gyms = await GymService.getGyms("Şahinbey", "Gaziantep");
         DataHolder.gymCache = [...gyms];
       } catch (e) {
         debugPrint("Gym fetch error: $e");

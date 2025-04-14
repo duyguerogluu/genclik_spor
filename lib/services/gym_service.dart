@@ -4,7 +4,7 @@ import 'package:genclik_spor/utils/const.dart';
 import 'package:http/http.dart' as http;
 
 class GymService {
-  static Future<List<GymModel>> getGyms() async {
+  static Future<List<GymModel>> getGyms(String district, String city) async {
     //final url = Uri.parse("$baseUrl/maps/search");
 
     final response = await http.post(

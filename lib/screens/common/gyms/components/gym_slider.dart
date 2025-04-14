@@ -16,7 +16,7 @@ class _GymSliderState extends State<GymSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 240,
       child: PageView.builder(
         itemCount: widget.gyms.length,
