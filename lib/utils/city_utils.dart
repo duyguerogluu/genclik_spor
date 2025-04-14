@@ -1,4 +1,6 @@
 class CityUtils {
+  CityUtils._();
+
   static List<String> getCities() => _data.keys.toList();
 
   static List<String> getDistricts(String city) => _data[city]!;
