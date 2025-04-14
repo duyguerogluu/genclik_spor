@@ -112,14 +112,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: <Widget>[
                                 customTextField(
                                   controller: login.email,
-                                  hintText: "Phone number",
+                                  hintText: "E-Posta",
                                   obscureText: false,
                                   onVisibilityToggle: () {},
                                   isDark: context.isDark,
                                 ),
                                 customTextField(
                                   controller: login.password,
-                                  hintText: "Password",
+                                  hintText: "Şifre",
                                   obscureText: _ishidden,
                                   onVisibilityToggle: _toggleVisibility,
                                   isDark: context.isDark,
