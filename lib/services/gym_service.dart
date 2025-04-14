@@ -13,7 +13,7 @@ class GymService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: jsonEncode({"ilce": "Şahinbey", "il": "Gaziantep"}),
+      body: jsonEncode({"ilce": district, "il": city}),
     );
 
     final data = jsonDecode(response.body);

@@ -26,13 +26,21 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
       final fetchedGyms = await GymService.getGyms(district, city);
       if (fetchedGyms.isEmpty) {
         debugPrint('No gyms found');
-        return;
+        setState(() {
+          gyms = [];
+          noGymsFound = true;
+        });
+      } else {
+        setState(() {
+          gyms = fetchedGyms;
+        });
       }
-      setState(() {
-        gyms = fetchedGyms;
-      });
     } catch (e) {
       debugPrint('Error fetching gyms: $e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -46,6 +54,8 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
   }
 
   List<GymModel> gyms = [];
+  bool isLoading = false;
+  bool noGymsFound = false;
   final userMarker = const Marker(
     point: LatLng(37.06406415751307, 37.362847029935075),
     child: Icon(
