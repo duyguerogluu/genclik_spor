@@ -23,12 +23,7 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
     final prefs = await SharedPreferences.getInstance();
     final isFirstTime = prefs.getBool('isFirstTime') ?? true;
 
-    if (isFirstTime) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HowToUseScreen()),
-      );
-    } else {
+    if (!isFirstTime) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginScreen()),
@@ -97,72 +92,75 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.isDark ? offdarkblue : white,
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: onboardingData.length,
-              onPageChanged: (index) {
-                setState(() => currentIndex = index);
-              },
-              itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(onboardingData[index]["image"]!),
-                    const SizedBox(height: 20),
-                    Text(
-                      onboardingData[index]["title"]!,
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      onboardingData[index]["description"]!,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: context.isDark ? white : offdarkblue,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: onboardingData.length,
+                onPageChanged: (index) {
+                  setState(() => currentIndex = index);
+                },
+                itemBuilder: (context, index) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(onboardingData[index]["image"]!),
+                      const SizedBox(height: 20),
+                      Text(
+                        onboardingData[index]["title"]!,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                  ],
-                );
-              },
+                      const SizedBox(height: 10),
+                      Text(
+                        onboardingData[index]["description"]!,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: context.isDark ? white : offdarkblue,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              onboardingData.length,
-              (index) => Container(
-                margin: const EdgeInsets.all(5),
-                width: currentIndex == index ? 12 : 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: currentIndex == index ? Colors.blue : Colors.grey,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                onboardingData.length,
+                (index) => Container(
+                  margin: const EdgeInsets.all(5),
+                  width: currentIndex == index ? 12 : 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: currentIndex == index ? Colors.blue : Colors.grey,
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: customButton(
-              context: context,
-              onPressed: currentIndex == onboardingData.length - 1
-                  ? _completeOnboarding
-                  : () => _pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut),
-              text:
-                  currentIndex == onboardingData.length - 1 ? "Başla" : "İleri",
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: customButton(
+                context: context,
+                onPressed: currentIndex == onboardingData.length - 1
+                    ? _completeOnboarding
+                    : () => _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut),
+                text: currentIndex == onboardingData.length - 1
+                    ? "Başla"
+                    : "İleri",
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-        ],
+            const SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
       ),
     );
   }

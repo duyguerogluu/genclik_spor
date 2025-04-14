@@ -35,7 +35,6 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
   Widget build(BuildContext context) {
     debugPrint("AthleteProfileScreen build çalıştı!");
     final profileState = ref.watch(profileRiverpodNotifier);
-   
 
     if (profileState.isLoading) {
       return Scaffold(
@@ -79,32 +78,34 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildProfileCard(read),
-            const SizedBox(height: 20),
-            Center(
-              child: customButton(
-                  context: context,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const ManageAthleteProfileScreen()));
-                  },
-                  text: 'Sporcu Bilgilerini Gir'),
-            ),
-            // _buildPerformanceAnalysis(read),
-            const SizedBox(height: 20),
-            // _buildTrainingHistory(read),
-            courseButton(context),
-            const SizedBox(height: 20),
-            _buildApplyButton(context),
-            const SizedBox(height: 10),
-            _buildMyApplicationsButton(context),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildProfileCard(read),
+              const SizedBox(height: 20),
+              Center(
+                child: customButton(
+                    context: context,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const ManageAthleteProfileScreen()));
+                    },
+                    text: 'Sporcu Bilgilerini Gir'),
+              ),
+              _buildPerformanceAnalysis(read),
+              const SizedBox(height: 20),
+              _buildTrainingHistory(read),
+              courseButton(context),
+              const SizedBox(height: 20),
+              _buildApplyButton(context),
+              const SizedBox(height: 10),
+              _buildMyApplicationsButton(context),
+            ],
+          ),
         ),
       ),
     );
@@ -154,50 +155,56 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
     );
   }
 
-  Widget _buildPerformanceAnalysis(read) {
+  Widget _buildPerformanceAnalysis(MemberProfileModel read) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text("Performans Analizi",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const SizedBox(height: 10),
-        _buildProgressBar("Dayanıklılık", read.endurance),
-        _buildProgressBar("Hız", read.speed),
-        _buildProgressBar("Esneklik", read.flexibility),
-        _buildProgressBar("Çeviklik", read.agility),
+        _buildProgressBar("Dayanıklılık", read.athleteProfile?.endurance ?? -1),
+        _buildProgressBar("Hız", read.athleteProfile?.speed ?? -1),
+        _buildProgressBar("Esneklik", read.athleteProfile?.flexibility ?? -1),
+        _buildProgressBar("Çeviklik", read.athleteProfile?.agility ?? -1),
       ],
     );
   }
 
-  Widget _buildTrainingHistory(read) {
-    return Expanded(
-      child: Column(
+  Widget _buildTrainingHistory(MemberProfileModel read) {
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Antrenman Geçmişi",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              itemCount: read.trainingHistory.length,
-              itemBuilder: (context, index) {
-                final session = read.trainingHistory[index];
-                return Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  color: white,
-                  child: ListTile(
-                    leading: Icon(Icons.sports_gymnastics, color: darkblue),
-                    title: Text(session.date),
-                    subtitle: Text("${session.sport} - ${session.status}"),
-                  ),
-                );
-              },
+          const Text(
+            "Antrenman Geçmişi",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
+          const SizedBox(height: 10),
+          if ((read.athleteProfile?.trainingHistory.length ?? 0) > 0)
+            Expanded(
+              child: ListView.builder(
+                itemCount: read.athleteProfile!.trainingHistory.length,
+                itemBuilder: (context, index) {
+                  final session = read.athleteProfile!.trainingHistory[index];
+                  return Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    color: white,
+                    child: ListTile(
+                      leading: Icon(Icons.sports_gymnastics, color: darkblue),
+                      title: Text(session.date),
+                      subtitle: Text(session.focus),
+                    ),
+                  );
+                },
+              ),
+            ),
         ],
-      ),
+      
     );
   }
 

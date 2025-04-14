@@ -33,6 +33,7 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
         : Column(
             children: [
               Expanded(
+                flex: 2,
                 child: CustomMap(
                   zoom: 15.0,
                   markers: gyms.map((gym) {
