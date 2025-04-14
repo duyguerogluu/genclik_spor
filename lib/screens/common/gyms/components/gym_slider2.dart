@@ -9,12 +9,9 @@ class GymSlider2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: gyms.length,
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      itemBuilder: (context, index) {
+    return Column(
+      children: List.generate(gyms.length, (index) {
         final gym = gyms[index];
-    
         return GestureDetector(
           onTap: () {
             Navigator.push(
@@ -25,7 +22,7 @@ class GymSlider2 extends StatelessWidget {
             );
           },
           child: Container(
-            margin: const EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             height: 200,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -81,7 +78,7 @@ class GymSlider2 extends StatelessWidget {
             ),
           ),
         );
-      },
+      }),
     );
   }
 }

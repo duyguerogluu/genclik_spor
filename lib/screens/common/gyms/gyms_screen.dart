@@ -88,9 +88,9 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                GymSlider(gyms: gyms),
+                // GymSlider(gyms: gyms),
                 const SizedBox(height: 20),
-                // GymSlider2(gyms: gyms),
+                GymSlider2(gyms: gyms),
               ],
             ),
           );
