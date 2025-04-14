@@ -1,0 +1,2 @@
+D:/genclik_spor/android/app/.cxx/RelWithDebInfo/6h6c2l2q/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/genclik_spor/android/app/.cxx/RelWithDebInfo/6h6c2l2q/arm64-v8a/CMakeFiles/rebuild_cache.dir
