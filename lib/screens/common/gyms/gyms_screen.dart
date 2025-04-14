@@ -29,6 +29,14 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
   }
 
   List<GymModel> gyms = [];
+  final userMarker = const Marker(
+    point: LatLng(37.06406415751307, 37.362847029935075),
+    child: const Icon(
+      Icons.my_location,
+      size: 45,
+      color: Colors.blue,
+    ),
+  );
 
   Future<void> fetchGyms() async {
     try {
@@ -65,26 +73,30 @@ class _GymsScreenState extends ConsumerState<GymsScreen> {
                   height: 300,
                   child: CustomMap(
                     zoom: 15.0,
-                    markers: gyms.map((gym) {
-                      return Marker(
-                        point: LatLng(gym.lat, gym.lng),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => GymDetailScreen(gym: gym),
-                              ),
-                            );
-                          },
-                          child: Icon(
-                            Icons.place,
-                            size: 40,
-                            color: red,
+                    markers: [
+                      userMarker,
+                      ...gyms.map((gym) {
+                        return Marker(
+                          point: LatLng(gym.lat, gym.lng),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      GymDetailScreen(gym: gym),
+                                ),
+                              );
+                            },
+                            child: Icon(
+                              Icons.place,
+                              size: 40,
+                              color: red,
+                            ),
                           ),
-                        ),
-                      );
-                    }).toList(),
+                        );
+                      })
+                    ],
                   ),
                 ),
                 const SizedBox(height: 20),
