@@ -64,6 +64,11 @@ flutter:
     - assets/images/ 
     - assets/fonts/
     - assets/mocks/athlete.json
+    - assets/images/course_bg.png
+    - assets/images/trainings_bg.png
+    - assets/images/profile_bg.png
+    - assets/images/performance_bg.png
+    - assets/images/warnings_bg.png
 
   fonts:
     - family: Poppins

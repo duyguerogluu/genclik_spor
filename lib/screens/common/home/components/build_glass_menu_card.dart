@@ -9,6 +9,31 @@ import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
 
 Widget buildGlassMenuCard(IconData icon, String title, BuildContext context) {
+  String imagePath;
+
+  switch (title) {
+    case "Kurslar":
+      imagePath = "assets/images/course_bg.png";
+      break;
+    case "Antrenmanlar":
+      imagePath = "assets/images/trainings_bg.png";
+      break;
+    case "Profilim":
+      imagePath = "assets/images/profile_bg.png";
+      break;
+    case "Performans Analizi":
+      imagePath = "assets/images/performance_bg.png";
+      break;
+    case "Başvurularım":
+      imagePath = "assets/images/applications_bg.png";
+      break;
+    case "Duyurular":
+      imagePath = "assets/images/warnings_bg.png";
+      break;
+    default:
+      imagePath = "assets/images/default_bg.png";
+  }
+
   return GestureDetector(
     onTap: () {
       if (title == "Kurslar") {
@@ -37,55 +62,29 @@ Widget buildGlassMenuCard(IconData icon, String title, BuildContext context) {
       }
     },
     child: Container(
-      width: 100,
-      height: 100,
+      width: 60,
+      height: 40,
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(
-          colors: [
-            context.isDark ? purple : white,
-            context.isDark ? offdarkblue1 : white
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        borderRadius: BorderRadius.circular(10),
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.cover,
+         
         ),
-        boxShadow: [
-          BoxShadow(
-            color: offlightblue2,
-            blurRadius: 6,
-            offset: Offset(0, 4),
-          ),
-        ],
+
       ),
       child: Card(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
         ),
         color: Colors.transparent,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Flexible(
-                  flex: 3,
-                  child: Icon(
-                    icon,
-                    size: 24,
-                    color: context.isDark ? white : offdarkblue,
-                  )),
-              Flexible(
-                flex: 2,
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    color: context.isDark ? white : offdarkblue,
-                    fontSize: 10,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+
             ],
           ),
         ),
