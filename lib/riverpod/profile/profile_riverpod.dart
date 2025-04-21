@@ -26,6 +26,7 @@ class ProfileRiverpod extends ChangeNotifier {
       try {
         debugPrint('profil bilggileri çekiliyor...!!!!!!!!!!!!!!!!!!!!!!1');
         memberProfile = await ProfileService.getProfile();
+
         DataHolder.memberProfile = memberProfile;
       } catch (e) {
         debugPrint("Profile fetch error: $e");
@@ -38,6 +39,7 @@ class ProfileRiverpod extends ChangeNotifier {
 
   Future<bool> updateAthleteProfile(AthleteModel profile) async {
     debugPrint("Updating profile...!!!!!!!!!!!!!!!!!");
+
     isLoading = true;
     notifyListeners();
 

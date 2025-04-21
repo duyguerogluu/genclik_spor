@@ -24,11 +24,10 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _loadProfile();
-  }
 
-  Future<void> _loadProfile() async {
-    await ref.read(profileRiverpodNotifier.notifier).fetchProfile();
+    Future.delayed(const Duration(seconds: 1), () async {
+      await ref.read(profileRiverpodNotifier.notifier).fetchProfile();
+    });
   }
 
   @override
@@ -172,39 +171,36 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
 
   Widget _buildTrainingHistory(MemberProfileModel read) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Antrenman Geçmişi",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Antrenman Geçmişi",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
-          const SizedBox(height: 10),
-          if ((read.athleteProfile?.trainingHistory.length ?? 0) > 0)
-            Expanded(
-              child: ListView.builder(
-                itemCount: read.athleteProfile!.trainingHistory.length,
-                itemBuilder: (context, index) {
-                  final session = read.athleteProfile!.trainingHistory[index];
-                  return Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    color: white,
-                    child: ListTile(
-                      leading: Icon(Icons.sports_gymnastics, color: darkblue),
-                      title: Text(session.date),
-                      subtitle: Text(session.focus),
-                    ),
-                  );
-                },
-              ),
-            ),
-        ],
-      
+        ),
+        const SizedBox(height: 10),
+        if ((read.athleteProfile?.trainingHistory.length ?? 0) > 0)
+          ListView.builder(
+            itemCount: read.athleteProfile!.trainingHistory.length,
+            itemBuilder: (context, index) {
+              final session = read.athleteProfile!.trainingHistory[index];
+              return Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                color: white,
+                child: ListTile(
+                  leading: Icon(Icons.sports_gymnastics, color: darkblue),
+                  title: Text(session.date),
+                  subtitle: Text(session.focus),
+                ),
+              );
+            },
+          ),
+      ],
     );
   }
 

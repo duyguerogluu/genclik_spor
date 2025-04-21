@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 class ProfileService {
   static Future<MemberProfileModel?> getProfile() async {
+    print("getProfile() çalıştı!!!!!!!!!!!");
     final url = Uri.parse("$baseUrl/profile");
 
     final token = await DataHolder.getToken();
