@@ -25,9 +25,9 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 1), () async {
-      await ref.read(profileRiverpodNotifier.notifier).fetchProfile();
-    });
+     Future.delayed(const Duration(seconds: 1), () async {
+       await ref.read(profileRiverpodNotifier.notifier).fetchProfile();
+     });
   }
 
   @override
@@ -44,7 +44,12 @@ class _AthleteProfileScreenState extends ConsumerState<MemberProfileScreen> {
 
     if (profileState.memberProfile == null) {
       return Scaffold(
-        backgroundColor: context.isDark ? offdarkblue : white1,
+        appBar: AppBar(
+          title: const Text("Üye Profili"),
+          backgroundColor: offlightblue,
+          foregroundColor: white,
+          elevation: 0,
+        ),
         body: const Center(child: Text("Profil bilgileri yüklenemedi")),
       );
     }

@@ -13,7 +13,7 @@ class ProfileRiverpod extends ChangeNotifier {
 
   Future<void> fetchProfile() async {
     debugPrint("Fetching profile...!!!!!!!!!!!!!!!!!");
-    if (memberProfile != null || isLoading) {
+    if (isLoading) {
       return;
     }
 
