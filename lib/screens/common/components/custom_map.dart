@@ -1,42 +1,35 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CustomMap extends StatelessWidget {
-  final LatLng center;
+    final LatLng center;
   final double zoom;
-  final List<Marker> markers;
+  final Set<Marker> markers;
+  final MapType mapType;
+  final void Function(GoogleMapController)? onMapCreated;
 
-  CustomMap({
-    Key? key,
-    this.center = const LatLng(37.06406415751307, 37.362847029935075),
+  const CustomMap({
+    super.key,
+    required this.center, 
     this.zoom = 13.0,
-    this.markers = const [
-      Marker(
-        point: LatLng(37.06406415751307, 37.362847029935075),
-        child: Icon(Icons.abc_rounded),
-      ),
-    ],
-  }) : super(key: key);
+    this.markers = const {},
+    this.mapType = MapType.normal,
+    this.onMapCreated,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return FlutterMap(
-      options: MapOptions(
-        initialCenter: center,
-        initialZoom: zoom,
+    return GoogleMap(
+      initialCameraPosition: CameraPosition(
+       target: center,  
+        zoom: zoom,
       ),
-      children: [
-        TileLayer(
-          urlTemplate:
-              "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-          subdomains: ['a', 'b', 'c'],
-          userAgentPackageName: 'com.example.genclik_spor',
-        ),
-        MarkerLayer(
-          markers: markers,
-        ),
-      ],
+      markers: markers,
+      mapType: mapType,
+      myLocationButtonEnabled: false,
+      zoomControlsEnabled: false,
+      onMapCreated: onMapCreated,
     );
   }
 }
