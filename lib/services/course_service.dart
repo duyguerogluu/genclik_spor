@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:genclik_spor/models/course_model.dart';
 import 'package:genclik_spor/utils/const.dart';
 import 'package:http/http.dart' as http;
