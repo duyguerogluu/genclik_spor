@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => token?.isNotEmpty ?? false
-              ? const HowToUseScreen()
+              ? const MainScreen()
               : const HowToUseScreen(),
         ),
       );

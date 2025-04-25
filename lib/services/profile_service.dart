@@ -11,6 +11,7 @@ class ProfileService {
     final url = Uri.parse("$baseUrl/profile");
 
     final token = await DataHolder.getToken();
+    print("Tokeeeeeeeeeeeeeeeeeen!!!!!!!!!!!!!!!!!!!!!!!!!!!!: $token");
 
     final response = await http.get(
       url,
