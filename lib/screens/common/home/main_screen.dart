@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/screens/common/coachs/coachs_screen.dart';
-import 'package:genclik_spor/screens/common/gyms/gyms_screen.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_app_bar.dart';
 import 'package:genclik_spor/screens/common/components/custom_bottom_bar.dart';
 import 'package:genclik_spor/screens/common/home/components/custom_drawer.dart';
@@ -37,7 +36,7 @@ class MainScreen extends ConsumerWidget {
               indicatorWeight: 0.2,
               tabs: const [
                 Tab(text: "Anasayfa"),
-                Tab(text: "Spor Salonları"),
+                //Tab(text: "Spor Salonları"),
                 Tab(text: "Antrenörler"),
               ],
             ),
@@ -45,7 +44,7 @@ class MainScreen extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   const HomeScreen(),
-                  GymsScreen(),
+                  //GymsScreen(),
                   const CoachsScreen(),
                 ],
               ),
