@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => token?.isNotEmpty ?? false
-              ? const MainScreen()
+              ? const HowToUseScreen()
               : const HowToUseScreen(),
         ),
       );
