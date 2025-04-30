@@ -87,7 +87,7 @@ class _CityDistrictDropdownState extends State<CityDistrictDropdown> {
         child: DropdownButtonFormField<String>(
           value: value,
           decoration: InputDecoration(
-                labelStyle: const TextStyle(fontSize: 14),  
+            labelStyle: const TextStyle(fontSize: 14),
             icon: Icon(icon, color: Colors.blueGrey),
             labelText: label,
             border: InputBorder.none,

@@ -103,26 +103,28 @@ class _HowToUseScreenState extends State<HowToUseScreen> {
                   setState(() => currentIndex = index);
                 },
                 itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(onboardingData[index]["image"]!),
-                      const SizedBox(height: 20),
-                      Text(
-                        onboardingData[index]["title"]!,
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        onboardingData[index]["description"]!,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: context.isDark ? white : offdarkblue,
+                  return SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(onboardingData[index]["image"]!),
+                        const SizedBox(height: 20),
+                        Text(
+                          onboardingData[index]["title"]!,
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 10),
+                        Text(
+                          onboardingData[index]["description"]!,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: context.isDark ? white : offdarkblue,
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),

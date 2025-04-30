@@ -24,7 +24,7 @@ class AthleteModel {
     required this.speed,
     required this.flexibility,
     required this.agility,
-    this.trainingHistory = const[],
+    this.trainingHistory = const [],
   });
 
   factory AthleteModel.fromJson(Map<String, dynamic> json) {

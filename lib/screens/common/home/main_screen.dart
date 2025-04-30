@@ -14,7 +14,7 @@ class MainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         backgroundColor: context.isDark ? offdarkblue : white,
         appBar: CustomAppBar(),
