@@ -70,9 +70,7 @@ Widget buildGlassMenuCard(IconData icon, String title, BuildContext context) {
         image: DecorationImage(
           image: AssetImage(imagePath),
           fit: BoxFit.cover,
-         
         ),
-
       ),
       child: Card(
         elevation: 0,
@@ -83,9 +81,7 @@ Widget buildGlassMenuCard(IconData icon, String title, BuildContext context) {
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: [
-
-            ],
+            children: [],
           ),
         ),
       ),

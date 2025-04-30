@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/main.dart';
+import 'package:genclik_spor/screens/common/gyms/components/gym_search_area.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:genclik_spor/models/gym_model.dart';
@@ -12,6 +16,7 @@ import 'package:genclik_spor/services/distance_matrix_service.dart';
 import 'package:genclik_spor/services/geocoding_service.dart';
 import 'package:genclik_spor/services/gym_service.dart';
 import 'package:genclik_spor/services/adressfrom_latlng.dart';
+import 'package:turkish/turkish.dart';
 
 class GymsScreen extends ConsumerStatefulWidget {
   const GymsScreen({Key? key}) : super(key: key);
@@ -27,27 +32,28 @@ class _GymsScreenState extends ConsumerState<GymsScreen>
   late BitmapDescriptor _gymIconSelected;
 
   final _distanceService = DistanceMatrixService();
-  final _geocoder        = GeocodingService();
-  final _scaffoldKey     = GlobalKey<ScaffoldState>();
+  final _geocoder = GeocodingService();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   GoogleMapController? _mapController;
-  LatLng?            _mapCenter = _defaultCenter;
-  String             _currentCity     = _defaultCity;
-  String             _currentDistrict = _defaultDistrict;
+  LatLng? _mapCenter = _defaultCenter;
+  String _currentCity = _defaultCity;
+  String _currentDistrict = _defaultDistrict;
 
-  LatLng?   _userLocation=_defaultCenter;
-    static const _defaultCity     = 'Gaziantep';
+  LatLng? _userLocation = _defaultCenter;
+  static const _defaultCity = 'Gaziantep';
   static const _defaultDistrict = 'Şehitkamil';
-  static const _defaultCenter   = LatLng(37.0965, 37.3825);
+  static const _defaultCenter = LatLng(37.0965, 37.3825);
 
-
-  MapType   _mapType         = MapType.normal;
-  List<GymModel> _gyms       = [];
-  bool      _isLoading       = true;
-    bool _initialLoading = true;
-  bool _refreshing     = false;
+  MapType _mapType = MapType.normal;
+  List<GymModel> _gyms = [];
+  bool _isLoading = true;
+  bool _initialLoading = true;
+  bool _refreshing = false;
 
   GymModel? _highlightedGym;
+
+  PersistentBottomSheetController? _persistentBottomSheetController;
 
   @override
   void initState() {
@@ -116,7 +122,8 @@ class _GymsScreenState extends ConsumerState<GymsScreen>
           'Konumunuz kapalı. Varsayılan olarak Gaziantep/Şehitkamil kullanılacak.',
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(c), child: const Text('Tamam')),
+          TextButton(
+              onPressed: () => Navigator.pop(c), child: const Text('Tamam')),
           TextButton(
             onPressed: () {
               Navigator.pop(c);
@@ -131,34 +138,30 @@ class _GymsScreenState extends ConsumerState<GymsScreen>
 
   Future<void> _initializeLocationAndFetchGyms() async {
     final hasLoc = await _getUserLocation();
- // ➋ Başlangıçta her zaman Gaziantep/Şehitkamil’i kullan,
+    // ➋ Başlangıçta her zaman Gaziantep/Şehitkamil’i kullan,
     //     eğer konum açıksa üzerine yazarız.
-    String city     = _defaultCity;
+    String city = _defaultCity;
     String district = _defaultDistrict;
-
 
     if (hasLoc && _userLocation != null) {
       final addr = Adress();
-      final loc  = await addr.getAddressFromLatLng(
-        _userLocation!.latitude, _userLocation!.longitude,
+      final loc = await addr.getAddressFromLatLng(
+        _userLocation!.latitude,
+        _userLocation!.longitude,
       );
       if (loc != null) {
-        city     = loc.key;
+        city = loc.key;
         district = loc.value;
         // haritayı gerçek konuma taşı
         _mapCenter = _userLocation;
       }
-    } 
-
-    else 
-    {
-
+    } else {
       // konum kapalı olsa bile Şehitkamil merkezine odaklan
       _mapCenter = _defaultCenter;
     }
 
     setState(() {
-      _currentCity     = city;
+      _currentCity = city;
       _currentDistrict = district;
     });
 
@@ -166,73 +169,69 @@ class _GymsScreenState extends ConsumerState<GymsScreen>
     await _fetchGyms(city: city, district: district, initial: true);
   }
 
-  
   Future<void> _fetchGyms({
-  required String city,
-  required String district,
-  bool initial = false,
-}) async {
-  if (initial) {
-    _initialLoading = true;
-  } else {
-    _refreshing = true;
-  }
-
-  setState(() { 
-    _currentCity = city;
-    _currentDistrict = district;
-    _highlightedGym = null;
-  });
-
-  List<GymModel> fetched;
-  try {
-    fetched = await GymService.getGyms(district, city);
-  } catch (_) {
-    fetched = [];
-  }
-
-  // Eğer Gaziantep ise tüm ilçeler gösterilsin, filtreleme YAPILMASIN
-  if (city.toLowerCase() == 'gaziantep') {
-    // Filtreleme yok, API’den gelen tüm veriler gösterilecek
-  } else {
-    // Diğer şehirlerde API'den gelen salonları ilçe bazında filtrele
-    fetched = fetched.where((gym) => gym.city.toLowerCase() == district.toLowerCase()).toList();
-  }
-
-  if (!initial && fetched.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('İlgili ilçede salon yok veya veriler eklenmedi'),
-      ),
-    );
-    final fallback = _userLocation ?? _defaultCenter;
-    _mapController
-      ?..moveCamera(CameraUpdate.newLatLngZoom(fallback, 13));
-  }
-
-  setState(() {
-    _gyms = fetched;
-    if (!initial && fetched.isNotEmpty) {
-      _mapCenter = LatLng(fetched.first.lat, fetched.first.lng);
-    }
-  });
-
-  setState(() {
+    required String city,
+    required String district,
+    bool initial = false,
+  }) async {
     if (initial) {
-      _initialLoading = false;
+      _initialLoading = true;
     } else {
-      _refreshing = false;
+      _refreshing = true;
     }
-  });
 
-  if (_mapController != null && _mapCenter != null) {
-    _mapController!
-      .moveCamera(CameraUpdate.newLatLngZoom(_mapCenter!, 13));
+    setState(() {
+      _currentCity = city;
+      _currentDistrict = district;
+      _highlightedGym = null;
+    });
+
+    List<GymModel> fetched;
+    try {
+      fetched = await GymService.getGyms(district, city);
+    } catch (_) {
+      fetched = [];
+    }
+
+    // Eğer Gaziantep ise tüm ilçeler gösterilsin, filtreleme YAPILMASIN
+    if (city.toLowerCase() == 'gaziantep') {
+      // Filtreleme yok, API’den gelen tüm veriler gösterilecek
+    } else {
+      // Diğer şehirlerde API'den gelen salonları ilçe bazında filtrele
+      fetched = fetched
+          .where((gym) => gym.city.toLowerCase() == district.toLowerCase())
+          .toList();
+    }
+
+    if (!initial && fetched.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('İlgili ilçede salon yok veya veriler eklenmedi'),
+        ),
+      );
+      final fallback = _userLocation ?? _defaultCenter;
+      _mapController?..moveCamera(CameraUpdate.newLatLngZoom(fallback, 13));
+    }
+
+    setState(() {
+      _gyms = fetched;
+      if (!initial && fetched.isNotEmpty) {
+        _mapCenter = LatLng(fetched.first.lat, fetched.first.lng);
+      }
+    });
+
+    setState(() {
+      if (initial) {
+        _initialLoading = false;
+      } else {
+        _refreshing = false;
+      }
+    });
+
+    if (_mapController != null && _mapCenter != null) {
+      _mapController!.moveCamera(CameraUpdate.newLatLngZoom(_mapCenter!, 13));
+    }
   }
-}
-
-
-
 
   /// Mahalle seçimi sonrası hem haritayı hem de userLocation’u günceller
   Future<void> _applySearchArea(String city, String district) async {
@@ -282,19 +281,19 @@ class _GymsScreenState extends ConsumerState<GymsScreen>
         ?..moveCamera(CameraUpdate.newLatLngZoom(districtCenter, 13));
       setState(() {
         _userLocation = districtCenter;
-        _mapCenter    = districtCenter;
+        _mapCenter = districtCenter;
       });
     }
 
     // Mahalle seçtiyse mahalleye git
     if (chosen.isNotEmpty) {
-      final ncoord = await _geocoder.geocodeNeighborhood(city, district, chosen);
+      final ncoord =
+          await _geocoder.geocodeNeighborhood(city, district, chosen);
       if (ncoord != null) {
-        _mapController
-          ?..moveCamera(CameraUpdate.newLatLngZoom(ncoord, 14));
+        _mapController?..moveCamera(CameraUpdate.newLatLngZoom(ncoord, 14));
         setState(() {
           _userLocation = ncoord;
-          _mapCenter    = ncoord;
+          _mapCenter = ncoord;
         });
       }
     }
@@ -307,13 +306,12 @@ class _GymsScreenState extends ConsumerState<GymsScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-     if (_initialLoading) {
+    if (_initialLoading) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       );
     }
-    
-  
+
     // Marker seti
     final markers = <Marker>{};
     if (_userLocation != null) {
@@ -323,157 +321,222 @@ class _GymsScreenState extends ConsumerState<GymsScreen>
         icon: _userIcon,
       ));
     }
+
+    onGymTap(gym) {
+      setState(() => _highlightedGym = gym);
+
+      final effectiveUserLocation = _userLocation ?? _defaultCenter;
+
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(
+          LatLng(gym.lat, gym.lng),
+        ),
+      );
+
+      final fut = _distanceService.getTravelInfo(
+          effectiveUserLocation, LatLng(gym.lat, gym.lng));
+
+      _scaffoldKey.currentState!.showBottomSheet(
+        (c) => Container(
+          padding: const EdgeInsets.all(16),
+          child: FutureBuilder<Map<String, String>>(
+            future: fut,
+            builder: (c, s) {
+              if (s.connectionState != ConnectionState.done) {
+                return const SizedBox(
+                  height: 180,
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
+              return _buildGymDetailSheet(gym: gym, travelInfo: s.data!);
+            },
+          ),
+        ),
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        enableDrag: true,
+      );
+    }
+
     for (var gym in _gyms) {
       final isSel = gym == _highlightedGym;
       markers.add(Marker(
         markerId: MarkerId(gym.gymName),
         position: LatLng(gym.lat, gym.lng),
         icon: isSel ? _gymIconSelected : _gymIcon,
-      onTap: () {
-  setState(() => _highlightedGym = gym);
-
- 
-  final effectiveUserLocation = _userLocation ?? _defaultCenter;
-
-  final fut = _distanceService.getTravelInfo(
-    effectiveUserLocation, LatLng(gym.lat, gym.lng));
-
-  _scaffoldKey.currentState!.showBottomSheet(
-    (c) => Container(
-      padding: const EdgeInsets.all(16),
-      child: FutureBuilder<Map<String, String>>(
-        future: fut,
-        builder: (c, s) {
-          if (s.connectionState != ConnectionState.done) {
-            return const SizedBox(
-              height: 180,
-              child: Center(child: CircularProgressIndicator()),
-            );
-          }
-          return _buildGymDetailSheet(
-            gym: gym, travelInfo: s.data!);
-        },
-      ),
-    ),
-    backgroundColor: Colors.white,
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-    enableDrag: true,
-  );
-},
+        onTap: () => onGymTap(gym),
       ));
     }
 
-    final gymsList  = _gyms.where((g) => g.lat != 0 && g.lng != 0).toList();
-    final sliderData = gymsList.map((g) => {
-          'gym': g,
-          'distance': _userLocation == null
-              ? null
-              : Geolocator.distanceBetween(_userLocation!.latitude,
-                  _userLocation!.longitude, g.lat, g.lng)
-        }).toList();
+    final gymsList = _gyms.where((g) => g.lat != 0 && g.lng != 0).toList();
+    /*
+    final sliderData = gymsList
+        .map((g) => {
+              'gym': g,
+              'distance': _userLocation == null
+                  ? null
+                  : Geolocator.distanceBetween(_userLocation!.latitude,
+                      _userLocation!.longitude, g.lat, g.lng)
+            })
+        .toList();
+    */
 
     return Scaffold(
       key: _scaffoldKey,
       appBar: customAppBar("Spor Salonları"),
-      body: Stack(children: [
-        // Harita
-        CustomMap(
-          center: _mapCenter ?? _defaultCenter,
-          zoom: _mapCenter != null ? 13 : 11,
-          mapType: _mapType,
-          markers: markers,
-          onMapCreated: (ctrl) {
-            _mapController = ctrl;
-            if (_mapCenter != null) {
-              _mapController!
-                  .moveCamera(CameraUpdate.newLatLngZoom(_mapCenter!, 13));
-            }
-          },
-        ),
+      floatingActionButton: _persistentBottomSheetController != null
+          ? null
+          : FloatingActionButton(
+              onPressed: () {
+                if (_refreshing || _persistentBottomSheetController != null) {
+                  return;
+                }
 
+                _persistentBottomSheetController =
+                    _scaffoldKey.currentState!.showBottomSheet(
+                  (c) {
+                    return GymSearchAreaWidget(
+                      gymList: gymsList,
+                      currentCity: _currentCity,
+                      currentDistrict: _currentDistrict,
+                      onGymTap: onGymTap,
+                      onCityDistrictSelected: _applySearchArea,
+                    );
+                  },
+                  constraints: BoxConstraints.loose(
+                    Size.fromHeight(
+                      MediaQuery.sizeOf(context).height * 0.65,
+                    ),
+                  ),
+                );
 
-//   aşağıda ki kod çıktısı canlıya çıkınca kullanılacak
-//        
-//  if (_gyms.isEmpty)
-//           Center(
-//             child: Container(
-//               padding: const EdgeInsets.all(12),
-//               color: Colors.white70,
-//               child: const Text("Yakınınızda spor salonu bulunamadı."),
-//             ),
-//           ),
-        // Üst bar + dropdown
-        Positioned(
-          top: 16, left: 16, right: 16,
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.9),
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4)],
+                setState(() {});
+
+                _persistentBottomSheetController?.closed.then(
+                  (_) => setState(() {
+                    _persistentBottomSheetController = null;
+                  }),
+                );
+              },
+              child: const Icon(Icons.search),
             ),
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Row(children: [
-                const Icon(Icons.location_on, color: Colors.blue),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'Konum: $_currentCity, $_currentDistrict',
-                    style: const TextStyle(fontSize: 14),
+      body: Column(
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                // Harita
+                CustomMap(
+                  center: _mapCenter ?? _defaultCenter,
+                  zoom: _mapCenter != null ? 13 : 11,
+                  mapType: _mapType,
+                  markers: markers,
+                  onMapCreated: (ctrl) {
+                    _mapController = ctrl;
+                    if (_mapCenter != null) {
+                      _mapController!.moveCamera(
+                          CameraUpdate.newLatLngZoom(_mapCenter!, 13));
+                    }
+                  },
+                ),
+
+                //   aşağıda ki kod çıktısı canlıya çıkınca kullanılacak
+                //
+                //  if (_gyms.isEmpty)
+                //           Center(
+                //             child: Container(
+                //               padding: const EdgeInsets.all(12),
+                //               color: Colors.white70,
+                //               child: const Text("Yakınınızda spor salonu bulunamadı."),
+                //             ),
+                //           ),
+                /*
+                // Üst bar + dropdown
+                Positioned(
+                  top: 16,
+                  left: 16,
+                  right: 16,
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.9),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black26, blurRadius: 4)
+                      ],
+                    ),
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Row(children: [
+                        const Icon(Icons.location_on, color: Colors.blue),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'Konum: $_currentCity, $_currentDistrict',
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ),
+                      ]),
+                      const SizedBox(height: 8),
+                      CityDistrictDropdown(
+                          onCityDistrictSelected: _applySearchArea),
+                    ]),
                   ),
                 ),
-              ]),
-              const SizedBox(height: 8),
-              CityDistrictDropdown(onCityDistrictSelected: _applySearchArea),
-            ]),
-          ),
-        ),
+                */
 
-        // Harita tipi switch
-        Positioned(
-          top: 16, right: 16,
-          child: DropdownButton<MapType>(
-            value: _mapType,
-            onChanged: (t) => setState(() => _mapType = t!),
-            items: const [
-              DropdownMenuItem(value: MapType.normal, child: Text('Normal')),
-              DropdownMenuItem(value: MapType.satellite, child: Text('Satellite')),
-              DropdownMenuItem(value: MapType.terrain, child: Text('Terrain')),
-              DropdownMenuItem(value: MapType.hybrid, child: Text('Hybrid')),
-            ],
-          ),
-        ),
-
-        // Alt slider
-        if (sliderData.isNotEmpty)
-          Positioned(
-            left: 0, right: 0, bottom: 0,
-            child: Container(
-              height: 240,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter, end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black26],
+                /*
+              // Harita tipi switch
+              Positioned(
+                top: 16, right: 16,
+                child: DropdownButton<MapType>(
+                  value: _mapType,
+                  onChanged: (t) => setState(() => _mapType = t!),
+                  items: const [
+                    DropdownMenuItem(value: MapType.normal, child: Text('Normal')),
+                    DropdownMenuItem(value: MapType.satellite, child: Text('Satellite')),
+                    DropdownMenuItem(value: MapType.terrain, child: Text('Terrain')),
+                    DropdownMenuItem(value: MapType.hybrid, child: Text('Hybrid')),
+                  ],
                 ),
               ),
-              child: CustomGymSlider(
-                gyms: gymsList,
-                gymData: sliderData,
-                onShowOnMap: (gym) {
-                  setState(() => _highlightedGym = gym);
-                  _mapController?.moveCamera(
-                    CameraUpdate.newLatLngZoom(
-                        LatLng(gym.lat, gym.lng), 15),
-                  );
-                },
-              ),
+            
+              // Alt slider
+              if (sliderData.isNotEmpty)
+                Positioned(
+                  left: 0, right: 0, bottom: 0,
+                  child: Container(
+                    height: 240,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter, end: Alignment.bottomCenter,
+                        colors: [Colors.transparent, Colors.black26],
+                      ),
+                    ),
+                    child: CustomGymSlider(
+                      gyms: gymsList,
+                      gymData: sliderData,
+                      onShowOnMap: (gym) {
+                        setState(() => _highlightedGym = gym);
+                        _mapController?.moveCamera(
+                          CameraUpdate.newLatLngZoom(
+                              LatLng(gym.lat, gym.lng), 15),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                */
+              ],
             ),
           ),
-      ]),
+        ],
+      ),
     );
   }
-Widget _buildTravelInfoColumn(IconData icon, String label, String value, Color color) {
+
+  Widget _buildTravelInfoColumn(
+      IconData icon, String label, String value, Color color) {
     return Expanded(
       child: Column(
         children: [
@@ -491,8 +554,7 @@ Widget _buildTravelInfoColumn(IconData icon, String label, String value, Color c
               textAlign: TextAlign.center),
           const SizedBox(height: 2),
           Text(value,
-              style:
-                  const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
               softWrap: true),
         ],
@@ -505,17 +567,22 @@ Widget _buildTravelInfoColumn(IconData icon, String label, String value, Color c
     required Map<String, String> travelInfo,
   }) {
     return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 40, height: 4, margin: const EdgeInsets.only(bottom: 12),
-            decoration:
-                BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(2)),
+            width: 40,
+            height: 4,
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2)),
           ),
           Text(gym.gymName,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              style:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const SizedBox(height: 12),
           Row(
             children: [
@@ -535,7 +602,8 @@ Widget _buildTravelInfoColumn(IconData icon, String label, String value, Color c
                 MaterialPageRoute(builder: (_) => GymDetailScreen(gym: gym))),
             style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 44),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8))),
             child: const Text('Detayları Görüntüle'),
           ),
           const SizedBox(height: 12),
@@ -543,5 +611,4 @@ Widget _buildTravelInfoColumn(IconData icon, String label, String value, Color c
       ),
     );
   }
- 
 }

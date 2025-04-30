@@ -15,7 +15,7 @@ class EditProfileScreen extends ConsumerWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-         const SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
@@ -26,4 +26,4 @@ class EditProfileScreen extends ConsumerWidget {
       ),
     );
   }
-} 
+}

@@ -33,7 +33,7 @@ class LocationLogic extends StateNotifier<LocationState> {
         if (permission == LocationPermission.denied) {
           throw Exception("İzin verilmedi");
         }
-      } 
+      }
 
       if (permission == LocationPermission.deniedForever) {
         throw Exception("İzin tamamen reddedildi");

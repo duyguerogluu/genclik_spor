@@ -22,7 +22,6 @@ extension SportTypeExtension on SportType {
 class CustomDropdown extends StatelessWidget {
   final ValueNotifier<SportType?> controller;
   final String label;
-  
 
   const CustomDropdown({
     super.key,

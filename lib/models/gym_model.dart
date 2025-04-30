@@ -6,8 +6,8 @@ class GymModel {
   final String imgUrl;
   final double lat;
   final double lng;
-  final String city; 
-  final String district; 
+  final String city;
+  final String district;
 
   GymModel({
     required this.gymName,
@@ -15,8 +15,8 @@ class GymModel {
     required this.imgUrl,
     required this.lat,
     required this.lng,
-    required this.city, 
-    required this.district, 
+    required this.city,
+    required this.district,
   });
 
   factory GymModel.fromJson(Map<String, dynamic> json) {
@@ -28,8 +28,8 @@ class GymModel {
       imgUrl: imgUrl,
       lat: json['lat'] ?? 0.0,
       lng: json['lng'] ?? 0.0,
-      city: json['il'] ?? '', 
-      district: json['ilce'] ?? '', 
+      city: json['il'] ?? '',
+      district: json['ilce'] ?? '',
     );
   }
 
@@ -40,8 +40,8 @@ class GymModel {
       'imgUrl': imgUrl,
       'lat': lat,
       'lng': lng,
-      'il': city, 
-      'ilce': district, 
+      'il': city,
+      'ilce': district,
     };
   }
 }

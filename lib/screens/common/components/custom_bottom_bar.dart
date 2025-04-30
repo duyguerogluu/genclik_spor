@@ -56,8 +56,8 @@ class CustomBottomBar extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         backgroundColor: context.isDark ? offdarkblue1 : black,
-        selectedItemColor: blue1, 
-        unselectedItemColor: lightgrey, 
+        selectedItemColor: blue1,
+        unselectedItemColor: lightgrey,
         showUnselectedLabels: false,
         showSelectedLabels: false,
         items: const <BottomNavigationBarItem>[

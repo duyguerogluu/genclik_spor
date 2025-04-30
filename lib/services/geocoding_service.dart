@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +16,8 @@ class GeocodingService {
     final resp = await _client.get(Uri.parse(url));
     final data = jsonDecode(resp.body) as Map<String, dynamic>;
     if (data['status'] == 'OK' && (data['results'] as List).isNotEmpty) {
-      final loc = data['results'][0]['geometry']['location'] as Map<String, dynamic>;
+      final loc =
+          data['results'][0]['geometry']['location'] as Map<String, dynamic>;
       return LatLng(loc['lat'] as double, loc['lng'] as double);
     }
     return null;
@@ -26,8 +26,7 @@ class GeocodingService {
   /// Bir ilçe için mahalle (mahalle) adlarını almak için otomatik tamamlama
   Future<List<String>> getNeighborhoods(String city, String district) async {
     final input = Uri.encodeComponent('$district, $city');
-    final url = 
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json'
+    final url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
         '?input=$input'
         '&types=(regions)'
         '&components=country:tr'
@@ -51,7 +50,8 @@ class GeocodingService {
     final resp = await _client.get(Uri.parse(url));
     final data = jsonDecode(resp.body) as Map<String, dynamic>;
     if (data['status'] == 'OK' && (data['results'] as List).isNotEmpty) {
-      final loc = data['results'][0]['geometry']['location'] as Map<String, dynamic>;
+      final loc =
+          data['results'][0]['geometry']['location'] as Map<String, dynamic>;
       return LatLng(loc['lat'] as double, loc['lng'] as double);
     }
     return null;
