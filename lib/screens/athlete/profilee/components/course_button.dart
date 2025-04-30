@@ -9,10 +9,10 @@ Widget courseButton(BuildContext context) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const CoursesScreen()));
       },
-      icon: const Icon(Icons.assignment, color: Colors.white),
       label: const Text("Kursları Görüntüle",
           style: TextStyle(color: Colors.white)),
       style: ElevatedButton.styleFrom(
+        elevation: 0,
         backgroundColor: offlightblue1,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

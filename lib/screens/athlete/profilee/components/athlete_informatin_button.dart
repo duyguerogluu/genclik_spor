@@ -11,10 +11,10 @@ Widget athleteInformationButton(BuildContext context) {
             MaterialPageRoute(
                 builder: (context) => const ManageAthleteProfileScreen()));
       },
-      icon: const Icon(Icons.assignment, color: Colors.white),
-      label: const Text("Kursları Görüntüle",
+      label: const Text("Sprorcu Bilgileri",
           style: TextStyle(color: Colors.white)),
       style: ElevatedButton.styleFrom(
+        elevation: 0,
         backgroundColor: offlightblue1,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

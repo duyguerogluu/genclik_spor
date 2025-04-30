@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:genclik_spor/models/member_profile_model.dart';
 import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/athlete/myapps/my_application_screen.dart';
+import 'package:genclik_spor/screens/athlete/profilee/components/athlete_informatin_button.dart';
 import 'package:genclik_spor/screens/athlete/profilee/components/course_button.dart';
 import 'package:genclik_spor/screens/athlete/profilee/manage_athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
@@ -80,29 +81,24 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 20),
-                    Center(
-                      child: customButton(
-                        context: context,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  const ManageAthleteProfileScreen(),
-                            ),
-                          );
-                        },
-                        text: 'Sporcu Bilgilerini Gir',
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          _buildSquareButton(
+                              context, athleteInformationButton(context)),
+                          const SizedBox(width: 16),
+                          _buildSquareButton(context, courseButton(context)),
+                          const SizedBox(width: 16),
+                          _buildSquareButton(
+                              context, _buildApplyButton(context)),
+                          const SizedBox(width: 16),
+                          _buildSquareButton(
+                              context, _buildMyApplicationsButton(context)),
+                        ],
                       ),
                     ),
-
-                    const SizedBox(height: 20),
-                    courseButton(context),
-                    const SizedBox(height: 20),
-                    _buildApplyButton(context),
-                    const SizedBox(height: 10),
-                    _buildMyApplicationsButton(context),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20),
                     _buildTrainingHistory(read),
                     const SizedBox(height: 20),
                     _buildPerformanceAnalysis(read),
@@ -192,10 +188,10 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
             ),
           );
         },
-        icon: Icon(Icons.add, color: white),
-        label: Text("Yeni Antrenmana Başvur", style: TextStyle(color: white)),
+        label: Text("Yeni Antrenman", style: TextStyle(color: white)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: offlightblue,
+          elevation: 0,
+          backgroundColor: offlightblue1,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -332,6 +328,7 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
         label: const Text("Yeni Antrenmana Başvur",
             style: TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
+          elevation: 0,
           backgroundColor: offlightblue1,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape:
@@ -348,15 +345,31 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
           Navigator.push(context,
               MaterialPageRoute(builder: (_) => const MyApplicationsScreen()));
         },
-        icon: const Icon(Icons.assignment, color: Colors.white),
-        label:
-            const Text("Başvurularım", style: TextStyle(color: Colors.white)),
+        label: Text("Başvuruları Görüntüle",
+            style: TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
+          elevation: 0,
           backgroundColor: offlightblue1,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSquareButton(BuildContext context, Widget child) {
+    double boxWidth = (MediaQuery.of(context).size.width - 24) / 3;
+    return SizedBox(
+      width: boxWidth,
+      height: 100,
+      child: Card(
+        color: offlightblue1,
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Center(child: child),
       ),
     );
   }
