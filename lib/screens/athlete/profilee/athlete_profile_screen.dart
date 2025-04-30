@@ -31,83 +31,172 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("AthleteProfileScreen build çalıştı!");
     final profileState = ref.watch(profileRiverpodNotifier);
 
     if (profileState.isLoading) {
       return Scaffold(
-        backgroundColor:
-            context.isDark ? const Color(0xFF002F7B) : Colors.white,
+        backgroundColor: context.isDark ? offdarkblue : white1,
         body: const Center(child: CircularProgressIndicator()),
       );
     }
 
     if (profileState.memberProfile == null) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text("Üye Profili"),
-          backgroundColor: const Color(0xFF3C6BC3),
-          foregroundColor: Colors.white,
-          elevation: 0,
-        ),
+        backgroundColor: context.isDark ? offdarkblue : white1,
         body: const Center(child: Text("Profil bilgileri yüklenemedi")),
       );
     }
 
-    final member = profileState.memberProfile!;
+    final read = profileState.memberProfile!;
 
     return Scaffold(
-      backgroundColor:
-          context.isDark ? const Color(0xFF001F4A) : const Color(0xFFF5F7FA),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF3C6BC3),
-        foregroundColor: Colors.white,
-        title: const Text("Üye Profili"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const SettingsScreen()),
-              );
-            },
-          )
+      backgroundColor: context.isDark ? offdarkblue : white1,
+      body: Stack(
+        children: [
+          Container(color: context.isDark ? offdarkblue : white1),
+          Positioned(
+            top: 60,
+            left: 0,
+            right: 0,
+            child: _buildProfileCard(read),
+          ),
+          Positioned(
+            top: 300,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: white,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // _buildProfileCard(read),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: customButton(
+                        context: context,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  const ManageAthleteProfileScreen(),
+                            ),
+                          );
+                        },
+                        text: 'Sporcu Bilgilerini Gir',
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildPerformanceAnalysis(read),
+                    const SizedBox(height: 20),
+                    _buildTrainingHistory(read),
+                    const SizedBox(height: 20),
+                    courseButton(context),
+                    const SizedBox(height: 20),
+                    _buildApplyButton(context),
+                    const SizedBox(height: 10),
+                    _buildMyApplicationsButton(context),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AppBar(
+              backgroundColor: offlightblue,
+              elevation: 0,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Üye Profili",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  GestureDetector(
+                    child: Icon(Icons.edit, color: Colors.white),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const SettingsScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
-        elevation: 0,
       ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await ref.read(profileRiverpodNotifier.notifier).fetchProfile();
+    );
+  }
+
+  Widget _buildPerformanceAnalysis(MemberProfileModel read) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Performans Analizi",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 10),
+        _buildProgressBar("Dayanıklılık", read.athleteProfile?.endurance ?? -1),
+        _buildProgressBar("Hız", read.athleteProfile?.speed ?? -1),
+        _buildProgressBar("Esneklik", read.athleteProfile?.flexibility ?? -1),
+        _buildProgressBar("Çeviklik", read.athleteProfile?.agility ?? -1),
+      ],
+    );
+  }
+
+  Widget _buildProgressBar(String label, int value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: const TextStyle(fontSize: 16)),
+        const SizedBox(height: 5),
+        LinearProgressIndicator(
+          value: value / 100,
+          minHeight: 8,
+          backgroundColor: Colors.grey[300],
+          color: darkblue,
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Widget _buildApplyButton(BuildContext context) {
+    return Center(
+      child: ElevatedButton.icon(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TrainingApplicationScreen(),
+            ),
+          );
         },
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildProfileCard(member),
-              const SizedBox(height: 20),
-              _buildInfoButton(context),
-              const SizedBox(height: 20),
-              _buildSectionTitle("Performans Analizi"),
-              const SizedBox(height: 10),
-              _buildProgress(
-                  "Dayanıklılık", member.athleteProfile?.endurance ?? -1),
-              _buildProgress("Hız", member.athleteProfile?.speed ?? -1),
-              _buildProgress(
-                  "Esneklik", member.athleteProfile?.flexibility ?? -1),
-              _buildProgress("Çeviklik", member.athleteProfile?.agility ?? -1),
-              const SizedBox(height: 20),
-              _buildSectionTitle("Antrenman Geçmişi"),
-              const SizedBox(height: 10),
-              _buildTrainingHistory(member),
-              const SizedBox(height: 20),
-              courseButton(context),
-              const SizedBox(height: 20),
-              _buildApplyTrainingButton(context),
-              const SizedBox(height: 10),
-              _buildMyApplicationsButton(context),
-            ],
+        icon: Icon(Icons.add, color: white),
+        label: Text("Yeni Antrenmana Başvur", style: TextStyle(color: white)),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: offlightblue,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
       ),
