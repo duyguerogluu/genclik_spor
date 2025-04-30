@@ -79,7 +79,6 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // _buildProfileCard(read),
                     const SizedBox(height: 20),
                     Center(
                       child: customButton(
@@ -96,16 +95,17 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
                         text: 'Sporcu Bilgilerini Gir',
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    _buildPerformanceAnalysis(read),
-                    const SizedBox(height: 20),
-                    _buildTrainingHistory(read),
+
                     const SizedBox(height: 20),
                     courseButton(context),
                     const SizedBox(height: 20),
                     _buildApplyButton(context),
                     const SizedBox(height: 10),
                     _buildMyApplicationsButton(context),
+                    const SizedBox(height: 20),
+                    _buildTrainingHistory(read),
+                    const SizedBox(height: 20),
+                    _buildPerformanceAnalysis(read),
                   ],
                 ),
               ),
@@ -332,7 +332,7 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
         label: const Text("Yeni Antrenmana Başvur",
             style: TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF3C6BC3),
+          backgroundColor: offlightblue1,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -352,7 +352,7 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
         label:
             const Text("Başvurularım", style: TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFFF8C42),
+          backgroundColor: offlightblue1,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
