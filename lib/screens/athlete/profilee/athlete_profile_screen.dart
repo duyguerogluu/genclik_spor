@@ -8,7 +8,7 @@ import 'package:genclik_spor/screens/athlete/profilee/components/athlete_informa
 import 'package:genclik_spor/screens/athlete/profilee/components/course_button.dart';
 import 'package:genclik_spor/screens/athlete/profilee/manage_athlete_profile_screen.dart';
 import 'package:genclik_spor/screens/athlete/trainingapplication/training_application_screen.dart';
-import 'package:genclik_spor/screens/common/components/custom_button.dart';
+
 import 'package:genclik_spor/screens/common/setting/setting_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 import 'package:genclik_spor/utils/extensions.dart';
@@ -55,7 +55,7 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
       backgroundColor: context.isDark ? offdarkblue : white1,
       body: Stack(
         children: [
-          Container(color: context.isDark ? offdarkblue : orange),
+          Container(color: context.isDark ? offdarkblue : offlightblue1),
           Positioned(
             top: 60,
             left: 0,
@@ -68,7 +68,7 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
             right: 0,
             bottom: 0,
             child: Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               decoration: BoxDecoration(
                 color: white,
                 borderRadius: const BorderRadius.only(
@@ -85,6 +85,7 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
+                          const SizedBox(width: 16),
                           _buildSquareButton(
                               context, athleteInformationButton(context)),
                           const SizedBox(width: 16),
@@ -95,13 +96,17 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
                           const SizedBox(width: 16),
                           _buildSquareButton(
                               context, _buildMyApplicationsButton(context)),
+                          const SizedBox(width: 16),
                         ],
                       ),
                     ),
                     SizedBox(height: 20),
                     _buildTrainingHistory(read),
                     const SizedBox(height: 20),
-                    _buildPerformanceAnalysis(read),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: _buildPerformanceAnalysis(read),
+                    ),
                   ],
                 ),
               ),
