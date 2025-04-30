@@ -54,7 +54,7 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
       backgroundColor: context.isDark ? offdarkblue : white1,
       body: Stack(
         children: [
-          Container(color: context.isDark ? offdarkblue : white1),
+          Container(color: context.isDark ? offdarkblue : orange),
           Positioned(
             top: 60,
             left: 0,
@@ -62,7 +62,7 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
             child: _buildProfileCard(read),
           ),
           Positioned(
-            top: 300,
+            top: 280,
             left: 0,
             right: 0,
             bottom: 0,
@@ -116,14 +116,16 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
             left: 0,
             right: 0,
             child: AppBar(
-              backgroundColor: offlightblue,
+              backgroundColor: Colors.transparent,
+              iconTheme: const IconThemeData(color: Colors.white),
               elevation: 0,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     "Üye Profili",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   GestureDetector(
                     child: Icon(Icons.edit, color: Colors.white),
@@ -207,11 +209,9 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
+        color: Colors.transparent,
       ),
-      child: Row(
+      child: Column(
         children: [
           CircleAvatar(
             radius: 45,
@@ -223,30 +223,23 @@ class _MemberProfileScreenState extends ConsumerState<MemberProfileScreen> {
                 ? const Icon(Icons.person, color: Colors.white, size: 40)
                 : null,
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${member.firstName ?? ""} ${member.lastName ?? ""}",
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  member.athleteProfile?.sport ?? 'Spor Branşı Bilinmiyor',
-                  style: const TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Yaş: ${member.athleteProfile?.age ?? '--'} | "
-                  "Boy: ${member.athleteProfile?.height ?? '--'} cm | "
-                  "Kilo: ${member.athleteProfile?.weight ?? '--'} kg",
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ],
-            ),
+          const SizedBox(height: 16),
+          Text(
+            "${member.firstName ?? ""} ${member.lastName ?? ""}",
+            style: const TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            member.athleteProfile?.sport ?? 'Spor Branşı Bilinmiyor',
+            style: const TextStyle(fontSize: 16, color: Colors.white),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            "Yaş: ${member.athleteProfile?.age ?? '--'} | "
+            "Boy: ${member.athleteProfile?.height ?? '--'} cm | "
+            "Kilo: ${member.athleteProfile?.weight ?? '--'} kg",
+            style: const TextStyle(fontSize: 14, color: Colors.white),
           ),
         ],
       ),
