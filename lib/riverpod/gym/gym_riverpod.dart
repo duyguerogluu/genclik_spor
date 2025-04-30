@@ -8,27 +8,37 @@ class GymRiverpod extends ChangeNotifier {
   bool isLoading = false;
 
   Future<void> fetchGyms() async {
-    debugPrint('Gyms Riverpod Çalışıyor    ...!!!!!!!!!!!!!!!!!!!!!!');
-    if (isLoading) {
-      return;
-    }
+    debugPrint('Gyms Riverpod çalışıyor...');
+
+    if (isLoading) return;
 
     isLoading = true;
     notifyListeners();
 
-    if (DataHolder.gymCache != null) {
-      gyms = [...DataHolder.gymCache!];
-    } else {
-      try {
-        debugPrint('Gyms Çekiliyor...!!!!!!!!!!!!!!!!!!!!!!');
+    try {
+      if (DataHolder.gymCache != null) {
+        gyms = [...DataHolder.gymCache!];
+      } else {
+        debugPrint('Gyms çekiliyor...');
         gyms = await GymService.getGyms("Şahinbey", "Gaziantep");
         DataHolder.gymCache = [...gyms];
-      } catch (e) {
-        debugPrint("Gym fetch error: $e");
       }
+    } catch (e) {
+      debugPrint("Gym fetch error: $e");
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
+  }
 
-    isLoading = false;
-    notifyListeners();
+  Future<void> refreshGyms() async {
+    DataHolder.gymCache = null;
+    await fetchGyms();
+  }
+
+  Future<void> hardRefreshGyms() async {
+    debugPrint('Hard refresh yapılıyor...');
+    DataHolder.gymCache = null;
+    await fetchGyms();
   }
 }

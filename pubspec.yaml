@@ -54,6 +54,10 @@ flutter:
     - assets/images/profile_bg.png
     - assets/images/performance_bg.png
     - assets/images/warnings_bg.png
+    - assets/images/gym.png
+    - assets/images/gym_selected.png
+    - assets/images/person.png
+    - assets/images/person.png
 
   fonts:
     - family: Poppins

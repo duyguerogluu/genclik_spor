@@ -1,114 +1,194 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:genclik_spor/models/gym_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genclik_spor/riverpod/riverpod_management.dart';
 import 'package:genclik_spor/screens/common/gyms/gym_detail_screen.dart';
 import 'package:genclik_spor/utils/colors.dart';
 
-class GymSlider extends StatefulWidget {
-  final List<GymModel> gyms;
-  const GymSlider({super.key, required this.gyms});
+class GymSlider extends ConsumerStatefulWidget {
+  const GymSlider({super.key});
 
   @override
-  _GymSliderState createState() => _GymSliderState();
+  ConsumerState<GymSlider> createState() => _GymSliderState();
 }
 
-class _GymSliderState extends State<GymSlider> {
+class _GymSliderState extends ConsumerState<GymSlider> {
   int _currentIndex = 0;
+  late PageController _pageController;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.75);
+
+    Future.microtask(() => ref.read(gymRiverpod).fetchGyms());
+
+    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+      if (_pageController.hasClients) {
+        final nextPage =
+            (_currentIndex + 1) % (ref.read(gymRiverpod).gyms.length);
+        _pageController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 400),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 240,
-      child: PageView.builder(
-        itemCount: widget.gyms.length,
-        controller: PageController(viewportFraction: 0.75),
-        onPageChanged: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        itemBuilder: (context, index) {
-          final gym = widget.gyms[index];
-          bool isActive = index == _currentIndex;
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GymDetailScreen(gym: gym),
-                  ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: Hero(
-                  tag: 'gym_image_${gym.lat}${gym.lng}${gym.imgUrl}',
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    margin: EdgeInsets.symmetric(
-                        horizontal: isActive ? 10 : 30, vertical: 10),
-                    transform: Matrix4.identity()
-                      ..scale(isActive ? 1.1 : 1.0)
-                      ..rotateZ(isActive ? 0.0 : 0.01),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: blacko,
-                          blurRadius: isActive ? 10 : 5,
-                          spreadRadius: isActive ? 3 : 1,
-                        )
-                      ],
-                      image: DecorationImage(
-                        image: NetworkImage(gym.imgUrl ?? ""),
-                        fit: BoxFit.cover,
+    final gymProvider = ref.watch(gymRiverpod);
+
+    if (gymProvider.isLoading) {
+      return const SizedBox(
+        height: 240,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    final gyms = gymProvider.gyms;
+
+    if (gyms.isEmpty) {
+      return const SizedBox(
+        height: 240,
+        child: Center(child: Text('Hiç salon bulunamadı')),
+      );
+    }
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 240,
+          child: PageView.builder(
+            itemCount: gyms.length,
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            itemBuilder: (context, index) {
+              final gym = gyms[index];
+              bool isActive = index == _currentIndex;
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GymDetailScreen(gym: gym),
                       ),
-                    ),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          bottom: 15,
-                          left: 15,
-                          child: Container(
-                            padding: const EdgeInsets.all(14),
-                            decoration: BoxDecoration(
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 12.0),
+                    child: Hero(
+                      tag: 'gym_image_${gym.lat}${gym.lng}${gym.imgUrl}',
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: isActive ? 10 : 30,
+                          vertical: 10,
+                        ),
+                        transform: Matrix4.identity()
+                          ..scale(isActive ? 1.1 : 1.0)
+                          ..rotateZ(isActive ? 0.0 : 0.01),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
                               color: blacko,
-                              borderRadius: BorderRadius.circular(10),
+                              blurRadius: isActive ? 10 : 5,
+                              spreadRadius: isActive ? 3 : 1,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  gym.gymName ?? "",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                          ],
+                          image: DecorationImage(
+                            image: NetworkImage(gym.imgUrl ?? ""),
+                            fit: BoxFit.cover,
+                            colorFilter: isActive
+                                ? null
+                                : const ColorFilter.mode(
+                                    Colors.black26,
+                                    BlendMode.darken,
                                   ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  gym.address ?? "",
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
-                        )
-                      ],
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              bottom: 15,
+                              left: 15,
+                              child: Container(
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: blacko,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      gym.gymName ?? "",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      gym.address ?? "",
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            gyms.length,
+            (index) => Expanded(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: _currentIndex == index ? 12 : 8,
+                height: _currentIndex == index ? 12 : 8,
+                decoration: BoxDecoration(
+                  color:
+                      _currentIndex == index ? Colors.blueAccent : Colors.grey,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
   }
 }

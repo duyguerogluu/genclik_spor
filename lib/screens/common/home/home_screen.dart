@@ -32,6 +32,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
 Widget _buildHomeTabContent(BuildContext context, WidgetRef ref) {
   final gyms = ref.watch(gymRiverpod).gyms;
+  debugPrint(
+      'GYMS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: $gyms');
+
   final List<Map<String, dynamic>> menuItems = [
     {'icon': Icons.sports_soccer, 'title': 'Kurslar'},
     {'icon': Icons.fitness_center, 'title': 'Antrenmanlar'},
@@ -68,7 +71,7 @@ Widget _buildHomeTabContent(BuildContext context, WidgetRef ref) {
             },
           ),
         ),
-        GymSlider(gyms: gyms),
+        GymSlider(),
         SizedBox(
           height: 180,
           child: ListView.builder(
